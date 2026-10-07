@@ -12,7 +12,11 @@
 <style>
 /* Layout: analyst's video-room desk. Header strip, then video + composer on the left, pitch + squads on the right, log below. Analyse tab swaps the desk for chart + filters. */
 :root {
-  --bg: #eef1ef;
+  --bg: #e2ebe4;              /* pale grass ground; stripes + pitch lines drawn on body::before */
+  --stripe: rgba(15,107,79,.05);
+  --glow: rgba(255,255,255,.75);
+  --lines-h: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1150 780' fill='none' stroke='rgba(15,107,79,0.16)' stroke-width='3'><rect x='50' y='50' width='1050' height='680'/><line x1='575' y1='50' x2='575' y2='730'/><circle cx='575' cy='390' r='91.5'/><rect x='50' y='188.5' width='165' height='403'/><rect x='50' y='298.5' width='55' height='183'/><rect x='935' y='188.5' width='165' height='403'/><rect x='1045' y='298.5' width='55' height='183'/><path d='M215 316.9A91.5 91.5 0 0 1 215 463.1M935 316.9A91.5 91.5 0 0 0 935 463.1'/></svg>");
+  --lines-v: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 780 1150' fill='none' stroke='rgba(15,107,79,0.16)' stroke-width='3'><rect x='50' y='50' width='680' height='1050'/><line x1='50' y1='575' x2='730' y2='575'/><circle cx='390' cy='575' r='91.5'/><rect x='188.5' y='50' width='403' height='165'/><rect x='298.5' y='50' width='183' height='55'/><rect x='188.5' y='935' width='403' height='165'/><rect x='298.5' y='1045' width='183' height='55'/><path d='M316.9 215A91.5 91.5 0 0 0 463.1 215M316.9 935A91.5 91.5 0 0 1 463.1 935'/></svg>");
   --panel: #ffffff;
   --panel-2: #f5f7f6;
   --ink: #17201c;
@@ -36,18 +40,26 @@
   --r: 8px;
 }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
-  --bg: #0f1412; --panel: #171e1b; --panel-2: #1d2622; --ink: #e7ece9; --ink-2: #aab6b0; --ink-3: #74827b;
+  --bg: #0a1511; --stripe: rgba(255,255,255,.022); --glow: rgba(255,248,214,.085); --lines-h: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1150 780' fill='none' stroke='rgba(220,240,228,0.075)' stroke-width='3'><rect x='50' y='50' width='1050' height='680'/><line x1='575' y1='50' x2='575' y2='730'/><circle cx='575' cy='390' r='91.5'/><rect x='50' y='188.5' width='165' height='403'/><rect x='50' y='298.5' width='55' height='183'/><rect x='935' y='188.5' width='165' height='403'/><rect x='1045' y='298.5' width='55' height='183'/><path d='M215 316.9A91.5 91.5 0 0 1 215 463.1M935 316.9A91.5 91.5 0 0 0 935 463.1'/></svg>"); --lines-v: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 780 1150' fill='none' stroke='rgba(220,240,228,0.075)' stroke-width='3'><rect x='50' y='50' width='680' height='1050'/><line x1='50' y1='575' x2='730' y2='575'/><circle cx='390' cy='575' r='91.5'/><rect x='188.5' y='50' width='403' height='165'/><rect x='298.5' y='50' width='183' height='55'/><rect x='188.5' y='935' width='403' height='165'/><rect x='298.5' y='1045' width='183' height='55'/><path d='M316.9 215A91.5 91.5 0 0 0 463.1 215M316.9 935A91.5 91.5 0 0 1 463.1 935'/></svg>"); --panel: #151d19; --panel-2: #1d2622; --ink: #e7ece9; --ink-2: #aab6b0; --ink-3: #74827b;
   --line: #2a3530; --accent: #3fbf8c; --accent-ink: #06130d; --turf: #1f5a3b; --turf-2: #1b5135;
   --turf-line: rgba(235,245,240,.75); --home: #6f97f0; --away: #f07a6f; --good: #45c27f; --bad: #f07a6f;
   --warn: #e0a84a; --hl: #f2c94c; color-scheme: dark } }
 :root[data-theme="dark"] {
-  --bg: #0f1412; --panel: #171e1b; --panel-2: #1d2622; --ink: #e7ece9; --ink-2: #aab6b0; --ink-3: #74827b;
+  --bg: #0a1511; --stripe: rgba(255,255,255,.022); --glow: rgba(255,248,214,.085); --lines-h: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1150 780' fill='none' stroke='rgba(220,240,228,0.075)' stroke-width='3'><rect x='50' y='50' width='1050' height='680'/><line x1='575' y1='50' x2='575' y2='730'/><circle cx='575' cy='390' r='91.5'/><rect x='50' y='188.5' width='165' height='403'/><rect x='50' y='298.5' width='55' height='183'/><rect x='935' y='188.5' width='165' height='403'/><rect x='1045' y='298.5' width='55' height='183'/><path d='M215 316.9A91.5 91.5 0 0 1 215 463.1M935 316.9A91.5 91.5 0 0 0 935 463.1'/></svg>"); --lines-v: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 780 1150' fill='none' stroke='rgba(220,240,228,0.075)' stroke-width='3'><rect x='50' y='50' width='680' height='1050'/><line x1='50' y1='575' x2='730' y2='575'/><circle cx='390' cy='575' r='91.5'/><rect x='188.5' y='50' width='403' height='165'/><rect x='298.5' y='50' width='183' height='55'/><rect x='188.5' y='935' width='403' height='165'/><rect x='298.5' y='1045' width='183' height='55'/><path d='M316.9 215A91.5 91.5 0 0 0 463.1 215M316.9 935A91.5 91.5 0 0 1 463.1 935'/></svg>"); --panel: #151d19; --panel-2: #1d2622; --ink: #e7ece9; --ink-2: #aab6b0; --ink-3: #74827b;
   --line: #2a3530; --accent: #3fbf8c; --accent-ink: #06130d; --turf: #1f5a3b; --turf-2: #1b5135;
   --turf-line: rgba(235,245,240,.75); --home: #6f97f0; --away: #f07a6f; --good: #45c27f; --bad: #f07a6f;
   --warn: #e0a84a; --hl: #f2c94c; color-scheme: dark }
 
 * { box-sizing: border-box }
 body { background: var(--bg); color: var(--ink); font: 14px/1.45 var(--font-body); }
+/* floodlit pitch behind everything: mown stripes + faint markings; turns with the screen */
+body::before { content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  background: radial-gradient(ellipse 55% 40% at 8% -6%, var(--glow), transparent 70%), radial-gradient(ellipse 55% 40% at 92% -6%, var(--glow), transparent 70%),
+    var(--lines-h) center / cover no-repeat, repeating-linear-gradient(90deg, var(--stripe) 0 6.25vw, transparent 6.25vw 12.5vw), var(--bg); }
+@media (orientation: portrait) { body::before {
+  background: radial-gradient(ellipse 80% 30% at 50% -6%, var(--glow), transparent 70%),
+    var(--lines-v) center / cover no-repeat, repeating-linear-gradient(180deg, var(--stripe) 0 6.25vh, transparent 6.25vh 12.5vh), var(--bg); } }
+.panel, .home .card { box-shadow: 0 1px 2px rgba(0,0,0,.06), 0 8px 24px -14px rgba(0,0,0,.25) }
 .wrap { padding-inline: 16px; padding-block: 12px 40px; max-width: 1500px; margin: 0 auto; display: grid; gap: 12px }
 h1, h2, h3 { font-family: var(--font-display); font-weight: 600; letter-spacing: .01em; margin: 0; text-wrap: balance }
 .lbl { font-family: var(--font-display); text-transform: uppercase; letter-spacing: .08em; font-size: 12px; font-weight: 600; color: var(--ink-3) }
@@ -66,11 +78,15 @@ select, input[type=text], input[type=number], textarea { background: var(--panel
 /* header */
 header.bar { display: flex; gap: 12px; align-items: center; flex-wrap: wrap }
 .brand { display: flex; align-items: baseline; gap: 10px; min-width: 0 }
-.brand h1 { font-size: 26px; line-height: 1 }
+.brand h1 { font-size: 26px; line-height: 1; white-space: nowrap }
 .brand .match-title { font-family: var(--font-display); font-size: 20px; color: var(--ink-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 46vw }
 .tabs { display: flex; gap: 2px; background: var(--panel-2); border: 1px solid var(--line); border-radius: 8px; padding: 3px }
 .tab { border: 0; background: transparent; padding: 6px 14px; border-radius: 6px; font-family: var(--font-display); font-size: 16px; font-weight: 600; letter-spacing: .03em; color: var(--ink-2) }
 .tab[aria-selected=true] { background: var(--panel); color: var(--ink); box-shadow: 0 1px 2px rgba(0,0,0,.12) }
+@media (max-width: 640px) { .tabs { width: 100% } .tab { flex: 1 1 auto; padding: 6px 6px; font-size: 15px } .hide-sm { display: none } }
+.themebtn { border-radius: 999px; padding: 4px 11px; font-size: 13px; white-space: nowrap }
+.backup { display: grid; gap: 6px; border-top: 1px solid var(--line); padding-top: 10px }
+.backup .btnlike { border: 1px solid var(--line); padding: 6px 10px; border-radius: 6px; cursor: pointer; display: inline-block; background: var(--panel) }
 .pill { font-size: 12px; padding: 3px 9px; border-radius: 999px; border: 1px solid var(--line); color: var(--ink-2); white-space: nowrap }
 .pill.ok { color: var(--good); border-color: color-mix(in srgb, var(--good) 40%, transparent) }
 .pill.warn { color: var(--warn); border-color: color-mix(in srgb, var(--warn) 45%, transparent) }
@@ -118,6 +134,71 @@ svg.pitch { width: 100%; height: auto; display: block; border-radius: 6px; curso
 .actbar button.def { background: var(--panel-2) }
 .actbar button[aria-pressed=true] { border-color: var(--accent); box-shadow: inset 0 0 0 2px var(--accent) }
 @media (hover: none), (max-width: 700px) { .keysbox { display: none } }
+.clipfind { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; margin-top: 8px; padding: 8px 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--panel-2) }
+.clipfind select { flex: 1 1 150px; max-width: 100% }
+.linkbtn { border: 0; background: none; padding: 0; color: inherit; text-align: left; text-decoration: underline; text-decoration-color: var(--line); text-underline-offset: 3px }
+.linkbtn:hover { text-decoration-color: var(--accent); color: var(--accent) }
+.navrow { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px }
+
+/* home */
+.home { display: grid; gap: 14px }
+.home .card { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: clamp(16px, 3vw, 28px); min-width: 0 }
+.hero { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); gap: clamp(16px, 3vw, 36px); align-items: center }
+@media (max-width: 820px) { .hero { grid-template-columns: minmax(0, 1fr) } }
+.hero .eyebrow { color: var(--accent) }
+.hero h2 { font-size: clamp(40px, 6.4vw, 76px); line-height: .92; text-transform: uppercase; letter-spacing: .005em; margin: 6px 0 14px; font-weight: 700 }
+.hero h2 em { font-style: normal; color: var(--accent) }
+.hero p { font-size: 16px; max-width: 58ch; margin: 0 0 10px; color: var(--ink-2) }
+.hero .cta { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 16px }
+.hero .cta button { padding: 10px 16px; font-size: 15px }
+.hero .meta { font-size: 13px; color: var(--ink-3); margin-top: 10px }
+.hero svg { width: 100%; height: auto; display: block; border-radius: 8px }
+.hero svg .t1 { fill: var(--turf) } .hero svg .t2 { fill: var(--turf-2) } .hero svg .ln { fill: none; stroke: var(--turf-line); stroke-width: .35 }
+.hero svg .lk { stroke: var(--turf-line); stroke-linecap: round } .hero svg .nd { fill: var(--home); stroke: #fff; stroke-width: .5 }
+.hero svg .hl { stroke: var(--hl) } .hero svg text { font: 600 2.4px var(--font-body); fill: #fff; text-anchor: middle }
+.home h3.sec { font-size: 26px; margin-bottom: 4px }
+.home .sub { color: var(--ink-2); margin: 0 0 14px; max-width: 70ch }
+.feats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px }
+@media (max-width: 900px) { .feats { grid-template-columns: repeat(2, minmax(0, 1fr)) } }
+@media (max-width: 560px) { .feats { grid-template-columns: minmax(0, 1fr) } }
+.feat { border-top: 3px solid var(--accent); background: var(--panel-2); border-radius: 0 0 8px 8px; padding: 12px 14px; min-width: 0 }
+.feat h4 { font-family: var(--font-display); font-size: 19px; font-weight: 600; margin: 0 0 4px; letter-spacing: .01em }
+.feat p { margin: 0; color: var(--ink-2) }
+.steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; counter-reset: st }
+.steps li { counter-increment: st; display: grid; grid-template-columns: 2.2ch minmax(0, 1fr); gap: 2px 12px; align-content: start }
+.steps li::before { content: counter(st); grid-row: span 2; font-family: var(--font-display); font-size: 44px; font-weight: 700; line-height: .9; color: var(--accent) }
+.steps b { font-family: var(--font-display); font-size: 19px; font-weight: 600 }
+.steps span { color: var(--ink-2) }
+.keyline { display: flex; flex-wrap: wrap; gap: 6px 14px; margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--line); font-size: 13px; color: var(--ink-2) }
+.keyline kbd { font-size: 12px; margin-right: 3px }
+.home .foot { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; color: var(--ink-3); font-size: 13px }
+.plbar { margin-top: 8px; border: 1px solid var(--accent); border-radius: 8px; padding: 8px 10px; display: flex; gap: 8px; align-items: center; flex-wrap: wrap; background: var(--panel-2) }
+.plbar .now { font-family: var(--font-display); font-size: 17px; font-weight: 600; min-width: 0 }
+.plbar input[type=number] { width: 4.2em }
+.lineup table td, .lineup table th { padding: 3px 6px }
+#luTables { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: 18px; align-items: start }
+.luteam { display: grid; gap: 8px; min-width: 0 }
+.luteam h3 { font-size: 18px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap }
+.fsel { display: grid; gap: 3px; font-size: 12px; color: var(--ink-2); max-width: 240px }
+.fpitch { position: relative; width: 100%; max-width: 440px; aspect-ratio: 68 / 88; border-radius: 8px; overflow: hidden;
+  background: linear-gradient(var(--turf-line), var(--turf-line)) center 50% / 100% 2px no-repeat,
+    radial-gradient(circle at 50% 50%, transparent 13%, var(--turf-line) 13.3%, transparent 13.8%),
+    repeating-linear-gradient(180deg, var(--turf) 0 10%, var(--turf-2) 10% 20%); border: 2px solid var(--turf-line) }
+.fpitch::before, .fpitch::after { content: ""; position: absolute; left: 30%; right: 30%; height: 8%; border: 2px solid var(--turf-line) }
+.fpitch::before { top: -2px } .fpitch::after { bottom: -2px }
+.fpitch .slot { position: absolute; transform: translate(-50%, -50%); display: grid; justify-items: center; gap: 2px; z-index: 1 }
+.fpitch .code { font: 600 11px var(--font-display); letter-spacing: .06em; color: #fff; background: rgba(0,0,0,.45); border-radius: 4px; padding: 0 5px }
+.fpitch select { width: clamp(70px, 22vw, 104px); font-size: 12px; padding: 3px 4px; background: var(--panel); border: 1px solid var(--line); border-radius: 6px }
+.fpitch .dir { position: absolute; right: 8px; bottom: 6px; font-size: 11px; color: rgba(255,255,255,.75); z-index: 0 }
+.fempty { border: 1px dashed var(--line); border-radius: 8px; padding: 18px; color: var(--ink-2); background: var(--panel-2); max-width: 440px }
+.bench { display: flex; flex-wrap: wrap; gap: 4px; align-items: center }
+.lulist summary { cursor: pointer; color: var(--ink-2); font-size: 13px }
+.lulist table { margin-top: 6px }
+.lineup select { padding: 2px 4px }
+.subrow { display: flex; gap: 6px; flex-wrap: wrap; align-items: end }
+.profctl { display: flex; gap: 10px; flex-wrap: wrap; align-items: end }
+.profctl label { display: grid; gap: 3px; font-size: 12px; color: var(--ink-2) }
+.pctpill { display: inline-block; min-width: 2.6em; text-align: center; border-radius: 999px; padding: 0 6px; font-size: 12px; font-weight: 600; color: #fff }
 .keys { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 3px 12px; font-size: 12.5px; color: var(--ink-2); margin-top: 6px }
 .keys span { display: flex; gap: 6px; align-items: center }
 
@@ -149,6 +230,13 @@ canvas.chart { width: 100%; height: auto; display: block; border-radius: 6px; ma
 .kpis { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px }
 .kpi { border: 1px solid var(--line); border-radius: 6px; padding: 8px 10px; background: var(--panel-2) }
 .kpi .v { font-family: var(--font-display); font-size: 24px; font-weight: 600; font-variant-numeric: tabular-nums; display: flex; gap: 10px; align-items: baseline }
+.cmpv { display: flex; align-items: center; gap: 6px; margin-top: 4px; font-variant-numeric: tabular-nums; color: var(--ink-2) }
+.cmpv .sw { width: 10px; height: 10px; border-radius: 2px; flex: none }
+.cmpv .nm { flex: 1 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 13px }
+.cmpv b { font-family: var(--font-display); font-size: 20px; font-weight: 500; color: var(--ink) }
+.cmpv.win b { font-weight: 700 } .cmpv .lead { color: var(--good); font-size: 12px }
+.kpi.kidx { border-width: 2px }
+.kpis.wide { grid-template-columns: repeat(auto-fill, minmax(215px, 1fr)) }
 .kpi .v .h { color: var(--home) } .kpi .v .a { color: var(--away) } .kpi .v .sep { color: var(--ink-3); font-size: 16px }
 .note { color: var(--ink-2); font-size: 12.5px; max-width: 75ch }
 
@@ -178,16 +266,65 @@ html { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area
       <span class="match-title" id="matchTitle">Loading…</span>
     </div>
     <span class="pill" id="saveState">Loading…</span>
+    <button class="themebtn" id="themeBtn" type="button" title="Switch between dark, light and your device's setting" aria-label="Colour theme">◐ Dark</button>
     <div class="tabs" role="tablist" aria-label="Sections">
-      <button class="tab" role="tab" id="tab-tag" aria-selected="true" aria-controls="view-tag">Tag</button>
+      <button class="tab" role="tab" id="tab-home" aria-selected="true" aria-controls="view-home">Home</button>
+      <button class="tab" role="tab" id="tab-tag" aria-selected="false" aria-controls="view-tag">Tag</button>
       <button class="tab" role="tab" id="tab-analyse" aria-selected="false" aria-controls="view-analyse">Analyse</button>
-      <button class="tab" role="tab" id="tab-setup" aria-selected="false" aria-controls="view-setup">Matches &amp; squads</button>
+      <button class="tab" role="tab" id="tab-setup" aria-selected="false" aria-controls="view-setup">Matches<span class="hide-sm"> &amp; squads</span></button>
     </div>
   </header>
   <div class="banner" id="exampleBanner" hidden>You're looking at an <b>example match with made-up events</b>, so you can see what the tool does. Go to <b>Matches &amp; squads</b> and click <b>New match</b> to start your own.</div>
 
+
+  <!-- ============ HOME ============ -->
+  <section id="view-home" role="tabpanel" aria-labelledby="tab-home" class="home">
+    <div class="card hero">
+      <div>
+        <span class="lbl eyebrow">Football video analysis</span>
+        <h2>Tag the match.<br><em>Read the game.</em></h2>
+        <p>Match Tagger turns match footage into event data. Play your video, log every pass, shot, tackle and press with a key or a tap on the pitch, and the analysis builds as you go: heatmaps, pass networks, expected threat, player profiles and clips.</p>
+        <p>It's made for analysts building a portfolio, coaches reviewing their own team and scouts comparing players — anyone who wants Opta-style data from a match they can watch.</p>
+        <div class="cta">
+          <button class="primary" id="hContinue" hidden>Continue</button>
+          <button id="hNew">Start a new match</button>
+          <button id="hExample">Explore the example match</button>
+        </div>
+        <div class="meta" id="hStats"></div>
+      </div>
+      <svg viewBox="0 0 105 68" role="img" aria-label="Example pass network: number 8 highlighted with his passing links"><rect class='t1' x='0.0' y='0' width='10.5' height='68'/><rect class='t2' x='10.5' y='0' width='10.5' height='68'/><rect class='t1' x='21.0' y='0' width='10.5' height='68'/><rect class='t2' x='31.5' y='0' width='10.5' height='68'/><rect class='t1' x='42.0' y='0' width='10.5' height='68'/><rect class='t2' x='52.5' y='0' width='10.5' height='68'/><rect class='t1' x='63.0' y='0' width='10.5' height='68'/><rect class='t2' x='73.5' y='0' width='10.5' height='68'/><rect class='t1' x='84.0' y='0' width='10.5' height='68'/><rect class='t2' x='94.5' y='0' width='10.5' height='68'/><rect class='ln' x='1' y='1' width='103' height='66'/><line class='ln' x1='52.5' y1='1' x2='52.5' y2='67'/><circle class='ln' cx='52.5' cy='34' r='9.15'/><rect class='ln' x='1' y='13.85' width='16.5' height='40.3'/><rect class='ln' x='87.5' y='13.85' width='16.5' height='40.3'/><rect class='ln' x='1' y='24.85' width='5.5' height='18.3'/><rect class='ln' x='98.5' y='24.85' width='5.5' height='18.3'/><line class='lk' x1='8' y1='34' x2='22' y2='27' stroke-width='0.5' opacity='0.55'/><line class='lk' x1='22' y1='27' x2='22' y2='41' stroke-width='0.8' opacity='0.55'/><line class='lk' x1='24' y1='12' x2='22' y2='27' stroke-width='0.6' opacity='0.55'/><line class='lk' x1='22' y1='41' x2='24' y2='56' stroke-width='0.6' opacity='0.55'/><line class='lk' x1='22' y1='27' x2='40' y2='34' stroke-width='1.1' opacity='0.55'/><line class='lk' x1='22' y1='41' x2='40' y2='34' stroke-width='1' opacity='0.55'/><line class='lk hl' x1='40' y1='34' x2='52' y2='22' stroke-width='1.6' opacity='0.9'/><line class='lk' x1='40' y1='34' x2='52' y2='46' stroke-width='1.4' opacity='0.55'/><line class='lk hl' x1='52' y1='22' x2='52' y2='46' stroke-width='1.2' opacity='0.9'/><line class='lk hl' x1='24' y1='12' x2='52' y2='22' stroke-width='0.9' opacity='0.9'/><line class='lk' x1='24' y1='56' x2='52' y2='46' stroke-width='0.9' opacity='0.55'/><line class='lk hl' x1='52' y1='22' x2='76' y2='12' stroke-width='1.1' opacity='0.9'/><line class='lk' x1='52' y1='46' x2='76' y2='56' stroke-width='1' opacity='0.55'/><line class='lk hl' x1='52' y1='22' x2='80' y2='34' stroke-width='0.7' opacity='0.9'/><line class='lk' x1='52' y1='46' x2='80' y2='34' stroke-width='0.8' opacity='0.55'/><line class='lk' x1='76' y1='12' x2='80' y2='34' stroke-width='0.5' opacity='0.55'/><circle class='nd' cx='8' cy='34' r='2.4'/><text x='8' y='34.85'>1</text><circle class='nd' cx='24' cy='12' r='2.6'/><text x='24' y='12.85'>2</text><circle class='nd' cx='22' cy='27' r='2.8'/><text x='22' y='27.85'>3</text><circle class='nd' cx='22' cy='41' r='2.8'/><text x='22' y='41.85'>4</text><circle class='nd' cx='24' cy='56' r='2.6'/><text x='24' y='56.85'>5</text><circle class='nd' cx='40' cy='34' r='3.2'/><text x='40' y='34.85'>6</text><circle class='nd' cx='52' cy='22' r='3.6'/><text x='52' y='22.85'>8</text><circle class='nd' cx='52' cy='46' r='3.4'/><text x='52' y='46.85'>10</text><circle class='nd' cx='76' cy='12' r='2.8'/><text x='76' y='12.85'>7</text><circle class='nd' cx='80' cy='34' r='2.8'/><text x='80' y='34.85'>9</text><circle class='nd' cx='76' cy='56' r='2.8'/><text x='76' y='56.85'>11</text></svg>
+    </div>
+
+    <div class="card">
+      <h3 class="sec">What you can do</h3>
+      <p class="sub">Everything runs from one page, on a laptop or a phone.</p>
+      <div class="feats">
+        <div class="feat"><h4>Tag events</h4><p>16 actions — pass, cross, carry, dribble, shot, tackle, interception, recovery, clearance, block, pressure, duels, fouls, saves — with exact pitch location, outcome, receiver and an automatic phase of play.</p></div>
+        <div class="feat"><h4>Analyse the match</h4><p>Heatmaps, pass maps, expected threat (xT), pass networks, shot maps and the 18-zone grid, filtered by team, player, phase or time.</p></div>
+        <div class="feat"><h4>Profile players</h4><p>Radar charts per 90 minutes with percentile ranks against the same position, a heatmap and a written summary. Compare any two players.</p></div>
+        <div class="feat"><h4>Watch player clips</h4><p>Pick a player and an action — every pass, shot or tackle plays back to back from your video, ready for a report or a coach.</p></div>
+        <div class="feat"><h4>Team stats</h4><p>Possession, field tilt, PPDA, counter-press regains, passes per possession, box entries and direct speed.</p></div>
+        <div class="feat"><h4>Export and import</h4><p>CSV for your Match Analysis Toolkit in Excel, a full data CSV with coordinates, PNG charts — and import Toolkit workbooks.</p></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3 class="sec">How to use it</h3>
+      <p class="sub">Four steps from video to analysis. Your video plays from your own device and is never uploaded.</p>
+      <ol class="steps">
+        <li><b>Set up the match</b><span>In <i>Matches &amp; squads</i>, click New match, type both squads as “8 Iniesta”, pick which way each team shoots, and tick the starters.</span></li>
+        <li><b>Open your video</b><span>On the <i>Tag</i> tab, click Choose video… and pick the match file. It stays on your computer or phone.</span></li>
+        <li><b>Tag as you watch</b><span>Type the shirt number (or tap the player), press the action key (or tap the button), click where it happened on the pitch, then Enter for successful or Z for not.</span></li>
+        <li><b>Analyse</b><span>Open <i>Analyse</i> for charts, player profiles and stats. Click a player in the pass network or the stats table to jump to his profile.</span></li>
+      </ol>
+      <div class="keyline"><span><kbd>P</kbd>pass</span><span><kbd>C</kbd>carry</span><span><kbd>S</kbd>shot</span><span><kbd>T</kbd>tackle</span><span><kbd>R</kbd>recovery</span><span><kbd>H</kbd>pressure</span><span><kbd>Enter</kbd>successful</span><span><kbd>Z</kbd>unsuccessful</span><span><kbd>Tab</kbd>switch team</span><span><kbd>M</kbd>mark as clip</span></div>
+    </div>
+
+    <div class="foot"><span>Your videos and matches stay on this device</span><span>Pitch 105 × 68 m · xT model trained on StatsBomb open data</span></div>
+  </section>
+
   <!-- ============ TAG ============ -->
-  <section id="view-tag" role="tabpanel" aria-labelledby="tab-tag" class="desk">
+  <section id="view-tag" role="tabpanel" aria-labelledby="tab-tag" class="desk" hidden>
     <div class="panel">
       <div class="videobox" id="videoBox">
         <video id="video" playsinline preload="metadata"></video>
@@ -210,6 +347,25 @@ html { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area
           <option value="0.5">0.5×</option><option value="0.75">0.75×</option><option value="1" selected>1×</option><option value="1.5">1.5×</option><option value="2">2×</option>
         </select>
         <label class="row" style="font-size:12px;gap:4px"><input type="checkbox" id="autoPause" checked> pause while tagging</label>
+      </div>
+      <div class="clipfind">
+        <span class="lbl">Player clips</span>
+        <select id="cfPlayer" aria-label="Player"></select>
+        <select id="cfAction" aria-label="Action">
+          <option value="">All actions</option><option value="pass">Passes &amp; crosses</option><option value="shot">Shots</option><option value="carry">Carries &amp; dribbles</option>
+          <option value="def">Defensive actions</option><option value="lost">Ball losses</option><option value="marked">Marked clips (M)</option>
+        </select>
+        <button id="cfPlay" class="primary">▶ Play clips</button>
+      </div>
+      <div class="plbar" id="plBar" hidden>
+        <span class="lbl">Clips</span>
+        <span class="now grow" id="plNow"></span>
+        <button id="plPrev" title="Previous clip">⏮</button><button id="plPlay">❚❚</button><button id="plNext" title="Next clip">⏭</button>
+        <label class="row" style="gap:4px;font-size:12px">before <input type="number" id="plPre" min="0" max="20" step="1" value="3"> s</label>
+        <label class="row" style="gap:4px;font-size:12px">after <input type="number" id="plPost" min="0" max="20" step="1" value="4"> s</label>
+        <label class="row" style="gap:4px;font-size:12px"><input type="checkbox" id="plLoop"> loop</label>
+        <button id="plCsv" title="List of clip start/end times for a video editor">Save list (CSV)</button>
+        <button id="plStop">■ Stop</button>
       </div>
 
       <div class="composer" id="composer" aria-live="polite">
@@ -244,6 +400,7 @@ html { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area
       <div class="row" style="justify-content:space-between">
         <h2 style="font-size:20px">Event log <span class="mono" id="logCount" style="font-size:14px;color:var(--ink-3)"></span></h2>
         <div class="row">
+          <button id="bReel" title="Play every event marked as a clip (M)">▶ Play clip reel</button>
           <button id="bUndo" title="Delete the last event (Backspace)">Undo last</button>
           <button id="bExportToolkit" title="Event Log columns of your Match Analysis Toolkit">Export for Toolkit (CSV)</button>
           <button id="bExportFull">Export full data (CSV)</button>
@@ -267,6 +424,7 @@ html { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area
         <label>Actions<select id="fAction"></select></label>
         <label>Outcome<select id="fOutcome"><option value="">Any</option><option value="ok">Successful only</option><option value="bad">Unsuccessful only</option></select></label>
         <label>Phase<select id="fPhase"></select></label>
+        <label id="fPerWrap">Numbers<select id="fPer"><option value="tot">Totals</option><option value="p90">Per 90 minutes</option></select></label>
         <label>Pitch orientation<select id="fOrient"><option value="std">Analyst view: each team attacking →</option><option value="video">As seen on the video</option></select></label>
         <div class="row"><label class="grow">From<input type="text" id="fFrom" class="mono" placeholder="00:00"></label><label class="grow">To<input type="text" id="fTo" class="mono" placeholder="end"></label></div>
         <p class="note" id="orientNote"></p>
@@ -274,7 +432,15 @@ html { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area
       <div class="panel" style="display:grid;gap:10px">
         <div class="row" style="justify-content:space-between">
           <div class="views" id="views"></div>
-          <button id="bPng">Save chart as image</button>
+          <div class="row"><button id="bClips" title="Play the filtered events back to back on the Tag tab">▶ Play as clips</button><button id="bPng">Save chart as image</button></div>
+        </div>
+        <div class="profctl" id="profCtl" hidden>
+          <label>Player<select id="pPlayer"></select></label>
+          <label>Compare with<select id="pCmp"></select></label>
+          <label>Rank against<select id="pPool"><option value="match">Players in this match</option><option value="all">Players in all my matches</option></select></label>
+          <label>Position<select id="pPos"></select></label>
+          <label>Template<select id="pTpl"></select></label>
+          <button id="pNet" title="Show this player's passing links">Pass network ›</button>
         </div>
         <div id="kpis" class="kpis"></div>
         <canvas class="chart" id="chart" width="1260" height="860"></canvas>
@@ -291,6 +457,11 @@ html { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area
         <div class="row" style="justify-content:space-between"><h2 style="font-size:20px">Your matches</h2>
           <div class="row"><button class="primary" id="bNew">New match</button><label title="A Match Tagger 'full data' CSV, or your Match Analysis Toolkit Excel workbook"><input type="file" id="importFile" accept=".csv,text/csv,.xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" hidden><span class="btnlike" style="border:1px solid var(--line);padding:6px 10px;border-radius:6px;cursor:pointer;display:inline-block;background:var(--panel)">Import CSV / Excel…</span></label></div></div>
         <div class="matchlist" id="matchList"></div>
+        <div class="backup">
+          <div class="row"><button id="bBackup" title="One file with every saved match, its events, line-ups, formations and substitutions">⤓ Back up all matches</button>
+            <label title="Bring matches back from a Match Tagger backup file"><input type="file" id="restoreFile" accept=".json,application/json" hidden><span class="btnlike">⤒ Restore from backup…</span></label></div>
+          <p class="note">The backup is one <span class="mono">.json</span> file with <b>everything</b>: all matches, events, line-ups, formations and substitutions. Keep it in your OneDrive folder. Restoring adds missing matches and updates older copies; a newer copy already here is kept.</p>
+        </div>
         <p class="note">Matches are saved <b>in this browser on this device</b>. Use <b>Export full data (CSV)</b> to back them up or move them to another device, then <b>Import</b> it there.</p>
         <p class="note"><b>Import</b> takes a Match Tagger “full data” CSV, or your <b>Match Analysis Toolkit</b> workbook (.xlsx): teams and squads come from Match Info, events from the Event Log. Toolkit events are placed at the centre of their zone.</p>
       </div>
@@ -315,6 +486,23 @@ html { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area
           <label class="grow"><span id="sqHomeLbl">Home</span><textarea id="sqHome" spellcheck="false"></textarea></label>
           <label class="grow"><span id="sqAwayLbl">Away</span><textarea id="sqAway" spellcheck="false"></textarea></label>
         </div>
+      </div>
+      <div class="panel lineup" style="display:grid;gap:10px;grid-column:1 / -1">
+        <h2 style="font-size:20px">Line-ups, positions &amp; substitutions</h2>
+        <p class="note">Pick each team's formation, then choose a player for every spot from the drop-downs. That sets the starting XI and each player's position in one go (no typing). Positions pick the template on player profiles; starters and substitutions give <b>minutes played</b> for per-90 stats. Changes save automatically.</p>
+        <div id="luTables"></div>
+        <div class="row"><label style="display:grid;gap:3px;font-size:12px;color:var(--ink-2)">Analysed from (video time)<input type="text" id="winFrom" class="mono" placeholder="first event" style="width:8em"></label>
+          <label style="display:grid;gap:3px;font-size:12px;color:var(--ink-2)">Analysed until<input type="text" id="winTo" class="mono" placeholder="last event" style="width:8em"></label>
+          <span class="note" id="winNote"></span></div>
+        <div><span class="lbl">Substitutions</span> <span class="note">pick the team, who went off, who came on (bench players are listed first) and the video time</span><div id="subList" class="note" style="margin:4px 0"></div>
+          <div class="subrow">
+            <label style="display:grid;gap:3px;font-size:12px;color:var(--ink-2)">Team<select id="subTm"></select></label>
+            <label style="display:grid;gap:3px;font-size:12px;color:var(--ink-2)">Off<select id="subOff"></select></label>
+            <label style="display:grid;gap:3px;font-size:12px;color:var(--ink-2)">On<select id="subOn"></select></label>
+            <label style="display:grid;gap:3px;font-size:12px;color:var(--ink-2)">Video time<input type="text" id="subT" class="mono" placeholder="mm:ss" style="width:6em"></label>
+            <button id="subNow" class="ghost" title="Use the video's current time">Use video time</button>
+            <button id="subAdd" class="primary">Add substitution</button>
+          </div></div>
       </div>
     </div>
   </section>
@@ -360,6 +548,15 @@ const mmss = (t, dec = false) => { t = Math.max(0, +t || 0); const m = Math.floo
 const parseT = (s) => { s = String(s || "").trim(); if (!s) return null; const p = s.split(":").map(Number); if (p.some(isNaN)) return null; return p.length === 1 ? p[0] : p[0] * 60 + p[1]; };
 const uid = () => Math.random().toString(36).slice(2, 10);
 const css = (v) => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+/* ---- colour theme: dark by default, or light, or follow the device (saved per browser) ---- */
+const THEMES = ["dark", "light", "auto"], THEME_LABEL = { dark: "◐ Dark", light: "◑ Light", auto: "◒ Auto" };
+function applyTheme(t) {
+  if (t === "auto") delete document.documentElement.dataset.theme; else document.documentElement.dataset.theme = t;
+  const b = document.getElementById("themeBtn"); if (b) { b.textContent = THEME_LABEL[t]; b.title = t === "auto" ? "Theme follows your device. Click for dark" : `Theme: ${t}. Click to change`; }
+}
+let THEME = "dark"; try { THEME = localStorage.getItem("mt_theme") || "dark"; } catch (_) {}
+if (!THEMES.includes(THEME)) THEME = "dark";
+applyTheme(THEME);
 
 /* ================= state ================= */
 const S = {
@@ -524,13 +721,14 @@ function setSave(t, cls = "") { const el = $("saveState"); el.textContent = t; e
 
 /* ================= set / render match ================= */
 function setMatch(m, ev, isExample) {
+  if (S.play && S.play.on) { S.play.on = false; $("plBar").hidden = true; }
   S.match = m; S.events = ev; S.isExample = isExample; S.onBall = null; S.comp = null; S.sel = null; S.active = 0;
   $("exampleBanner").hidden = !isExample;
   $("matchTitle").textContent = m.title;
   $("videoWanted").textContent = m.video ? "File for this match: " + m.video : "";
   renderAll();
 }
-function renderAll() { renderPitch(); renderSquads(); renderComposer(); renderLog(); renderSetup(); renderMatchList(); if (!$("view-analyse").hidden) renderAnalysis(); }
+function renderAll() { renderPitch(); renderSquads(); renderComposer(); renderLog(); renderSetup(); renderLineups(); renderMatchList(); renderClipFind(); renderHome(); if (!$("view-analyse").hidden) renderAnalysis(); }
 
 /* ================= pitch (tagging) ================= */
 function pitchSVG(lines = true) {
@@ -702,7 +900,7 @@ function renderLog() {
       <td>${esc(e.r)}</td><td>${esc(e.ph)}${e.pa && e.ph ? ' <span style="color:var(--ink-3);font-size:11px">auto</span>' : ""}</td><td>${e.c ? "Y" : ""}</td><td>${esc(e.n)}</td></tr>`;
   });
   $("logBody").innerHTML = rows.join("") || `<tr><td colspan="12" class="note" style="padding:14px">No events yet. Open the video, type a shirt number, press <kbd>P</kbd>, and click the pitch twice.</td></tr>`;
-  renderEditor();
+  renderEditor(); if (typeof renderClipFind === "function") renderClipFind();
 }
 function renderEditor() {
   const box = $("editBox"), e = S.events.find((q) => q.i === S.sel);
@@ -844,6 +1042,51 @@ $("bSwap").onclick = () => {
 
 /* ================= export / import ================= */
 let downloads = null;
+/* ---------- back up / restore every match in one file ---------- */
+async function readMatch(id) {
+  const ref = S.db.collection("matches").doc(id), snap = await ref.get(); if (!snap.exists) return null;
+  const m = JSON.parse(JSON.stringify(snap.data())), ch = await ref.collection("chunks").get();
+  let ev = []; ch.docs.slice().sort((a, b) => a.id < b.id ? -1 : 1).forEach((d) => { ev = ev.concat(JSON.parse(JSON.stringify(d.data().events || []))); });
+  return { m, ev };
+}
+async function writeMatch(m, ev, oldChunks = 0) {
+  const ref = S.db.collection("matches").doc(m.id), n = Math.max(1, Math.ceil(ev.length / CHUNK));
+  for (let c = 0; c < n; c++) await ref.collection("chunks").doc("c" + String(c).padStart(3, "0")).set({ events: ev.slice(c * CHUNK, (c + 1) * CHUNK) });
+  for (let c = n; c < oldChunks; c++) await ref.collection("chunks").doc("c" + String(c).padStart(3, "0")).delete();
+  await ref.set({ ...m, chunks: n, eventCount: ev.length });
+}
+async function backupAll() {
+  await saveNow();
+  const out = [];
+  if (S.db) { for (const mt of S.matches) { const r = await readMatch(mt.id); if (r) out.push({ match: r.m, events: r.ev }); } }
+  else if (S.match && !S.isExample) out.push({ match: S.match, events: S.events });
+  if (!out.length) { toast("No saved matches to back up yet"); return; }
+  const data = JSON.stringify({ app: "Match Tagger", kind: "backup", version: 1, exported: new Date().toISOString(), matches: out });
+  await offerFile(`MatchTagger_backup_${new Date().toISOString().slice(0, 10)}.json`, data);
+}
+async function restoreAll(file) {
+  let b = null; try { b = JSON.parse(await file.text()); } catch (_) {}
+  if (!b || b.app !== "Match Tagger" || !Array.isArray(b.matches)) { toast("That file isn't a Match Tagger backup"); return; }
+  if (!S.db) { toast("Saving isn't available here, so a backup can't be restored"); return; }
+  await saveNow();
+  let added = 0, updated = 0, kept = 0, bad = 0;
+  for (const it of b.matches) {
+    const m = it && it.match, ev = Array.isArray(it && it.events) ? it.events : [];
+    if (!m || !m.id || !Array.isArray(m.teams) || m.teams.length !== 2) { bad++; continue; }
+    const have = S.matches.find((x) => x.id === m.id);
+    if (have && (have.updated || 0) >= (m.updated || 0)) { kept++; continue; }
+    try { await writeMatch(m, ev, have ? have.chunks || 0 : 0); have ? updated++ : added++; }
+    catch (err) { toast(err && err.code === "quota_exceeded" ? "Storage is full — some matches weren't restored" : "Couldn't restore everything — try again"); break; }
+  }
+  const msg = [`${added} added`, updated ? `${updated} updated` : "", kept ? `${kept} already up to date` : "", bad ? `${bad} unreadable` : ""].filter(Boolean).join(", ");
+  toast("Restore finished: " + msg);
+  const first = b.matches.find((it) => it && it.match && it.match.id);
+  if (first && (S.isExample || !S.events.length)) await loadMatch(first.match.id);   // nothing worth keeping open: show the restored match
+  else if (S.match && updated && b.matches.some((it) => it && it.match && it.match.id === S.match.id)) await loadMatch(S.match.id);
+  renderMatchList();
+}
+$("bBackup").onclick = backupAll;
+$("restoreFile").onchange = (e) => { const f = e.target.files[0]; e.target.value = ""; if (f) restoreAll(f); };
 async function offerFile(filename, data) {
   if (!downloads) { toast("Saving files isn't available in this view"); return; }
   try { await downloads.save({ filename, data }); toast("Saved " + filename); }
@@ -893,7 +1136,15 @@ $("importFile").onchange = async (ev) => {
   [0, 1].forEach((t) => { m.teams[t].players = [...new Set(ev2.filter((e) => e.tm === t).flatMap((e) => [e.p, e.r]).filter(Boolean))].sort((a, b) => (+shirt(a) || 99) - (+shirt(b) || 99)); });
   const first = rows.find((r) => teams.indexOf(r[ix("team")]) === 0);
   if (first) m.homeRight = first[ix("attacks_right")] === "Y";
-  setMatch(m, ev2, false); markDirty(); toast(`Imported ${ev2.length} events`);
+  // a change in the attacks_right flag = the teams changed ends (half-time)
+  const flags = rows.map((r) => ({ t: +r[ix("time_s")], tm: Math.max(0, teams.indexOf(r[ix("team")])), f: r[ix("attacks_right")] === "Y" })).sort((x, y) => x.t - y.t);
+  const flip = flags.find((q) => (q.tm === 0 ? q.f : !q.f) !== m.homeRight);   // home attacking right = away attacking left
+  if (flip) m.swaps = [flip.t];
+  // events without a phase (e.g. suggestions from the tracking notebook) get the automatic phase
+  const byT = ev2.slice().sort((x, y) => x.t - y.t);
+  byT.forEach((e) => { if (!e.ph) { e.ph = autoPhaseFor(e, byT, m); e.pa = true; } });
+  const nAuto = ev2.filter((e) => /^auto\b/.test(e.n || "")).length;
+  setMatch(m, ev2, false); markDirty(); toast(nAuto ? `Imported ${ev2.length} suggested events — check them against the video` : `Imported ${ev2.length} events`);
 };
 
 /* ---------- Match Analysis Toolkit workbook (.xlsx) ---------- */
@@ -1005,7 +1256,7 @@ $("matchList").addEventListener("click", async (e) => {
 });
 
 /* ================= analysis ================= */
-const VIEWS = [["heat", "Heatmap"], ["passes", "Pass map"], ["threat", "Threat (xT)"], ["network", "Pass network"], ["shots", "Shot map"], ["zones", "Zones"], ["players", "Player stats"], ["teams", "Team stats"]];
+const VIEWS = [["profile", "Player profile"], ["heat", "Heatmap"], ["passes", "Pass map"], ["threat", "Threat (xT)"], ["network", "Pass network"], ["shots", "Shot map"], ["zones", "Zones"], ["players", "Player stats"], ["teams", "Team stats"]];
 $("views").innerHTML = VIEWS.map(([k, n]) => `<button data-view="${k}" aria-pressed="${k === S.view}">${n}</button>`).join("");
 $("views").addEventListener("click", (e) => { const b = e.target.closest("[data-view]"); if (!b) return; S.view = b.dataset.view; [...$("views").children].forEach((x) => x.setAttribute("aria-pressed", x.dataset.view === S.view)); renderAnalysis(); });
 const ACTION_GROUPS = { "": "All actions", Pass: "Passes", "__through": "Through balls", "__lb": "Line-breaking passes", "__long": "Long balls (32 m+)", "__switch": "Switches of play", "__hs": "Passes into half-spaces", Cross: "Crosses", Carry: "Carries", Dribble: "Dribbles", Shot: "Shots", "__def": "Defensive actions", "__win": "Ball wins (tackles won, interceptions, recoveries)", "__loss": "Losses (ball lost, failed passes/dribbles)", Pressure: "Pressures" };
@@ -1022,7 +1273,7 @@ function fillFilters() {
   $("fAction").innerHTML = Object.entries(ACTION_GROUPS).map(([k, n]) => `<option value="${k}" ${k === a ? "selected" : ""}>${n}</option>`).join("");
   $("fPhase").innerHTML = `<option value="">All phases</option>` + PHASES.map((q) => `<option ${q === ph ? "selected" : ""}>${q}</option>`).join("");
 }
-["fTeam", "fPlayer", "fAction", "fOutcome", "fPhase", "fFrom", "fTo", "fOrient"].forEach((id) => $(id).addEventListener("change", renderAnalysis));
+["fTeam", "fPlayer", "fAction", "fOutcome", "fPhase", "fFrom", "fTo", "fOrient", "fPer"].forEach((id) => $(id).addEventListener("change", renderAnalysis));
 function filtered(opts = {}) {
   const team = $("fTeam").value, p = $("fPlayer").value, a = opts.ignoreAction ? "" : $("fAction").value, o = $("fOutcome").value, ph = $("fPhase").value;
   const from = parseT($("fFrom").value), to = parseT($("fTo").value);
@@ -1047,9 +1298,9 @@ function filtered(opts = {}) {
 }
 // --- canvas pitch
 const CV = $("chart"), CX = CV.getContext("2d");
-const PADX = 50, PADY = 50, SC = (CV.width - 2 * PADX) / L;
+let PADX = 50, PADY = 50, SC = (CV.width - 2 * PADX) / L;
 const px = (x) => PADX + x * SC, py = (y) => PADY + y * SC;
-const ANALYST_ONLY = new Set(["heat", "zones", "players", "teams"]);
+const ANALYST_ONLY = new Set(["heat", "zones", "players", "teams", "profile"]);
 const videoView = () => !ANALYST_ONLY.has(S.view) && $("fOrient").value === "video";
 // point to draw: standard view = team attacking left->right; video view = where it was on screen
 const vp = (m, e, end = false) => videoView() ? ((end ? e.ex : e.x) == null ? null : [end ? e.ex : e.x, end ? e.ey : e.y]) : norm(m, e, end);
@@ -1065,6 +1316,13 @@ function drawPitchCanvas(title, sub) {
   const bg = css("--panel"), turf = css("--turf"), turf2 = css("--turf-2"), line = css("--turf-line"), ink = css("--ink"), ink2 = css("--ink-2");
   CV.height = Math.round(2 * PADY + W * SC + 40);
   CX.fillStyle = bg; CX.fillRect(0, 0, CV.width, CV.height);
+  drawTurf();
+  CX.fillStyle = ink; CX.font = `600 26px ${css("--font-display")}`; CX.textBaseline = "alphabetic"; CX.fillText(title, PADX, 34);
+  CX.fillStyle = ink2; CX.font = `15px ${css("--font-body")}`; CX.textAlign = "right"; CX.fillText(sub || "", CV.width - PADX, 34); CX.textAlign = "left";
+  CX.fillStyle = ink2; CX.font = `14px ${css("--font-body")}`; CX.fillText(directionLabel(), PADX, py(W) + 30);
+}
+function drawTurf() {
+  const turf = css("--turf"), turf2 = css("--turf-2"), line = css("--turf-line");
   for (let i = 0; i < 12; i++) { CX.fillStyle = i % 2 ? turf : turf2; CX.fillRect(px(i * L / 12), py(0), SC * L / 12, SC * W); }
   CX.strokeStyle = line; CX.lineWidth = 2.2;
   CX.strokeRect(px(0), py(0), SC * L, SC * W);
@@ -1075,31 +1333,40 @@ function drawPitchCanvas(title, sub) {
     CX.strokeRect(px(s > 0 ? 0 : L - 5.5), py((W - 18.32) / 2), 5.5 * SC, 18.32 * SC);
     CX.strokeRect(px(s > 0 ? -1.6 : L), py((W - 7.32) / 2), 1.6 * SC, 7.32 * SC);
   }
-  CX.fillStyle = ink; CX.font = `600 26px ${css("--font-display")}`; CX.textBaseline = "alphabetic"; CX.fillText(title, PADX, 34);
-  CX.fillStyle = ink2; CX.font = `15px ${css("--font-body")}`; CX.textAlign = "right"; CX.fillText(sub || "", CV.width - PADX, 34); CX.textAlign = "left";
-  CX.fillStyle = ink2; CX.font = `14px ${css("--font-body")}`; CX.fillText(directionLabel(), PADX, py(W) + 30);
 }
 function teamLabelSel() { const t = $("fTeam").value; return t === "" ? "Both teams" : S.match.teams[+t].name; }
 function subTitle(n) { const p = $("fPlayer").value; return `${p || teamLabelSel()} · ${n} event${n === 1 ? "" : "s"}`; }
 function heat(points, color) {
-  const gx = 105, gy = 68, grid = new Float32Array(gx * gy);
-  points.forEach(([x, y]) => { const i = Math.min(gx - 1, Math.max(0, Math.floor(x))), j = Math.min(gy - 1, Math.max(0, Math.floor(y))); grid[j * gx + i] += 1; });
-  // gaussian-ish blur: 3 box passes, radius 3
-  const blur = (g) => { const out = new Float32Array(g.length), r = 3;
-    for (let j = 0; j < gy; j++) for (let i = 0; i < gx; i++) { let s = 0, n = 0; for (let k = -r; k <= r; k++) { const ii = i + k; if (ii >= 0 && ii < gx) { s += g[j * gx + ii]; n++; } } out[j * gx + i] = s / n; }
-    const o2 = new Float32Array(g.length);
-    for (let j = 0; j < gy; j++) for (let i = 0; i < gx; i++) { let s = 0, n = 0; for (let k = -r; k <= r; k++) { const jj = j + k; if (jj >= 0 && jj < gy) { s += out[jj * gx + i]; n++; } } o2[j * gx + i] = s / n; }
-    return o2; };
-  let g = blur(blur(grid)); let mx = 0; g.forEach((v) => { if (v > mx) mx = v; }); if (!mx) return;
+  // smooth density: each action spreads a soft gaussian "glow" (kernel density estimate) on a fine grid
+  const RES = 3, gx = L * RES, gy = W * RES, grid = new Float32Array(gx * gy);
+  const pts = points.filter((q) => q && isFinite(q[0]) && isFinite(q[1]));
+  if (!pts.length) return;
+  const sigma = Math.max(3.2, Math.min(6, 9 / Math.sqrt(Math.max(1, pts.length) / 8))) * RES;   // fewer actions → softer, wider glow
+  const rad = Math.ceil(3 * sigma), k2 = -1 / (2 * sigma * sigma);
+  const ker = new Float32Array((2 * rad + 1) * (2 * rad + 1));
+  for (let dy = -rad; dy <= rad; dy++) for (let dx = -rad; dx <= rad; dx++) ker[(dy + rad) * (2 * rad + 1) + dx + rad] = Math.exp((dx * dx + dy * dy) * k2);
+  pts.forEach(([x, y]) => {
+    const cx = Math.round(Math.min(L, Math.max(0, x)) * RES), cy = Math.round(Math.min(W, Math.max(0, y)) * RES);
+    for (let dy = -rad; dy <= rad; dy++) { const yy = cy + dy; if (yy < 0 || yy >= gy) continue;
+      const row = yy * gx, krow = (dy + rad) * (2 * rad + 1) + rad;
+      for (let dx = -rad; dx <= rad; dx++) { const xx = cx + dx; if (xx >= 0 && xx < gx) grid[row + xx] += ker[krow + dx]; } }
+  });
+  let mx = 0; for (let k = 0; k < grid.length; k++) if (grid[k] > mx) mx = grid[k];
+  if (!mx) return;
   const off = document.createElement("canvas"); off.width = gx; off.height = gy; const oc = off.getContext("2d"); const img = oc.createImageData(gx, gy);
-  const stops = [[0, [255, 255, 178]], [0.35, [254, 204, 92]], [0.65, [253, 141, 60]], [1, [189, 0, 38]]];
-  for (let k = 0; k < g.length; k++) {
-    const v = g[k] / mx; if (v < 0.06) continue;
-    let a = stops[0], b = stops[stops.length - 1]; for (let s = 1; s < stops.length; s++) if (v <= stops[s][0]) { a = stops[s - 1]; b = stops[s]; break; }
+  const stops = [[0, [255, 247, 188]], [0.25, [254, 227, 145]], [0.5, [254, 178, 76]], [0.75, [240, 101, 46]], [1, [189, 0, 38]]];
+  const sm = (a, b, v) => { const t = Math.min(1, Math.max(0, (v - a) / (b - a))); return t * t * (3 - 2 * t); };
+  for (let k = 0; k < grid.length; k++) {
+    const v = grid[k] / mx; if (v < 0.015) continue;
+    let a = stops[0], b = stops[stops.length - 1]; for (let s2 = 1; s2 < stops.length; s2++) if (v <= stops[s2][0]) { a = stops[s2 - 1]; b = stops[s2]; break; }
     const f = (v - a[0]) / (b[0] - a[0] || 1);
-    img.data[k * 4] = a[1][0] + f * (b[1][0] - a[1][0]); img.data[k * 4 + 1] = a[1][1] + f * (b[1][1] - a[1][1]); img.data[k * 4 + 2] = a[1][2] + f * (b[1][2] - a[1][2]); img.data[k * 4 + 3] = 70 + 150 * v;
+    img.data[k * 4] = a[1][0] + f * (b[1][0] - a[1][0]); img.data[k * 4 + 1] = a[1][1] + f * (b[1][1] - a[1][1]); img.data[k * 4 + 2] = a[1][2] + f * (b[1][2] - a[1][2]);
+    img.data[k * 4 + 3] = 235 * sm(0.015, 0.45, v);                     // fades in softly, no hard edge
   }
-  oc.putImageData(img, 0, 0); CX.imageSmoothingEnabled = true; CX.drawImage(off, px(0), py(0), SC * L, SC * W);
+  oc.putImageData(img, 0, 0);
+  CX.save(); CX.imageSmoothingEnabled = true; CX.imageSmoothingQuality = "high";
+  CX.beginPath(); CX.rect(px(0), py(0), SC * L, SC * W); CX.clip();
+  CX.drawImage(off, px(0), py(0), SC * L, SC * W); CX.restore();
   void color;
 }
 function arrow(x1, y1, x2, y2, col, w = 2.4, alpha = 1) {
@@ -1169,9 +1436,9 @@ function possessions(m, evs) {
   }
   return out;
 }
-function computeStats(evs) {
-  const m = S.match, all = sorted(), by = {};
-  const g = (p, tm) => (by[p] ??= { player: p, team: tm, touches: 0, passes: 0, passOk: 0, prog: 0, f3: 0, key: 0, thr: 0, thrOk: 0, lb: 0, lbOk: 0, longB: 0, longOk: 0, sw: 0, boxP: 0, recF3: 0, recLb: 0, sca: 0, gca: 0, xt: 0, xtPass: 0, xtCarry: 0, ppd: 0, pcd: 0, hs: 0, crosses: 0, crossOk: 0, carries: 0, progCarry: 0, drib: 0, dribOk: 0, shots: 0, onT: 0, goals: 0, tackles: 0, tackleOk: 0, inter: 0, rec: 0, clear: 0, blocks: 0, press: 0, duels: 0, duelOk: 0, fouls: 0, lost: 0 });
+function computeStats(evs, m = S.match, all = sorted()) {
+  const by = {};
+  const g = (p, tm) => (by[p] ??= { player: p, team: tm, touches: 0, passes: 0, passOk: 0, prog: 0, f3: 0, key: 0, thr: 0, thrOk: 0, lb: 0, lbOk: 0, longB: 0, longOk: 0, sw: 0, boxP: 0, recF3: 0, recLb: 0, sca: 0, gca: 0, xt: 0, xtPass: 0, xtCarry: 0, ppd: 0, pcd: 0, hs: 0, crosses: 0, crossOk: 0, carries: 0, progCarry: 0, drib: 0, dribOk: 0, shots: 0, onT: 0, goals: 0, tackles: 0, tackleOk: 0, inter: 0, rec: 0, clear: 0, blocks: 0, press: 0, duels: 0, duelOk: 0, fouls: 0, lost: 0, saves: 0 });
   evs.forEach((e) => {
     const s = g(e.p, e.tm); const k = ACTION_BY_NAME[e.a];
     if (k.kind === "ball" || WINS.has(e.a) || e.a === "Tackle") s.touches++;
@@ -1194,7 +1461,7 @@ function computeStats(evs) {
     if (e.a === "Shot") { s.shots++; if (e.o === "On target" || e.o === "Goal") s.onT++; if (e.o === "Goal") s.goals++; }
     if (e.a === "Tackle") { s.tackles++; if (e.o === "Successful") s.tackleOk++; }
     if (e.a === "Interception") s.inter++; if (e.a === "Recovery") s.rec++; if (e.a === "Clearance") s.clear++; if (e.a === "Block") s.blocks++;
-    if (e.a === "Pressure") s.press++; if (e.a === "Foul") s.fouls++;
+    if (e.a === "Pressure") s.press++; if (e.a === "Foul") s.fouls++; if (e.a === "Save") s.saves++;
     if (e.a === "Duel" || e.a === "Aerial duel") { s.duels++; if (e.o === "Successful") s.duelOk++; }
     if (e.a === "Ball lost" || ((e.a === "Pass" || e.a === "Cross" || e.a === "Dribble") && e.o === "Unsuccessful")) s.lost++;
     // key pass = completed pass/cross whose receiver shoots within 5 s
@@ -1208,16 +1475,468 @@ function computeStats(evs) {
   shotCreating(m, all).forEach((c) => { if (!evIds.has(c.e.i)) return; const s = g(c.p, c.tm); s.sca++; if (c.goal) s.gca++; });
   return Object.values(by);
 }
+/* ================= line-ups, minutes, per 90 ================= */
+const POS_LIST = [["Goalkeeper", ["GK"]], ["Defenders", ["RB", "RCB", "CB", "LCB", "LB", "RWB", "LWB"]], ["Midfielders", ["DM", "RDM", "LDM", "CM", "RCM", "LCM", "RM", "LM"]],
+  ["Attackers", ["AM", "RAM", "LAM", "RW", "LW", "SS", "CF", "ST"]]];
+const POSITIONS = POS_LIST.flatMap(([, l]) => l);
+const POS_NAME = { GK: "Goalkeeper", RB: "Right-back", RCB: "Right centre-back", CB: "Centre-back", LCB: "Left centre-back", LB: "Left-back", RWB: "Right wing-back", LWB: "Left wing-back",
+  DM: "Defensive midfielder", RDM: "Right defensive mid", LDM: "Left defensive mid", CM: "Central midfielder", RCM: "Right centre-mid", LCM: "Left centre-mid", RM: "Right midfielder", LM: "Left midfielder",
+  AM: "Attacking midfielder", RAM: "Right attacking mid", LAM: "Left attacking mid", RW: "Right winger", LW: "Left winger", SS: "Second striker", CF: "Centre-forward", ST: "Striker" };
+const POS_GROUP = { GK: "Goalkeeper", RB: "Full-back", LB: "Full-back", RWB: "Full-back", LWB: "Full-back", CB: "Centre-back", RCB: "Centre-back", LCB: "Centre-back",
+  DM: "Midfielder", RDM: "Midfielder", LDM: "Midfielder", CM: "Midfielder", RCM: "Midfielder", LCM: "Midfielder",
+  AM: "Attacking midfielder", RAM: "Attacking midfielder", LAM: "Attacking midfielder", RM: "Winger", LM: "Winger", RW: "Winger", LW: "Winger", SS: "Striker", CF: "Striker", ST: "Striker" };
+const posOptions = (cur) => `<option value="">Position…</option>` + POS_LIST.map(([g, l]) => `<optgroup label="${g}">${l.map((q) => `<option value="${q}" ${cur === q ? "selected" : ""}>${q} · ${POS_NAME[q]}</option>`).join("")}</optgroup>`).join("");
+// formations: slots as [position, x %, y %] on a pitch attacking upwards (x 0 = left touchline)
+const BACK4 = [["LB", 14, 73], ["LCB", 37, 79], ["RCB", 63, 79], ["RB", 86, 73]], BACK3 = [["LCB", 25, 78], ["CB", 50, 81], ["RCB", 75, 78]], GKS = [["GK", 50, 93]];
+const FORMATIONS = {
+  "4-3-3": [...GKS, ...BACK4, ["LCM", 28, 50], ["DM", 50, 59], ["RCM", 72, 50], ["LW", 15, 23], ["ST", 50, 15], ["RW", 85, 23]],
+  "4-2-3-1": [...GKS, ...BACK4, ["LDM", 36, 59], ["RDM", 64, 59], ["LW", 15, 34], ["AM", 50, 37], ["RW", 85, 34], ["ST", 50, 14]],
+  "4-4-2": [...GKS, ...BACK4, ["LM", 14, 46], ["LCM", 37, 52], ["RCM", 63, 52], ["RM", 86, 46], ["ST", 37, 18], ["ST", 63, 18]],
+  "4-1-4-1": [...GKS, ...BACK4, ["DM", 50, 61], ["LM", 14, 40], ["LCM", 37, 45], ["RCM", 63, 45], ["RM", 86, 40], ["ST", 50, 15]],
+  "4-4-2 diamond": [...GKS, ...BACK4, ["DM", 50, 61], ["LCM", 28, 48], ["RCM", 72, 48], ["AM", 50, 35], ["ST", 37, 16], ["ST", 63, 16]],
+  "4-3-1-2": [...GKS, ...BACK4, ["LCM", 25, 52], ["CM", 50, 55], ["RCM", 75, 52], ["AM", 50, 35], ["ST", 37, 16], ["ST", 63, 16]],
+  "4-2-2-2": [...GKS, ...BACK4, ["LDM", 36, 58], ["RDM", 64, 58], ["LAM", 22, 36], ["RAM", 78, 36], ["ST", 37, 16], ["ST", 63, 16]],
+  "3-5-2": [...GKS, ...BACK3, ["LWB", 10, 46], ["LCM", 32, 50], ["DM", 50, 58], ["RCM", 68, 50], ["RWB", 90, 46], ["ST", 37, 17], ["ST", 63, 17]],
+  "3-4-3": [...GKS, ...BACK3, ["LWB", 10, 50], ["LCM", 37, 54], ["RCM", 63, 54], ["RWB", 90, 50], ["LW", 17, 22], ["ST", 50, 15], ["RW", 83, 22]],
+  "3-4-2-1": [...GKS, ...BACK3, ["LWB", 10, 52], ["LCM", 37, 56], ["RCM", 63, 56], ["RWB", 90, 52], ["LAM", 33, 33], ["RAM", 67, 33], ["ST", 50, 14]],
+  "5-3-2": [...GKS, ["LWB", 9, 66], ["LCB", 30, 77], ["CB", 50, 80], ["RCB", 70, 77], ["RWB", 91, 66], ["LCM", 28, 48], ["CM", 50, 52], ["RCM", 72, 48], ["ST", 37, 18], ["ST", 63, 18]],
+  "5-4-1": [...GKS, ["LWB", 9, 66], ["LCB", 30, 77], ["CB", 50, 80], ["RCB", 70, 77], ["RWB", 91, 66], ["LM", 15, 44], ["LCM", 38, 48], ["RCM", 62, 48], ["RM", 85, 44], ["ST", 50, 16]],
+};
+const pkey = (tm, p) => tm + "|" + p;
+function lineupOf(m) { m.lineup ??= { starters: {}, pos: {} }; m.lineup.form ??= {}; m.lineup.slots ??= {}; m.subs ??= []; m.win ??= { from: null, to: null }; return m.lineup; }
+function matchWindow(m, ev) {
+  const ts = ev.map((e) => e.t), from = m.win?.from ?? (ts.length ? Math.min(...ts) : 0), to = m.win?.to ?? (ts.length ? Math.max(...ts) : from);
+  return [from, Math.max(to, from + 60)];
+}
+// minutes on the pitch per player (video time inside the analysed window)
+function minutesMap(m, ev) {
+  const lu = lineupOf(m), [A, B] = matchWindow(m, ev), out = {}, assumed = [false, false];
+  [0, 1].forEach((tm) => {
+    const hasXI = m.teams[tm].players.some((p) => lu.starters[pkey(tm, p)]);
+    assumed[tm] = !hasXI;
+    const names = new Set([...m.teams[tm].players, ...ev.filter((e) => e.tm === tm).map((e) => e.p)]);
+    names.forEach((p) => {
+      const k = pkey(tm, p);
+      let on = !hasXI || lu.starters[k] ? A : null;
+      const subOn = m.subs.find((q) => q.tm === tm && q.on === p);
+      if (on == null && subOn) on = subOn.t;
+      if (on == null) { const first = ev.find((e) => e.tm === tm && e.p === p); on = first ? first.t : null; }   // has events but wasn't listed
+      if (on == null) { out[k] = 0; return; }
+      const subOff = m.subs.find((q) => q.tm === tm && q.off === p && q.t >= on);
+      const off = subOff ? subOff.t : B;
+      out[k] = Math.max(0, (Math.min(off, B) - Math.max(on, A)) / 60);
+    });
+  });
+  return { minutes: out, assumed, window: [A, B] };
+}
+function posOf(m, tm, p) { return lineupOf(m).pos[pkey(tm, p)] || ""; }
+function renderLineups() {
+  const m = S.match; if (!m) return; const lu = lineupOf(m);
+  const label = (p) => `${shirt(p) ? shirt(p) + " " : ""}${shortName(p)}`;
+  $("luTables").innerHTML = m.teams.map((t, tm) => {
+    const f = lu.form[tm] || "", slots = lu.slots[tm] || [], P = t.players;
+    const starters = P.filter((p) => lu.starters[pkey(tm, p)]);
+    const bench = P.filter((p) => !lu.starters[pkey(tm, p)]);
+    const pitch = f && FORMATIONS[f] ? `<div class="fpitch" role="group" aria-label="${esc(t.name)} ${esc(f)}">${FORMATIONS[f].map(([code, x, y], i) =>
+      `<div class="slot" style="left:${x}%;top:${y}%"><span class="code">${code}</span><select data-slot="${tm}:${i}" aria-label="${esc(t.name)} ${code}"><option value="">—</option>${P.map((p) => `<option value="${esc(p)}" ${slots[i] === p ? "selected" : ""}>${esc(label(p))}</option>`).join("")}</select></div>`).join("")}<span class="dir">attacking ↑</span></div>`
+      : `<div class="fempty">Pick a formation to place your starting XI on the pitch. Each player gets the position of his spot.</div>`;
+    return `<div class="luteam"><h3><span class="swatch" style="background:${esc(t.color)}"></span> ${esc(t.name)} <span class="note">${starters.length ? starters.length + " starters" : "no starters yet"}</span></h3>
+      <label class="fsel">Formation <select data-form="${tm}"><option value="">Choose…</option>${Object.keys(FORMATIONS).map((k) => `<option ${k === f ? "selected" : ""}>${k}</option>`).join("")}</select></label>
+      ${pitch}
+      <div class="bench"><span class="lbl">Bench</span> ${bench.length ? bench.map((p) => `<span class="chip">${esc(label(p))}</span>`).join(" ") : `<span class="note">Everyone in the squad is starting. Add substitutes to the squad list above to make them available.</span>`}</div>
+      <details class="lulist"><summary>Every player: starter tick and position</summary>
+      <table><thead><tr><th>Player</th><th>Starter</th><th>Position</th></tr></thead><tbody>${P.map((p) => `<tr><td>${esc(p)}</td>
+        <td><input type="checkbox" data-xi="${esc(pkey(tm, p))}" ${lu.starters[pkey(tm, p)] ? "checked" : ""} aria-label="${esc(p)} starts"></td>
+        <td><select data-pos="${esc(pkey(tm, p))}" aria-label="${esc(p)} position">${posOptions(lu.pos[pkey(tm, p)] || "")}</select></td></tr>`).join("") || `<tr><td colspan="3" class="note">Add the squad first.</td></tr>`}</tbody></table></details></div>`;
+  }).join("");
+  $("winFrom").value = m.win.from == null ? "" : mmss(m.win.from); $("winTo").value = m.win.to == null ? "" : mmss(m.win.to);
+  const w = matchWindow(m, S.events); $("winNote").textContent = `Counting minutes from ${mmss(w[0])} to ${mmss(w[1])} of the video (${Math.round((w[1] - w[0]) / 60)} min).`;
+  $("subTm").innerHTML = m.teams.map((t, i) => `<option value="${i}">${esc(t.name)}</option>`).join("");
+  $("subTm").value = String(S.subTeam ?? 0); fillSubPlayers();
+  $("subList").innerHTML = m.subs.length ? m.subs.slice().sort((a, b) => a.t - b.t).map((q) => `<span class="pill" style="margin:0 6px 4px 0;display:inline-flex;gap:6px;align-items:center">${mmss(q.t)} · ${esc(m.teams[q.tm].name)}: ${esc(shortName(q.off))} ⟶ ${esc(shortName(q.on))} <button class="ghost" data-delsub="${m.subs.indexOf(q)}" style="padding:0 5px" aria-label="Remove substitution">✕</button></span>`).join("") : "None yet.";
+}
+// put the current starters into a formation's spots: exact position first, then same position group, then anyone left
+function fillFormation(m, tm, f) {
+  const lu = lineupOf(m), spots = FORMATIONS[f], old = lu.slots[tm] || [];
+  let pool = m.teams[tm].players.filter((p) => lu.starters[pkey(tm, p)]);
+  if (!pool.length) pool = old.some(Boolean) ? old.filter(Boolean) : m.teams[tm].players.slice(0, spots.length);   // nobody ticked yet: start from the squad order
+  const out = new Array(spots.length).fill(null), used = new Set();
+  const take = (i, p) => { out[i] = p; used.add(p); };
+  spots.forEach(([code], i) => { const p = pool.find((q) => !used.has(q) && lu.pos[pkey(tm, q)] === code); if (p) take(i, p); });
+  spots.forEach(([code], i) => { if (out[i]) return; const p = pool.find((q) => !used.has(q) && POS_GROUP[lu.pos[pkey(tm, q)]] === POS_GROUP[code]); if (p) take(i, p); });
+  spots.forEach(([code], i) => { if (out[i]) return; const p = pool.find((q) => !used.has(q) && !lu.pos[pkey(tm, q)]); if (p) take(i, p); });
+  lu.slots[tm] = out;
+  out.forEach((p, i) => { if (p) { lu.starters[pkey(tm, p)] = true; lu.pos[pkey(tm, p)] = spots[i][0]; } });
+}
+function fillSubPlayers() {
+  const m = S.match, tm = +$("subTm").value, P = m.teams[tm]?.players || [], lu = lineupOf(m);
+  // on the pitch now = starters + subbed on − subbed off (everyone if no starters ticked)
+  const onPitch = new Set(P.some((p) => lu.starters[pkey(tm, p)]) ? P.filter((p) => lu.starters[pkey(tm, p)]) : P);
+  m.subs.filter((q) => q.tm === tm).sort((a, b) => a.t - b.t).forEach((q) => { onPitch.delete(q.off); onPitch.add(q.on); });
+  const bench = P.filter((p) => !onPitch.has(p));
+  const o = (L) => L.map((p) => `<option>${esc(p)}</option>`).join("");
+  $("subOff").innerHTML = o([...onPitch]);
+  $("subOn").innerHTML = bench.length ? `<optgroup label="Bench">${o(bench)}</optgroup><optgroup label="Already on">${o([...onPitch])}</optgroup>` : o(P);
+}
+$("luTables").addEventListener("change", (e) => {
+  const m = S.match, lu = lineupOf(m);
+  if (e.target.dataset.form !== undefined) {
+    const tm = +e.target.dataset.form, f = e.target.value;
+    if (f) { lu.form[tm] = f; fillFormation(m, tm, f); } else { delete lu.form[tm]; }
+  }
+  if (e.target.dataset.slot) {
+    const [tm, i] = e.target.dataset.slot.split(":").map(Number), p = e.target.value, sl = (lu.slots[tm] ??= []), code = FORMATIONS[lu.form[tm]][i][0];
+    const prev = sl[i];
+    const j = p ? sl.indexOf(p) : -1;
+    if (j >= 0 && j !== i) sl[j] = prev || null;               // swap if he was already in another spot
+    sl[i] = p || null;
+    if (prev && !sl.includes(prev)) { delete lu.starters[pkey(tm, prev)]; }
+    if (j >= 0 && prev && sl[j] === prev) lu.pos[pkey(tm, prev)] = FORMATIONS[lu.form[tm]][j][0];
+    if (p) { lu.starters[pkey(tm, p)] = true; lu.pos[pkey(tm, p)] = code; }
+  }
+  if (e.target.dataset.xi) { if (e.target.checked) lu.starters[e.target.dataset.xi] = true; else delete lu.starters[e.target.dataset.xi]; }
+  if (e.target.dataset.pos !== undefined) { if (e.target.value) lu.pos[e.target.dataset.pos] = e.target.value; else delete lu.pos[e.target.dataset.pos]; }
+  if (S.isExample) { toast("This is the example match — changes here aren't saved"); }
+  markDirty(); renderLineups();
+});
+$("subTm").onchange = () => { S.subTeam = +$("subTm").value; fillSubPlayers(); };
+$("subNow").onclick = () => { if (!V.src) { toast("Open the video on the Tag tab first"); return; } $("subT").value = mmss(V.currentTime); };
+$("subAdd").onclick = () => {
+  const m = S.match, t = parseT($("subT").value), tm = +$("subTm").value, off = $("subOff").value, on = $("subOn").value;
+  if (t == null) { toast("Type the video time of the substitution (mm:ss) or click Use video time"); return; }
+  if (!off || !on || off === on) { toast("Choose two different players"); return; }
+  lineupOf(m); m.subs.push({ t, tm, off, on }); markDirty(); renderLineups(); toast(`${shortName(on)} on for ${shortName(off)} at ${mmss(t)}`);
+};
+$("subList").addEventListener("click", (e) => { const b = e.target.closest("[data-delsub]"); if (!b) return; S.match.subs.splice(+b.dataset.delsub, 1); markDirty(); renderLineups(); });
+["winFrom", "winTo"].forEach((id) => $(id).addEventListener("change", () => {
+  const m = S.match; lineupOf(m); const v = $(id).value.trim() === "" ? null : parseT($(id).value);
+  m.win[id === "winFrom" ? "from" : "to"] = v; markDirty(); renderLineups();
+}));
+
+/* ================= player profiles ================= */
+const MET = {
+  passes: ["Passes", (s) => s.passes], passPct: ["Pass completion", (s) => s.passes ? 100 * s.passOk / s.passes : null, "pct"],
+  prog: ["Progressive passes", (s) => s.prog], f3: ["Final-third passes", (s) => s.f3], key: ["Key passes", (s) => s.key],
+  sca: ["Shot-creating actions", (s) => s.sca], xt: ["xT added", (s) => s.xt, "dec"], thr: ["Through balls", (s) => s.thrOk],
+  lb: ["Line-breaking passes", (s) => s.lbOk], longB: ["Long balls", (s) => s.longOk], sw: ["Switches", (s) => s.sw], boxP: ["Passes into box", (s) => s.boxP],
+  recF3: ["Received in final third", (s) => s.recF3], hs: ["Half-space receptions", (s) => s.hs], cross: ["Crosses completed", (s) => s.crossOk],
+  progCarry: ["Progressive carries", (s) => s.progCarry], pcd: ["Prog. carry distance", (s) => s.pcd, "m"], ppd: ["Prog. pass distance", (s) => s.ppd, "m"],
+  drib: ["Dribbles won", (s) => s.dribOk], shots: ["Shots", (s) => s.shots], onT: ["Shots on target", (s) => s.onT], goals: ["Goals", (s) => s.goals],
+  tackle: ["Tackles won", (s) => s.tackleOk], inter: ["Interceptions", (s) => s.inter], rec: ["Recoveries", (s) => s.rec], clear: ["Clearances", (s) => s.clear],
+  blocks: ["Blocks", (s) => s.blocks], press: ["Pressures", (s) => s.press], duelPct: ["Duels won", (s) => s.duels ? 100 * s.duelOk / s.duels : null, "pct"],
+  saves: ["Saves", (s) => s.saves], lost: ["Ball losses (fewer is better)", (s) => s.lost, "inv"],
+};
+const TEMPLATES = {
+  "Goalkeeper": ["passes", "passPct", "longB", "ppd", "rec", "clear", "saves", "lost"],
+  "Centre-back": ["passPct", "prog", "longB", "ppd", "tackle", "inter", "clear", "duelPct"],
+  "Full-back": ["prog", "progCarry", "cross", "key", "xt", "tackle", "inter", "rec"],
+  "Midfielder": ["passes", "passPct", "prog", "lb", "xt", "tackle", "inter", "rec"],
+  "Attacking midfielder": ["key", "sca", "xt", "thr", "drib", "shots", "recF3", "hs"],
+  "Winger": ["drib", "cross", "progCarry", "key", "sca", "xt", "shots", "recF3"],
+  "Striker": ["shots", "onT", "goals", "sca", "recF3", "hs", "duelPct", "press"],
+};
+const ZERO = () => computeStats([], S.match, [])[0];
+function addStats(a, b) { for (const k in b) if (typeof b[k] === "number" && k !== "team") a[k] = (a[k] || 0) + b[k]; return a; }
+const metricVal = (s, key, min) => { const [, f, kind] = MET[key]; const v = f(s); if (v == null) return null; return kind === "pct" ? v : (min > 0 ? v * 90 / min : 0); };
+// one entry per player: stats + minutes (+ position group), for this match or all saved matches
+async function profilePool(scope) {
+  const build = (m, ev, matchId) => {
+    const st = computeStats(ev, m, ev.slice().sort((a, b) => a.t - b.t));
+    const { minutes } = minutesMap(m, ev);
+    return st.map((s) => ({ key: m.teams[s.team].name + "|" + s.player, player: s.player, teamName: m.teams[s.team].name, color: m.teams[s.team].color,
+      s, min: minutes[pkey(s.team, s.player)] || 0, pos: posOf(m, s.team, s.player), matches: 1, matchId }));
+  };
+  const cur = build(S.match, S.events, S.match.id);
+  if (scope !== "all" || !S.db) return { rows: cur, note: "" };
+  const all = {}; let n = 0;
+  for (const mt of S.matches) {
+    let m, ev;
+    if (S.match && mt.id === S.match.id) { m = S.match; ev = S.events; }
+    else {
+      S.poolCache ??= {};
+      if (!S.poolCache[mt.id] || S.poolCache[mt.id].updated !== mt.updated) {
+        const ref = S.db.collection("matches").doc(mt.id), snap = await ref.get(); if (!snap.exists) continue;
+        const ch = await ref.collection("chunks").get(); let evs = [];
+        ch.docs.slice().sort((a, b) => a.id < b.id ? -1 : 1).forEach((d) => { evs = evs.concat(JSON.parse(JSON.stringify(d.data().events || []))); });
+        S.poolCache[mt.id] = { updated: mt.updated, m: JSON.parse(JSON.stringify(snap.data())), ev: evs };
+      }
+      ({ m, ev } = S.poolCache[mt.id]);
+    }
+    n++;
+    build(m, ev, mt.id).forEach((r) => {
+      const a = all[r.key] ??= { ...r, s: { ...ZERO(), player: r.player, team: r.s.team }, min: 0, matches: 0 };
+      addStats(a.s, r.s); a.min += r.min; a.matches++; if (r.pos) a.pos = r.pos;
+    });
+  }
+  return { rows: Object.values(all), note: `${n} matches` };
+}
+function percentile(val, arr, inv) {
+  const v = arr.filter((x) => x != null); if (!v.length || val == null) return null;
+  const below = v.filter((x) => inv ? x > val : x < val).length, eq = v.filter((x) => x === val).length;
+  return Math.round(100 * (below + 0.5 * eq) / v.length);
+}
+const pctColor = (p) => p == null ? "#8a948f" : p >= 80 ? "#1d8a4e" : p >= 60 ? "#5aa469" : p >= 40 ? "#b7791f" : "#c0392b";
+let profileBusy = 0;
+const lc1 = (t) => t[0].toLowerCase() + t.slice(1);
+async function renderProfile() {
+  const m = S.match, ticket = ++profileBusy;
+  const scope = $("pPool").value;
+  if (scope === "all") $("viewNote").textContent = "Loading your matches…";
+  const { rows, note } = await profilePool(scope);
+  if (ticket !== profileBusy || S.view !== "profile") return;
+  const outfield = rows.filter((r) => r.min > 0);
+  // player picker (this match's players first)
+  const here = rows.filter((r) => scope !== "all" || S.events.some((e) => m.teams[e.tm].name + "|" + e.p === r.key));
+  const opts = (scope === "all" ? rows : here).slice().sort((a, b) => a.teamName.localeCompare(b.teamName) || (+shirt(a.player) || 99) - (+shirt(b.player) || 99));
+  const keep = (id, def) => { const v = $(id).value; return opts.some((r) => r.key === v) ? v : def; };
+  const def = opts.slice().sort((a, b) => b.s.touches - a.s.touches)[0];
+  if (!def) { $("kpis").innerHTML = ""; CV.height = 200; CX.fillStyle = css("--panel"); CX.fillRect(0, 0, CV.width, CV.height); $("viewNote").textContent = "No players with events yet — tag some actions first."; return; }
+  const want = S.wantProfile && opts.some((r) => r.key === S.wantProfile) ? S.wantProfile : null; S.wantProfile = null;
+  const pick = want || keep("pPlayer", def.key);
+  $("pPlayer").innerHTML = opts.map((r) => `<option value="${esc(r.key)}" ${r.key === pick ? "selected" : ""}>${esc(r.player)} — ${esc(r.teamName)}</option>`).join("");
+  const cmpKeep = $("pCmp").value;
+  $("pCmp").innerHTML = `<option value="">Nobody</option>` + opts.filter((r) => r.key !== pick).map((r) => `<option value="${esc(r.key)}" ${r.key === cmpKeep ? "selected" : ""}>${esc(r.player)} — ${esc(r.teamName)}</option>`).join("");
+  const P = rows.find((r) => r.key === pick), C = rows.find((r) => r.key === $("pCmp").value) || null;
+  const grp = POS_GROUP[P.pos] || "";
+  const inMatch = scope !== "all" || m.teams.some((t) => P.key.startsWith(t.name + "|"));
+  $("pPos").innerHTML = posOptions(P.pos); $("pPos").disabled = !inMatch;
+  const tplKeep = $("pTpl").value;
+  $("pTpl").innerHTML = Object.keys(TEMPLATES).map((g) => `<option ${g === (S.tplUser ? tplKeep : (grp || "Midfielder")) ? "selected" : ""}>${g}</option>`).join("");
+  const tpl = $("pTpl").value, keys = TEMPLATES[tpl];
+  // comparison pool: same position group if it has 3+ players with minutes, else all outfield players
+  let pool = outfield.filter((r) => (POS_GROUP[r.pos] || "") === tpl);
+  let poolLabel = `${pool.length} ${tpl.toLowerCase()}s`;
+  if (pool.length < 3) { pool = outfield.filter((r) => r.pos !== "GK" || tpl === "Goalkeeper"); poolLabel = `${pool.length} players (too few ${tpl.toLowerCase()}s to compare like for like)`; }
+  const score = (R) => keys.map((k) => { const v = metricVal(R.s, k, R.min); return { k, v, p: percentile(v, pool.map((q) => metricVal(q.s, k, q.min)), MET[k][2] === "inv") }; });
+  const ps = score(P), cs = C ? score(C) : null;
+  // profile index = average percentile across the template's metrics (50 = typical for the group)
+  const indexOf = (sc) => { const v = sc.filter((q) => q.p != null).map((q) => q.p); return v.length ? Math.round(v.reduce((a, b) => a + b, 0) / v.length) : null; };
+  const iP = indexOf(ps), iC = cs ? indexOf(cs) : null;
+  // keep team colours readable on the panel (lighten dark colours in dark mode, darken pale ones in light mode)
+  const lum = (h) => { const m0 = /^#?([0-9a-f]{6})$/i.exec(h || ""); if (!m0) return .5; const v = parseInt(m0[1], 16), f = (c) => { c /= 255; return c <= .03928 ? c / 12.92 : ((c + .055) / 1.055) ** 2.4; }; return .2126 * f(v >> 16 & 255) + .7152 * f(v >> 8 & 255) + .0722 * f(v & 255); };
+  const mix = (h, t, k) => { const a = parseInt(h.slice(1), 16), b = parseInt(t.slice(1), 16); const ch = (sh) => Math.round((a >> sh & 255) * (1 - k) + (b >> sh & 255) * k); return "#" + [16, 8, 0].map((sh) => ch(sh).toString(16).padStart(2, "0")).join(""); };
+  const darkUI = lum(css("--panel").trim()) < .2;
+  const readable = (h) => !/^#[0-9a-f]{6}$/i.test(h) ? h : darkUI && lum(h) < .18 ? mix(h, "#ffffff", .35) : !darkUI && lum(h) > .55 ? mix(h, "#000000", .35) : h;
+  const colA = readable(P.color), colB = C ? readable(C.color.toLowerCase() === P.color.toLowerCase() ? css("--warn").trim() : C.color) : null;
+  const fmtK = (k, v) => v == null ? "–" : MET[k][2] === "pct" ? Math.round(v) + "%" : v.toFixed(MET[k][2] === "dec" ? 2 : MET[k][2] === "m" ? 0 : 1);
+  // which player leads each metric (fewer is better for 'inv')
+  const lead = (k, a, b) => a == null || b == null || Math.abs(a - b) < 1e-9 ? 0 : (MET[k][2] === "inv" ? (a < b ? 1 : -1) : (a > b ? 1 : -1));
+  // ---- draw
+  const ink = css("--ink"), ink2 = css("--ink-2"), ink3 = css("--ink-3"), line = css("--line");
+  CV.height = C ? 820 : 760; CX.fillStyle = css("--panel"); CX.fillRect(0, 0, CV.width, CV.height);
+  CX.textBaseline = "alphabetic"; CX.textAlign = "left";
+  // title: names in their colours
+  let tx = 40; const seg = (t, c, f) => { CX.fillStyle = c; CX.font = f; CX.fillText(t, tx, 46); tx += CX.measureText(t).width; };
+  const fT = `600 30px ${css("--font-display")}`;
+  seg(P.player, C ? colA : ink, fT); if (C) { seg("  vs  ", ink3, fT); seg(C.player, colB, fT); }
+  CX.fillStyle = ink2; CX.font = `15px ${css("--font-body")}`;
+  const subOf = (R) => `${R.teamName} · ${R.pos || "position not set"} · ${Math.round(R.min)} min${scope === "all" ? ` · ${R.matches} match${R.matches === 1 ? "" : "es"}` : ""}`;
+  CX.fillText(C ? `${subOf(P)}   |   ${subOf(C)}` : subOf(P), 40, 72);
+  CX.fillStyle = ink3; CX.font = `13px ${css("--font-body")}`; CX.fillText(`Per 90 minutes · percentile ranks against ${poolLabel} · ${tpl} template`, 40, 94);
+  // index badges (top right)
+  const badge = (x, label, val, col) => {
+    CX.fillStyle = css("--panel-2"); CX.strokeStyle = col; CX.lineWidth = 3; CX.beginPath(); CX.roundRect(x, 18, 150, 78, 10); CX.fill(); CX.stroke();
+    CX.fillStyle = ink3; CX.font = `600 12px ${css("--font-display")}`; CX.textAlign = "left"; CX.fillText("PROFILE INDEX", x + 14, 40);
+    CX.fillStyle = col; CX.font = `700 40px ${css("--font-display")}`; CX.fillText(val == null ? "–" : String(val), x + 14, 84);
+    CX.fillStyle = ink2; CX.font = `600 14px ${css("--font-body")}`; CX.textAlign = "right"; CX.fillText(shortName(label), x + 138, 84); CX.textAlign = "left";
+  };
+  if (C) { badge(CV.width - 340, P.player, iP, colA); badge(CV.width - 175, C.player, iC, colB); } else badge(CV.width - 175, P.player, iP, colA);
+  const cx = 390, cy = C ? 450 : 420, R = 185, n = keys.length;
+  CX.strokeStyle = line; CX.lineWidth = 1;
+  [25, 50, 75, 100].forEach((r) => { CX.beginPath(); for (let i = 0; i <= n; i++) { const a = -Math.PI / 2 + 2 * Math.PI * i / n; const x = cx + Math.cos(a) * R * r / 100, y = cy + Math.sin(a) * R * r / 100; i ? CX.lineTo(x, y) : CX.moveTo(x, y); } CX.stroke(); });
+  for (let i = 0; i < n; i++) { const a = -Math.PI / 2 + 2 * Math.PI * i / n; CX.beginPath(); CX.moveTo(cx, cy); CX.lineTo(cx + Math.cos(a) * R, cy + Math.sin(a) * R); CX.stroke(); }
+  CX.fillStyle = ink3; CX.font = `12px ${css("--font-mono")}`; CX.textAlign = "center"; CX.fillText("50", cx + 12, cy - R / 2 + 14);
+  const poly = (sc, color, alpha, dash) => { CX.beginPath(); sc.forEach((q, i) => { const a = -Math.PI / 2 + 2 * Math.PI * i / n, r = (q.p ?? 0) / 100 * R; const x = cx + Math.cos(a) * r, y = cy + Math.sin(a) * r; i ? CX.lineTo(x, y) : CX.moveTo(x, y); }); CX.closePath(); CX.globalAlpha = alpha; CX.fillStyle = color; CX.fill(); CX.globalAlpha = 1; CX.strokeStyle = color; CX.lineWidth = 3; CX.setLineDash(dash || []); CX.stroke(); CX.setLineDash([]); };
+  poly(ps, colA, C ? 0.28 : 0.35);
+  if (cs) poly(cs, colB, 0.16, [9, 6]);
+  ps.forEach((q, i) => {
+    const a = -Math.PI / 2 + 2 * Math.PI * i / n, x = cx + Math.cos(a) * (R + 24), y = cy + Math.sin(a) * (R + 30) + (Math.sin(a) < -0.9 ? (C ? -34 : -14) : 0);
+    const al = Math.abs(Math.cos(a)) < 0.2 ? "center" : Math.cos(a) > 0 ? "left" : "right";
+    CX.textAlign = al;
+    CX.fillStyle = ink; CX.font = `600 15px ${css("--font-body")}`; CX.fillText(MET[q.k][0], x, y);
+    CX.font = `14px ${css("--font-mono")}`;
+    if (!cs) { CX.fillStyle = ink2; CX.fillText(`${fmtK(q.k, q.v)}${q.p != null ? "  (" + q.p + ")" : ""}`, x, y + 19); return; }
+    const w = lead(q.k, q.v, cs[i].v);
+    const line1 = `${w === 1 ? "▲ " : ""}${fmtK(q.k, q.v)}${q.p != null ? " (" + q.p + ")" : ""}`, line2 = `${w === -1 ? "▲ " : ""}${fmtK(q.k, cs[i].v)}${cs[i].p != null ? " (" + cs[i].p + ")" : ""}`;
+    CX.font = `${w === 1 ? "700 " : ""}14px ${css("--font-mono")}`; CX.fillStyle = colA; CX.fillText(line1, x, y + 19);
+    CX.font = `${w === -1 ? "700 " : ""}14px ${css("--font-mono")}`; CX.fillStyle = colB; CX.fillText(line2, x, y + 37);
+  });
+  CX.textAlign = "left";
+  // heatmaps (analyst view) — one per player
+  const ptsFor = (key) => (scope === "all"
+    ? Object.values(S.poolCache || {}).flatMap((c) => c.ev.filter((e) => c.m.teams[e.tm].name + "|" + e.p === key).map((e) => norm(c.m, e))).concat(S.events.filter((e) => m.teams[e.tm].name + "|" + e.p === key).map((e) => norm(m, e)))
+    : S.events.filter((e) => m.teams[e.tm].name + "|" + e.p === key).map((e) => norm(m, e))).filter(Boolean);
+  const save = [PADX, PADY, SC];
+  const mini = (R0, col, top, w) => {
+    PADX = 790; PADY = top; SC = w / L; drawTurf(); const pts = ptsFor(R0.key); heat(pts);
+    CX.fillStyle = col; CX.fillRect(PADX, PADY + W * SC + 10, 12, 12);
+    CX.fillStyle = ink2; CX.font = `600 14px ${css("--font-body")}`; CX.fillText(`${R0.player} · ${pts.length} actions · attacking →`, PADX + 18, PADY + W * SC + 21);
+  };
+  if (C) { mini(P, colA, 128, 430); mini(C, colB, 468, 430); } else mini(P, colA, 170, 430);
+  [PADX, PADY, SC] = save;
+  CX.fillStyle = ink3; CX.font = `13px ${css("--font-body")}`;
+  CX.fillText(C ? `Solid shape: ${P.player} · dashed: ${C.player}. Each value: per 90 (percentile); ▲ = better of the two. Profile index = average percentile across the ${n} metrics (50 = typical).`
+    : `Numbers per 90 minutes, percentile rank in brackets (100 = best in the comparison group). Profile index = average of the ${n} percentiles (50 = typical).`, 40, CV.height - 22);
+  // ---- cards + summary
+  const top = ps.filter((q) => q.p != null).sort((a, b) => b.p - a.p);
+  const pill = (p) => `<span class="pctpill" style="background:${pctColor(p)}">${p ?? "–"}</span>`;
+  $("kpis").classList.toggle("wide", !!C);
+  if (!C) {
+    $("kpis").innerHTML = `<div class="kpi kidx" style="border-color:${esc(colA)}"><div class="lbl">Profile index</div><div class="v">${iP ?? "–"} <span class="sep">/ 100</span></div></div>` +
+      ps.map((q) => `<div class="kpi"><div class="lbl">${esc(MET[q.k][0])}</div><div class="v">${fmtK(q.k, q.v)} ${pill(q.p)}</div></div>`).join("");
+  } else {
+    const row = (name, col, v, p, win) => `<div class="cmpv${win ? " win" : ""}"><span class="sw" style="background:${esc(col)}"></span><span class="nm">${esc(shortName(name))}</span><b>${v}</b>${pill(p)}${win ? '<span class="lead">▲</span>' : ""}</div>`;
+    const iw = lead("passes", iP, iC);
+    $("kpis").innerHTML = `<div class="kpi kidx"><div class="lbl">Profile index</div>${row(P.player, colA, iP ?? "–", null, iw === 1).replace(/<span class="pctpill"[^>]*>–<\/span>/, "")}${row(C.player, colB, iC ?? "–", null, iw === -1).replace(/<span class="pctpill"[^>]*>–<\/span>/, "")}</div>` +
+      ps.map((q, i) => { const w = lead(q.k, q.v, cs[i].v); return `<div class="kpi"><div class="lbl">${esc(MET[q.k][0])}</div>${row(P.player, colA, fmtK(q.k, q.v), q.p, w === 1)}${row(C.player, colB, fmtK(q.k, cs[i].v), cs[i].p, w === -1)}</div>`; }).join("");
+  }
+  const strengths = top.filter((q) => q.p >= 70).slice(0, 3).map((q) => lc1(MET[q.k][0]));
+  const weak = top.filter((q) => q.p <= 30).slice(-2).map((q) => lc1(MET[q.k][0]).replace(" (fewer is better)", ""));
+  const myEv = (scope === "all" ? [] : S.events).filter((e) => m.teams[e.tm].name + "|" + e.p === P.key);
+  const zones = {}; myEv.forEach((e) => { const z = zoneOf(norm(m, e)); if (z) zones[z] = (zones[z] || 0) + 1; });
+  const zTop = Object.entries(zones).sort((a, b) => b[1] - a[1]).slice(0, 2).map(([z]) => z);
+  const small = P.min < 30 || (C && C.min < 30) ? ` Under 30 minutes of data, so per-90 numbers are rough.` : "";
+  let cmpTxt = "";
+  if (C) {
+    const aW = [], bW = []; ps.forEach((q, i) => { const w = lead(q.k, q.v, cs[i].v); if (w === 1) aW.push(lc1(MET[q.k][0]).replace(" (fewer is better)", "")); if (w === -1) bW.push(lc1(MET[q.k][0]).replace(" (fewer is better)", "")); });
+    cmpTxt = ` <b>Head to head:</b> ${esc(shortName(P.player))} is ahead on ${aW.length} of ${n}${aW.length ? " (" + aW.join(", ") + ")" : ""}; ${esc(shortName(C.player))} on ${bW.length}${bW.length ? " (" + bW.join(", ") + ")" : ""}. Profile index ${iP ?? "–"} v ${iC ?? "–"}.`;
+  }
+  $("viewNote").innerHTML = `<b>${esc(shortName(P.player))}</b>: ` +
+    (strengths.length ? `stands out for ${strengths.join(", ")}` : "no metric in the top 30% of the group") +
+    (weak.length ? `; lower for ${weak.join(" and ")}` : "") + "." + cmpTxt +
+    (zTop.length ? ` ${esc(shortName(P.player))} is most involved in zones ${zTop.join(" and ")}.` : "") + small +
+    (minutesMap(m, S.events).assumed.some(Boolean) ? " Minutes assume everyone played the whole time for a team with no starters ticked in Line-ups." : "") +
+    (scope === "all" ? ` Pool: ${note}.` : "") + (P.pos ? "" : " Set positions in Matches &amp; squads → Line-ups to pick the right template automatically.");
+}
+["pPlayer", "pCmp", "pPool"].forEach((id) => $(id).addEventListener("change", () => renderAnalysis()));
+$("pTpl").addEventListener("change", () => { S.tplUser = true; renderAnalysis(); });
+$("pPos").addEventListener("change", () => {
+  const v = $("pPlayer").value, k = v.indexOf("|"), tn = v.slice(0, k), p = v.slice(k + 1), m = S.match, tm = m.teams.findIndex((t) => t.name === tn);
+  if (tm < 0) return; const lu = lineupOf(m);
+  if ($("pPos").value) lu.pos[pkey(tm, p)] = $("pPos").value; else delete lu.pos[pkey(tm, p)];
+  if (S.isExample) toast("This is the example match — changes here aren't saved");
+  S.tplUser = false; markDirty(); renderLineups(); renderAnalysis();
+});
+$("pPlayer").addEventListener("change", () => { S.tplUser = false; });
+
+/* ================= clip playlists ================= */
+function renderTimeline() {}
+S.play = { on: false, list: [], i: 0, label: "" };
+function eventLabel(e) { return `${mmss(e.t)} ${shortName(e.p)} · ${e.a}${e.o ? " (" + e.o.toLowerCase() + ")" : ""}`; }
+function buildClips(evs) {
+  const pre = Math.max(0, +$("plPre").value || 0), post = Math.max(0, +$("plPost").value || 0);
+  const out = [];
+  evs.slice().sort((a, b) => a.t - b.t).forEach((e) => {
+    const s0 = Math.max(0, e.t - pre), e0 = e.t + post, last = out[out.length - 1];
+    if (last && s0 <= last.e) { last.e = Math.max(last.e, e0); last.n++; last.labels.push(eventLabel(e)); }
+    else out.push({ s: s0, e: e0, n: 1, labels: [eventLabel(e)] });
+  });
+  return out;
+}
+function startPlaylist(evs, label) {
+  if (!evs.length) { toast("No events to play — change the filters"); return; }
+  selectTab("tag");
+  if (!V.src) { toast("Open the match video first (Choose video…), then press Play again"); }
+  S.play = { on: true, list: buildClips(evs), i: 0, label, evs };
+  $("plBar").hidden = false; playClip(0);
+}
+function playClip(i) {
+  const P = S.play; if (!P.on) return;
+  P.i = Math.max(0, Math.min(P.list.length - 1, i));
+  const c = P.list[P.i];
+  $("plNow").textContent = `${P.label} · clip ${P.i + 1} of ${P.list.length} · ${c.labels[0]}${c.n > 1 ? ` (+${c.n - 1} more)` : ""}`;
+  if (V.src) { V.currentTime = c.s; V.play(); }
+  renderTimeline();
+}
+function stopPlaylist() { S.play.on = false; $("plBar").hidden = true; if (V.src) V.pause(); renderTimeline(); }
+V.addEventListener("timeupdate", () => {
+  const P = S.play;
+  if (P.on && P.list.length && !V.paused) {
+    const c = P.list[P.i];
+    if (V.currentTime >= c.e) { if (P.i < P.list.length - 1) playClip(P.i + 1); else if ($("plLoop").checked) playClip(0); else { V.pause(); $("plNow").textContent = `${P.label} · finished (${P.list.length} clips)`; } }
+  }
+  renderTimeline();
+});
+$("plPrev").onclick = () => playClip(S.play.i - 1); $("plNext").onclick = () => playClip(S.play.i + 1);
+$("plPlay").onclick = () => { if (!V.src) { toast("Open the video first"); return; } V.paused ? V.play() : V.pause(); };
+V.addEventListener("play", () => { $("plPlay").textContent = "❚❚"; }); V.addEventListener("pause", () => { $("plPlay").textContent = "▶"; });
+$("plStop").onclick = stopPlaylist;
+["plPre", "plPost"].forEach((id) => $(id).addEventListener("change", () => { if (S.play.on) { S.play.list = buildClips(S.play.evs); playClip(0); } }));
+$("plCsv").onclick = () => { const rows = [["clip", "start", "end", "start_s", "end_s", "events"]]; S.play.list.forEach((c, i) => rows.push([i + 1, mmss(c.s), mmss(c.e), r1(c.s), r1(c.e), c.labels.join(" | ")])); offerFile(safeName(S.match.title) + "_clips.csv", csv(rows)); };
+$("bReel").onclick = () => startPlaylist(S.events.filter((e) => e.c), "Clip reel");
+$("bClips").onclick = () => {
+  const evs = S.view === "profile" ? S.events.filter((e) => S.match.teams[e.tm].name + "|" + e.p === $("pPlayer").value) : filtered();
+  const what = S.view === "profile" ? shortName(($("pPlayer").value || "").split("|")[1]) : [$("fPlayer").value ? shortName($("fPlayer").value) : $("fTeam").selectedOptions[0]?.text, $("fAction").selectedOptions[0]?.text].filter(Boolean).join(" · ");
+  startPlaylist(evs, what || "Clips");
+};
+// ---- player clips (Tag tab)
+function renderClipFind() {
+  const m = S.match; if (!m) return; const sel = $("cfPlayer"), keep = sel.value;
+  const byNo = (x, y) => (+shirt(x) || 99) - (+shirt(y) || 99);
+  sel.innerHTML = `<option value="">Choose a player…</option>` + [0, 1].map((tm) => {
+    const ps = [...new Set(S.events.filter((e) => e.tm === tm && e.p).map((e) => e.p))].sort(byNo);
+    return `<optgroup label="${esc(m.teams[tm].name)}"><option value="${tm}|">All ${esc(m.teams[tm].name)} players</option>${ps.map((p) => `<option value="${tm}|${esc(p)}">${esc(p)}</option>`).join("")}</optgroup>`;
+  }).join("");
+  if ([...sel.options].some((o) => o.value === keep)) sel.value = keep;
+}
+const CLIP_ACT = {
+  pass: (e) => isPassLike(e.a), shot: (e) => e.a === "Shot", carry: (e) => e.a === "Carry" || e.a === "Dribble",
+  def: (e) => ACTION_BY_NAME[e.a]?.kind === "def", marked: (e) => !!e.c,
+  lost: (e) => e.a === "Ball lost" || ((e.a === "Pass" || e.a === "Cross" || e.a === "Dribble") && e.o === "Unsuccessful"),
+};
+$("cfPlay").onclick = () => {
+  const v = $("cfPlayer").value; if (!v) { toast("Choose a player first"); $("cfPlayer").focus(); return; }
+  const k = v.indexOf("|"), tm = +v.slice(0, k), p = v.slice(k + 1), act = $("cfAction").value;
+  const evs = S.events.filter((e) => e.tm === tm && (!p || e.p === p) && (!act || CLIP_ACT[act](e)));
+  if (!evs.length) { toast("No " + $("cfAction").selectedOptions[0].text.toLowerCase() + " for that player"); return; }
+  startPlaylist(evs, `${p ? shortName(p) : S.match.teams[tm].name} · ${$("cfAction").selectedOptions[0].text}`);
+};
+// ---- jumping between views
+function setView(v) { S.view = v; [...$("views").children].forEach((x) => x.setAttribute("aria-pressed", x.dataset.view === v)); renderAnalysis(); }
+function goProfile(tm, p) { S.wantProfile = S.match.teams[tm].name + "|" + p; S.tplUser = false; if ($("view-analyse").hidden) { S.view = "profile"; selectTab("analyse"); [...$("views").children].forEach((x) => x.setAttribute("aria-pressed", x.dataset.view === "profile")); } else setView("profile"); }
+function goNetwork(tm, p) { $("fTeam").value = String(tm); fillFilters(); $("fPlayer").value = p || ""; setView("network"); }
+$("pNet").onclick = () => { const v = $("pPlayer").value, k = v.indexOf("|"), tn = v.slice(0, k), p = v.slice(k + 1); const tm = S.match.teams.findIndex((t) => t.name === tn); if (tm < 0 || !S.events.some((e) => e.tm === tm && e.p === p)) { toast("This player has no events in the open match"); return; } goNetwork(tm, p); };
+CV.addEventListener("click", (e) => {
+  if (S.view !== "network" || !S.netNodes) return;
+  const r = CV.getBoundingClientRect(), x = (e.clientX - r.left) * CV.width / r.width, y = (e.clientY - r.top) * CV.height / r.height;
+  const hit = S.netNodes.find((n) => Math.hypot(n.x - x, n.y - y) <= n.r + 10);
+  if (hit) goNetwork(hit.tm, $("fPlayer").value === hit.p ? "" : hit.p); else if ($("fPlayer").value) { $("fPlayer").value = ""; renderAnalysis(); }
+});
+$("viewNote").addEventListener("click", (e) => {
+  const b = e.target.closest("[data-nav]"); if (!b) return;
+  const tm = +b.dataset.tm, p = b.dataset.p;
+  if (b.dataset.nav === "profile") goProfile(tm, p);
+  if (b.dataset.nav === "clips") startPlaylist(S.events.filter((q) => q.tm === tm && q.p === p && isPassLike(q.a)), `${shortName(p)} · Passes`);
+  if (b.dataset.nav === "team") { $("fPlayer").value = ""; renderAnalysis(); }
+});
+$("tableBox").addEventListener("click", (e) => { const b = e.target.closest("[data-prof]"); if (!b) return; const v = b.dataset.prof, k = v.indexOf("|"); goProfile(+v.slice(0, k), v.slice(k + 1)); });
+// ---- home
+function renderHome() {
+  const m = S.match, b = $("hContinue"); if (!m) return;
+  if (S.isExample) { b.hidden = true; $("hStats").textContent = ""; return; }
+  const fresh = !S.events.length; b.hidden = false;
+  b.textContent = fresh ? "Set up your match" : `Continue: ${m.title}`; b.dataset.go = fresh ? "setup" : "tag";
+  $("hStats").textContent = fresh ? "" : `${S.events.length} events tagged · ${m.teams[0].name} v ${m.teams[1].name}`;
+}
+$("hContinue").onclick = () => selectTab($("hContinue").dataset.go || "tag");
+$("hNew").onclick = () => $("bNew").click();
+$("hExample").onclick = async () => { await saveNow(); const ex = exampleMatch(); setMatch(ex.m, ex.ev, true); selectTab("analyse"); };
+
 function renderAnalysis() {
   const m = S.match; if (!m) return; fillFilters();
   $("fOrient").closest("label").hidden = ANALYST_ONLY.has(S.view);
+  $("fPerWrap").hidden = S.view !== "players";
+  $("profCtl").hidden = S.view !== "profile";
+  ["fPlayer", "fTeam", "fAction", "fOutcome"].forEach((id) => { $(id).closest("label").hidden = S.view === "profile"; });
   $("orientNote").innerHTML = ANALYST_ONLY.has(S.view) && S.view !== "players" && S.view !== "teams"
     ? "Heatmaps and zones always use the <b>analyst view</b>: each team attacking left → right, so you can compare players, halves and matches directly."
     : videoView()
     ? "Charts show actions <b>where they happened on screen</b>, so both teams can share one pitch. Positions flip at the half-time swap, so pick a time window inside one half for clean pictures. Stats and zones always use each team's own direction."
     : "All pitch charts show the chosen team <b>attacking left → right</b>, like your Zone Map — the standard way to compare teams, halves and matches.";
-  const view = S.view; $("tableBox").hidden = !(view === "players" || view === "teams"); CV.hidden = !$("tableBox").hidden;
-  $("kpis").innerHTML = ""; $("viewNote").textContent = ""; $("bPng").hidden = CV.hidden;
+  const view = S.view;
+  if (view === "profile") { $("tableBox").hidden = true; CV.hidden = false; $("bPng").hidden = false; $("kpis").innerHTML = ""; renderProfile(); return; }
+  $("tableBox").hidden = !(view === "players" || view === "teams"); CV.hidden = !$("tableBox").hidden;
+  $("kpis").innerHTML = ""; $("kpis").classList.remove("wide"); $("viewNote").textContent = ""; $("bPng").hidden = CV.hidden; CV.style.cursor = ""; S.netNodes = null;
   if (view === "heat") {
     const ev = filtered(); const pts = ev.map((e) => vp(m, e)).filter(Boolean);
     drawPitchCanvas("Heatmap — where actions happened", subTitle(ev.length)); heat(pts);
@@ -1248,25 +1967,49 @@ function renderAnalysis() {
     $("kpis").innerHTML = kpi("xT created", tot.toFixed(2)) + kpi("Actions adding threat", vals.length) + best.map(([p, v], i) => kpi(i === 0 ? "Top threat creator" : `#${i + 1}`, `<span style="font-size:17px">${esc(shortName(p))}</span> <span class="sep">${v.toFixed(2)}</span>`)).join("");
     $("viewNote").textContent = "Shading = how dangerous each area is (chance it leads to a goal soon). Arrows = completed passes (yellow) and carries (white) that moved the ball somewhere more dangerous; thicker = more threat added. xT model trained on the free StatsBomb 2015/16 Premier League data.";
   } else if (view === "network") {
-    let team = $("fTeam").value; if (team === "") { team = "0"; }
+    const selP = $("fPlayer").value;
+    let team = $("fTeam").value;
+    if (selP) { const f = S.events.find((e) => e.p === selP && (team === "" || e.tm === +team)); if (f) team = String(f.tm); }
+    if (team === "") team = "0";
     const tm = +team, ev = filtered({ ignoreAction: true, bothTeams: true, allPlayers: true }).filter((e) => e.tm === tm);
     const pas = ev.filter((e) => e.a === "Pass" && e.o === "Successful" && e.r);
     const pos = {}; ev.forEach((e) => { const a = vp(m, e); if (!a || !e.p) return; (pos[e.p] ??= []).push(a); });
     pas.forEach((e) => { const b = vp(m, e, true); if (b) (pos[e.r] ??= []).push(b); });
-    const avg = Object.fromEntries(Object.entries(pos).filter(([, v]) => v.length >= 2).map(([k, v]) => [k, [v.reduce((s, q) => s + q[0], 0) / v.length, v.reduce((s, q) => s + q[1], 0) / v.length, v.length]]));
+    const avg = Object.fromEntries(Object.entries(pos).filter(([k, v]) => v.length >= 2 || k === selP).map(([k, v]) => [k, [v.reduce((s, q) => s + q[0], 0) / v.length, v.reduce((s, q) => s + q[1], 0) / v.length, v.length]]));
     const pair = {}; pas.forEach((e) => { const k = [e.p, e.r].sort().join("|"); pair[k] = (pair[k] || 0) + 1; });
-    drawPitchCanvas(`Pass network — ${m.teams[tm].name}`, `${pas.length} completed passes · nodes at average position`);
+    const partners = new Set(); Object.keys(pair).forEach((k) => { const [a, b] = k.split("|"); if (a === selP) partners.add(b); if (b === selP) partners.add(a); });
+    drawPitchCanvas(selP ? `Pass network — ${shortName(selP)}, ${m.teams[tm].name}` : `Pass network — ${m.teams[tm].name}`, `${pas.length} completed passes · nodes at average position${selP ? " · highlighted: " + shortName(selP) + "'s links" : ""}`);
     const maxP = Math.max(1, ...Object.values(pair)), minShow = Math.max(1, Math.round(maxP * 0.15));
-    const lineC = css("--turf-line");
-    Object.entries(pair).forEach(([k, n]) => { const [a, b] = k.split("|"); if (!avg[a] || !avg[b] || n < minShow) return; CX.globalAlpha = .35 + .6 * n / maxP; CX.strokeStyle = lineC; CX.lineWidth = 1 + 9 * n / maxP; CX.beginPath(); CX.moveTo(px(avg[a][0]), py(avg[a][1])); CX.lineTo(px(avg[b][0]), py(avg[b][1])); CX.stroke(); CX.globalAlpha = 1; });
+    const lineC = css("--turf-line"), hl = css("--hl");
+    const links = Object.entries(pair).map(([k, n]) => { const [a, b] = k.split("|"); return { a, b, n, mine: !!selP && (a === selP || b === selP) }; })
+      .filter((l) => avg[l.a] && avg[l.b] && (l.mine || l.n >= minShow)).sort((x, y) => x.mine - y.mine);
+    links.forEach(({ a, b, n, mine }) => { CX.globalAlpha = selP ? (mine ? .55 + .45 * n / maxP : .14) : .35 + .6 * n / maxP; CX.strokeStyle = mine ? hl : lineC; CX.lineWidth = 1 + 9 * n / maxP + (mine ? 1 : 0); CX.lineCap = "round"; CX.beginPath(); CX.moveTo(px(avg[a][0]), py(avg[a][1])); CX.lineTo(px(avg[b][0]), py(avg[b][1])); CX.stroke(); CX.globalAlpha = 1; });
     const maxT = Math.max(1, ...Object.values(avg).map((v) => v[2]));
+    S.netNodes = [];
     Object.entries(avg).forEach(([p, [x, y, n]]) => {
-      dot(x, y, 12 + 12 * n / maxT, m.teams[tm].color, "#fff", 2.5);
+      const r = 12 + 12 * n / maxT, dim = selP && p !== selP && !partners.has(p);
+      S.netNodes.push({ p, tm, x: px(x), y: py(y), r });
+      CX.globalAlpha = dim ? .35 : 1;
+      dot(x, y, r, m.teams[tm].color, p === selP ? hl : "#fff", p === selP ? 5 : 2.5);
       CX.fillStyle = "#fff"; CX.font = `600 15px ${css("--font-body")}`; CX.textAlign = "center"; CX.textBaseline = "middle"; CX.fillText(shirt(p) || "", px(x), py(y));
-      CX.font = `600 14px ${css("--font-body")}`; CX.textBaseline = "top"; CX.lineWidth = 3; CX.strokeStyle = "rgba(0,0,0,.55)"; CX.strokeText(shortName(p), px(x), py(y) + 14 + 12 * n / maxT); CX.fillText(shortName(p), px(x), py(y) + 14 + 12 * n / maxT);
-      CX.textAlign = "left"; CX.textBaseline = "alphabetic";
+      CX.font = `600 14px ${css("--font-body")}`; CX.textBaseline = "top"; CX.lineWidth = 3; CX.strokeStyle = "rgba(0,0,0,.55)"; CX.strokeText(shortName(p), px(x), py(y) + r + 2); CX.fillText(shortName(p), px(x), py(y) + r + 2);
+      CX.textAlign = "left"; CX.textBaseline = "alphabetic"; CX.globalAlpha = 1;
     });
-    $("viewNote").textContent = `Node size = involvement, line thickness = passes between the pair (pairs with fewer than ${minShow} hidden). Uses the team filter (both teams shows ${m.teams[0].name}).`;
+    CV.style.cursor = "pointer";
+    if (selP) {
+      const made = pas.filter((e) => e.p === selP), recv = pas.filter((e) => e.r === selP);
+      const to = {}, from = {}; made.forEach((e) => { to[e.r] = (to[e.r] || 0) + 1; }); recv.forEach((e) => { from[e.p] = (from[e.p] || 0) + 1; });
+      const top = (o) => Object.entries(o).sort((a, b) => b[1] - a[1])[0];
+      const t1 = top(to), f1 = top(from);
+      $("kpis").innerHTML = kpi("Passes completed", made.length) + kpi("Passes received", recv.length) +
+        kpi("Passes most to", t1 ? `<span style="font-size:17px">${esc(shortName(t1[0]))}</span> <span class="sep">${t1[1]}</span>` : "–") +
+        kpi("Receives most from", f1 ? `<span style="font-size:17px">${esc(shortName(f1[0]))}</span> <span class="sep">${f1[1]}</span>` : "–");
+      const d = `data-tm="${tm}" data-p="${esc(selP)}"`;
+      $("viewNote").innerHTML = `Yellow lines = ${esc(shortName(selP))}'s passing links (both directions); faded players never exchanged a completed pass with him. Click another player to switch, or empty grass to see the whole team.
+        <div class="navrow"><button ${d} data-nav="profile">Open ${esc(shortName(selP))}'s profile ›</button><button ${d} data-nav="clips">▶ Watch his passes</button><button ${d} data-nav="team">Show whole team</button></div>`;
+    } else {
+      $("viewNote").textContent = `Click a player to highlight his passing links. Node size = involvement, line thickness = passes between the pair (pairs with fewer than ${minShow} hidden). Uses the team, phase and time filters.`;
+    }
   } else if (view === "shots") {
     const ev = filtered({ ignoreAction: true }).filter((e) => e.a === "Shot");
     drawPitchCanvas("Shot map", subTitle(ev.length));
@@ -1289,7 +2032,11 @@ function renderAnalysis() {
   } else if (view === "players") {
     const st = computeStats(filtered({ ignoreAction: true })).sort((a, b) => a.team - b.team || (+shirt(a.player) || 99) - (+shirt(b.player) || 99));
     const pct = (a, b) => b ? Math.round(100 * a / b) + "%" : "–";
-    const cols = [["Player", (s) => esc(s.player)], ["Team", (s) => `<span class="tdot" style="background:${esc(m.teams[s.team].color)}"></span>${esc(m.teams[s.team].name)}`], ["Touches", (s) => s.touches],
+    const MM = minutesMap(m, S.events), p90 = $("fPer").value === "p90";
+    const mins = (s) => MM.minutes[pkey(s.team, s.player)] || 0;
+    // in per-90 mode every count is scaled to 90 minutes; pairs show successes per 90
+    const N = (s, v) => p90 ? (mins(s) > 0 ? (v * 90 / mins(s)).toFixed(1) : "–") : v;
+    const rawCols = [["Player", (s) => `<button class="linkbtn" data-prof="${s.team}|${esc(s.player)}" title="Open player profile">${esc(s.player)}</button>`], ["Team", (s) => `<span class="tdot" style="background:${esc(m.teams[s.team].color)}"></span>${esc(m.teams[s.team].name)}`], ["Pos", (s) => esc(posOf(m, s.team, s.player))], ["Minutes", (s) => Math.round(mins(s))], ["Touches", (s) => s.touches],
       ["Passes", (s) => s.passes], ["Pass %", (s) => pct(s.passOk, s.passes)], ["Prog. passes", (s) => s.prog], ["Final ⅓ passes", (s) => s.f3], ["Key passes", (s) => s.key],
       ["Through balls", (s) => s.thrOk + "/" + s.thr], ["Line-breaking", (s) => s.lbOk + "/" + s.lb], ["Long balls", (s) => s.longOk + "/" + s.longB], ["Switches", (s) => s.sw], ["Passes into box", (s) => s.boxP],
       ["Received in final ⅓", (s) => s.recF3], ["Received line-breaking", (s) => s.recLb], ["Half-space receptions", (s) => s.hs],
@@ -1298,8 +2045,17 @@ function renderAnalysis() {
       ["Crosses", (s) => s.crossOk + "/" + s.crosses], ["Carries", (s) => s.carries], ["Prog. carries", (s) => s.progCarry], ["Dribbles", (s) => s.dribOk + "/" + s.drib],
       ["Shots", (s) => s.shots], ["On target", (s) => s.onT], ["Goals", (s) => s.goals], ["Tackles won", (s) => s.tackleOk + "/" + s.tackles], ["Interceptions", (s) => s.inter],
       ["Recoveries", (s) => s.rec], ["Clearances", (s) => s.clear], ["Blocks", (s) => s.blocks], ["Pressures", (s) => s.press], ["Duels won", (s) => s.duelOk + "/" + s.duels], ["Fouls", (s) => s.fouls], ["Ball lost", (s) => s.lost]];
-    $("tableBox").innerHTML = `<table><thead><tr>${cols.map(([h], i) => `<th class="${i > 1 ? "num" : ""}">${h}</th>`).join("")}</tr></thead><tbody>${st.map((s) => `<tr>${cols.map(([, f], i) => `<td class="${i > 1 ? "num" : ""}">${f(s)}</td>`).join("")}</tr>`).join("") || `<tr><td colspan="${cols.length}" class="note">No events match the filters.</td></tr>`}</tbody></table>`;
-    $("viewNote").textContent = "Shot-creating actions = the two attacking actions (pass, cross, carry, dribble) directly before a shot. xT added = how much each completed pass/carry raised the chance of scoring (expected threat). Progressive distance = metres the ball moved towards the opponent's goal. Half-space receptions = completed passes received in the channels between the box edge and the six-yard box line, in the opposition half. Key pass = completed pass/cross whose receiver shoots within 5 s. Long ball = pass of 32 m+. Switch = completed pass that moves the ball 30 m+ across the pitch. 'Received' columns show who gets on the ball in dangerous places.";
+    // wrap numeric columns for per-90 mode: plain counts scale, "a/b" shows a per 90, %, xT decimals and distances scale too
+    const cols = rawCols.map(([h, f], i) => i < 4 || h.endsWith("%") ? [h, f] : [p90 ? h + " /90" : h, (s) => {
+      const v = f(s);
+      if (!p90) return v;
+      if (typeof v === "number") return N(s, v);
+      if (typeof v === "string" && /^\d+\/\d+$/.test(v)) return N(s, +v.split("/")[0]);
+      if (typeof v === "string" && /^-?\d+(\.\d+)?$/.test(v)) return mins(s) > 0 ? (parseFloat(v) * 90 / mins(s)).toFixed(2) : "–";
+      return v;
+    }]);
+    $("tableBox").innerHTML = `<table><thead><tr>${cols.map(([h], i) => `<th class="${i > 2 ? "num" : ""}">${h}</th>`).join("")}</tr></thead><tbody>${st.map((s) => `<tr>${cols.map(([, f], i) => `<td class="${i > 2 ? "num" : ""}">${f(s)}</td>`).join("")}</tr>`).join("") || `<tr><td colspan="${cols.length}" class="note">No events match the filters.</td></tr>`}</tbody></table>`;
+    $("viewNote").textContent = (p90 ? "Per 90: each count scaled to 90 minutes on the pitch (minutes from Line-ups in Matches & squads" + (MM.assumed.some(Boolean) ? "; a team with no starters ticked counts everyone for the whole time" : "") + "). Be careful with players under 30 minutes. " : "") + "Shot-creating actions = the two attacking actions (pass, cross, carry, dribble) directly before a shot. xT added = how much each completed pass/carry raised the chance of scoring (expected threat). Progressive distance = metres the ball moved towards the opponent's goal. Half-space receptions = completed passes received in the channels between the box edge and the six-yard box line, in the opposition half. Key pass = completed pass/cross whose receiver shoots within 5 s. Long ball = pass of 32 m+. Switch = completed pass that moves the ball 30 m+ across the pitch. 'Received' columns show who gets on the ball in dangerous places.";
     $("bPng").hidden = true;
   } else if (view === "teams") {
     const ev = filtered({ ignoreAction: true, bothTeams: true, allPlayers: true });
@@ -1359,11 +2115,12 @@ $("bPng").onclick = () => CV.toBlob((b) => b && offerFile(safeName(S.match.title
 
 /* ================= tabs & toast ================= */
 function selectTab(name) {
-  ["tag", "analyse", "setup"].forEach((n) => { $("tab-" + n).setAttribute("aria-selected", n === name); $("view-" + n).hidden = n !== name; });
+  ["home", "tag", "analyse", "setup"].forEach((n) => { $("tab-" + n).setAttribute("aria-selected", n === name); $("view-" + n).hidden = n !== name; });
+  if (name === "home") renderHome();
   if (name === "analyse") renderAnalysis();
   try { localStorage.setItem("mt_tab", name); } catch (_) {}
 }
-["tag", "analyse", "setup"].forEach((n) => { $("tab-" + n).onclick = () => selectTab(n); });
+["home", "tag", "analyse", "setup"].forEach((n) => { $("tab-" + n).onclick = () => selectTab(n); });
 let toastT = null;
 function toast(msg) { const t = $("toast"); t.textContent = msg; t.hidden = false; clearTimeout(toastT); toastT = setTimeout(() => { t.hidden = true; }, 2600); }
 window.addEventListener("beforeunload", () => { if (S.dirty) saveNow(); });
@@ -1376,6 +2133,12 @@ $("tTeam").onclick = (e) => { e.currentTarget.blur(); S.active = 1 - S.active; r
 $("tUndo").onclick = (e) => { e.currentTarget.blur(); undoLast(); };
 function markActBar() { [...$("actBar").children].forEach((b) => b.setAttribute("aria-pressed", !!S.comp && S.comp.a === b.dataset.act)); }
 
+$("themeBtn").onclick = () => {
+  THEME = THEMES[(THEMES.indexOf(THEME) + 1) % THEMES.length]; applyTheme(THEME);
+  try { localStorage.setItem("mt_theme", THEME); } catch (_) {}
+  renderAll(); if (!$("view-analyse").hidden) renderAnalysis();       // charts are drawn with the theme's colours
+};
+window.matchMedia?.("(prefers-color-scheme: dark)").addEventListener?.("change", () => { if (THEME === "auto") { renderAll(); if (!$("view-analyse").hidden) renderAnalysis(); } });
 /* ================= standalone: storage on this device + normal downloads ================= */
 const LocalDB = (() => {
   const P = "matchtagger/";
@@ -1422,18 +2185,17 @@ const LocalDownloads = {
 (function boot() {
   S.db = LocalDB; downloads = LocalDownloads;
   setSave(LocalDB.ok ? "Saved on this device" : "Your browser blocks saving — export CSVs", LocalDB.ok ? "ok" : "bad");
-  let tab = null; try { tab = localStorage.getItem("mt_tab"); } catch (_) {}
+  selectTab("home");
   LocalDB.collection("matches").onSnapshot((snap) => { S.matches = snap.docs.map((d) => ({ id: d.id, ...d.data() })); renderMatchList(); });
   LocalDB.collection("matches").get().then(async (snap) => {
     const list = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
     if (list.length) {
       let last = null; try { last = localStorage.getItem("mt_last"); } catch (_) {}
       const pick = list.find((m) => m.id === last) || list.sort((a, b) => (b.updated || 0) - (a.updated || 0))[0];
-      await loadMatch(pick.id);
-      if (tab === "analyse" || tab === "setup") selectTab(tab);
+      await loadMatch(pick.id); renderHome();
     } else {
       const m = newMatchObj("New match " + new Date().toLocaleDateString("en-GB"), "Home", "Away", "#2856b8", "#c8372d");
-      setMatch(m, [], false); selectTab("setup");
+      setMatch(m, [], false); renderHome();
       $("setupMsg").textContent = "Start here: name the match, type both squads, pick the shooting direction, then Save.";
     }
   });
