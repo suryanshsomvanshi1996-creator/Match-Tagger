@@ -4,7 +4,7 @@
 
 Built by **Suryansh Somvanshi**.
 
-> **Try it:** open the live site (GitHub Pages link in the repository's *About* box), or download `index.html` and double-click it. It works offline in Chrome, Edge, Safari or Firefox on a laptop, tablet or phone.
+> **Try it:** Match tagger - https://suryanshsomvanshi1996-creator.github.io/Match-Tagger/
 
 ---
 
