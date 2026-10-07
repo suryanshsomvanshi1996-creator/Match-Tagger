@@ -206,7 +206,7 @@ Match Tagger is an honest manual-coding tool. These are its limits:
 **Data collection**
 - **Tagging is manual.** Data quality depends on the analyst: a 90-minute match takes several hours to code in full. Nothing is detected automatically from the video.
 - **Locations are judgement.** You click where you see the action on a 2D pitch; broadcast camera angles make this approximate (typically within a few metres), especially far from the camera.
-- **The definitions are the tool's own.** Progressive passes, key passes, SCA, PPDA and so on follow common public definitions but are not identical to Opta, StatsBomb or Wyscout, so numbers are not directly comparable with theirs.
+- **The definitions are created on my own.** Progressive passes, key passes, SCA, PPDA and so on follow common public definitions but are not identical to Opta, StatsBomb or Wyscout, so numbers are not directly comparable with theirs.
 - **Automatic phases are rule-based.** They use pitch zone and recent changes of possession, not the context a human sees (game state, shape). Check and edit them where it matters.
 - **Toolkit (.xlsx) imports place events in the centre of their zone**, because the workbook stores zones, not coordinates. Heatmaps and pass maps from imported data are therefore blockier than from tagged data.
 
