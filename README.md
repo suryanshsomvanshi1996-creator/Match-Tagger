@@ -2,7 +2,7 @@
 
 **A free football match-analysis tool that runs in your browser.** Play a match video, log every action with a key press or a tap on the pitch, and get professional-style analysis straight away: heatmaps, pass networks, expected threat (xT), player profiles with percentile radars, team stats and video clips of any player's actions.
 
-Built by **Suryansh Somvanshi**, a data analyst and former video analyst at REBALL.
+Built by **Suryansh Somvanshi**.
 
 > **Try it:** open the live site (GitHub Pages link in the repository's *About* box), or download `index.html` and double-click it. It works offline in Chrome, Edge, Safari or Firefox on a laptop, tablet or phone.
 
