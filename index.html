@@ -171,7 +171,15 @@ svg.pitch { width: 100%; height: auto; display: block; border-radius: 6px; curso
 .steps span { color: var(--ink-2) }
 .keyline { display: flex; flex-wrap: wrap; gap: 6px 14px; margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--line); font-size: 13px; color: var(--ink-2) }
 .keyline kbd { font-size: 12px; margin-right: 3px }
+.guide .gsec h3.sec { font-size: 22px }
+.glist { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: 10px 22px; margin: 0 }
+.gi { border-left: 3px solid var(--accent); padding: 2px 0 2px 12px; min-width: 0 }
+.gi dt { font-family: var(--font-display); font-size: 18px; font-weight: 600; margin-bottom: 2px }
+.gi dd { margin: 0; color: var(--ink-2); max-width: 70ch }
+.gi dd i { color: var(--ink) }
 .home .foot { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; color: var(--ink-3); font-size: 13px }
+.insbar { margin-top: 8px; border: 1px solid var(--warn); border-radius: 8px; padding: 8px 10px; display: flex; gap: 10px; align-items: center; flex-wrap: wrap; background: color-mix(in srgb, var(--warn) 12%, var(--panel)) }
+.insbar span { flex: 1 1 240px; min-width: 0 }
 .plbar { margin-top: 8px; border: 1px solid var(--accent); border-radius: 8px; padding: 8px 10px; display: flex; gap: 8px; align-items: center; flex-wrap: wrap; background: var(--panel-2) }
 .plbar .now { font-family: var(--font-display); font-size: 17px; font-weight: 600; min-width: 0 }
 .plbar input[type=number] { width: 4.2em }
@@ -236,7 +244,25 @@ canvas.chart { width: 100%; height: auto; display: block; border-radius: 6px; ma
 .cmpv b { font-family: var(--font-display); font-size: 20px; font-weight: 500; color: var(--ink) }
 .cmpv.win b { font-weight: 700 } .cmpv .lead { color: var(--good); font-size: 12px }
 .kpi.kidx { border-width: 2px }
+.psets { display: flex; gap: 4px; flex-wrap: wrap; padding: 8px }
+.psets { align-items: center }
+.pctl { display: inline-flex; gap: 6px; align-items: center; font-size: 13px; color: var(--ink-2) }
+.pctl input[type=number] { width: 4.5em; padding: 4px 6px }
+.psets button[aria-pressed=true] { background: var(--ink); color: var(--panel); border-color: var(--ink) }
+.ptable { overflow-x: auto }
+table.pstats th.stick, table.pstats td.stick { position: sticky; left: 0; background: var(--panel); z-index: 2; min-width: 150px }
+table.pstats thead th.stick { z-index: 3; background: var(--panel-2) }
+table.pstats th.sortable { cursor: pointer; user-select: none }
+table.pstats th.sortable:hover { color: var(--ink) }
+table.pstats tbody tr:nth-child(even) td { background: color-mix(in srgb, var(--panel-2) 60%, transparent) }
+table.pstats tbody tr:nth-child(even) td.stick { background: var(--panel-2) }
+table.pstats td.best { font-weight: 700; color: var(--accent); background: color-mix(in srgb, var(--accent) 14%, transparent) !important }
+table.pstats .of { color: var(--ink-3); font-weight: 400; font-size: 11px }
+.best-key { font-weight: 700; color: var(--accent); background: color-mix(in srgb, var(--accent) 14%, transparent); padding: 0 4px; border-radius: 3px }
 .kpis.wide { grid-template-columns: repeat(auto-fill, minmax(215px, 1fr)) }
+.kpi.span2 { grid-column: span 2 }
+#kpis { grid-auto-flow: row dense }
+.kpi .v .h, .kpi .v .a { white-space: nowrap }
 .kpi .v .h { color: var(--home) } .kpi .v .a { color: var(--away) } .kpi .v .sep { color: var(--ink-3); font-size: 16px }
 .note { color: var(--ink-2); font-size: 12.5px; max-width: 75ch }
 
@@ -272,6 +298,7 @@ html { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area
       <button class="tab" role="tab" id="tab-tag" aria-selected="false" aria-controls="view-tag">Tag</button>
       <button class="tab" role="tab" id="tab-analyse" aria-selected="false" aria-controls="view-analyse">Analyse</button>
       <button class="tab" role="tab" id="tab-setup" aria-selected="false" aria-controls="view-setup">Matches<span class="hide-sm"> &amp; squads</span></button>
+      <button class="tab" role="tab" id="tab-guide" aria-selected="false" aria-controls="view-guide">Guide</button>
     </div>
   </header>
   <div class="banner" id="exampleBanner" hidden>You're looking at an <b>example match with made-up events</b>, so you can see what the tool does. Go to <b>Matches &amp; squads</b> and click <b>New match</b> to start your own.</div>
@@ -283,8 +310,8 @@ html { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area
       <div>
         <span class="lbl eyebrow">Football video analysis</span>
         <h2>Tag the match.<br><em>Read the game.</em></h2>
-        <p>Match Tagger turns match footage into event data. Play your video, log every pass, shot, tackle and press with a key or a tap on the pitch, and the analysis builds as you go: heatmaps, pass networks, expected threat, player profiles and clips.</p>
-        <p>It's made for analysts building a portfolio, coaches reviewing their own team and scouts comparing players — anyone who wants Opta-style data from a match they can watch.</p>
+        <p>Noticed a winger drifting inside or a midfielder dropping deep? Upload the match to Match Tagger, tag the moments as they unfold, and watch your instincts turn into evidence, with live visuals and analysis that confirm what you saw and uncover what you missed.</p>
+        <p>Whether you’re an analyst building your portfolio, a coach breaking down your own team, or a scout comparing players, Match Tagger puts Opta-style data in your hands. All you need is the match footage.</p>
         <div class="cta">
           <button class="primary" id="hContinue" hidden>Continue</button>
           <button id="hNew">Start a new match</button>
@@ -321,6 +348,20 @@ html { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area
     </div>
 
     <div class="foot"><span>Your videos and matches stay on this device</span><span>Pitch 105 × 68 m · xT model trained on StatsBomb open data</span></div>
+  </section>
+
+
+  <!-- ============ GUIDE ============ -->
+  <section id="view-guide" role="tabpanel" aria-labelledby="tab-guide" class="home guide" hidden>
+    <div class="card"><span class="lbl eyebrow" style="color:var(--accent)">Guide</span><h2 style="font-size:clamp(28px,4vw,40px);margin:4px 0 6px">What the numbers mean</h2>
+      <p class="sub" style="margin:0">Plain-language definitions of every stat and phase in Match Tagger, with how each one is worked out. Hover any column name in Player stats for a one-line version.</p></div>
+    <section class="card gsec"><h3 class="sec">Reading the numbers</h3><p class="sub">How the tool turns events into comparable numbers.</p><dl class="glist"><div class="gi"><dt>Per 90</dt><dd>Every count scaled to 90 minutes on the pitch, so players with different minutes can be compared. <i>4 progressive passes in 30 minutes = 4 × 90 ÷ 30 = 12 per 90.</i> Minutes come from the line-up and substitutions. Under about 30 minutes, per-90 numbers are unreliable.</dd></div><div class="gi"><dt>Percentile</dt><dd>The share of the comparison group a player beats on a metric. <b>85</b> = better than 85% of the group, <b>50</b> = typical. The group is players in the same position group, from this match or from all your matches (<i>Rank against</i>).</dd></div><div class="gi"><dt>Profile index</dt><dd>The average of the player's 8 percentiles in the chosen template, 0–100. Around 50 is typical for the role, 70+ stands out, under 30 is weak.</dd></div></dl></section>
+    <section class="card gsec"><h3 class="sec">Passing and progression</h3><dl class="glist"><div class="gi"><dt>Progressive pass / carry</dt><dd>Moves the ball closer to the opponent's goal, at least 30 m closer within its own half, 15 m from its own half into the opponent's, or 10 m inside the opponent's half.</dd></div><div class="gi"><dt>Final-third pass</dt><dd>A completed pass that starts outside the final third and ends inside it.</dd></div><div class="gi"><dt>Key pass</dt><dd>A completed pass or cross whose receiver shoots within 5 seconds.</dd></div><div class="gi"><dt>Through ball (Q)</dt><dd>A pass into space behind or between the last line of defenders for a team-mate running onto it.</dd></div><div class="gi"><dt>Line-breaking pass (E)</dt><dd>A forward pass that goes past a line of the opponent's shape (forwards, midfield or defence) and is received behind or between it.</dd></div><div class="gi"><dt>Long ball · Switch</dt><dd>Long ball: a pass of 32 m or more. Switch: a completed pass that moves the ball 30 m or more across the pitch.</dd></div><div class="gi"><dt>Progressive distance</dt><dd>Metres a player's completed passes (or carries) moved the ball towards the opponent's goal.</dd></div><div class="gi"><dt>Under pressure (J)</dt><dd>Tagged by you on any on-ball action: an opponent is close enough to affect it, roughly within 2–3 m and closing in. Shows who stays calm under pressure.</dd></div></dl></section>
+    <section class="card gsec"><h3 class="sec">Creating chances</h3><dl class="glist"><div class="gi"><dt>Shot-creating actions (SCA)</dt><dd>For every shot, the tool looks back at the shooting team's actions before it (up to 15 seconds, and only within the same spell of possession) and credits the <b>last two attacking actions</b>: completed passes, crosses, carries or dribbles. Each one gives its player 1 SCA. <i>Example: Xavi passes to Iniesta, Iniesta dribbles past Carrick, then passes to Messi, who shoots. The two actions before the shot are Iniesta's pass and Iniesta's dribble, so Iniesta gets 2 SCA and Xavi gets 0.</i> A player's own carry right before his shot counts too.</dd></div><div class="gi"><dt>Goal-creating actions (GCA)</dt><dd>The same two actions, but only for shots that became goals.</dd></div><div class="gi"><dt>Expected threat (xT)</dt><dd>Each area of the pitch has a value: the chance that having the ball there leads to a goal soon (from a model trained on the StatsBomb 2015/16 Premier League data). <b>xT added</b> = value where a completed pass or carry ended minus value where it started. <i>A pass from midfield (0.02) to the edge of the box (0.09) adds 0.07.</i> Sideways or backwards balls add nothing.</dd></div><div class="gi"><dt>Half-space reception</dt><dd>A completed pass received in one of the two channels between the edge of the six-yard box and the edge of the penalty box (9–20 m either side of the middle), in the opponent's half.</dd></div><div class="gi"><dt>Box entry · Final-third entry</dt><dd>A completed pass, cross or carry that ends inside the opponent's box / final third, having started outside it.</dd></div></dl></section>
+    <section class="card gsec"><h3 class="sec">Defending and pressing</h3><dl class="glist"><div class="gi"><dt>PPDA</dt><dd>Passes allowed per defensive action: the opponent's passes in their own 60% of the pitch ÷ your tackles, interceptions, fouls and ground duels in that area. <b>Lower = more intense pressing</b> (around 7–10 is a high-pressing team). Needs the opponent's passes to be tagged.</dd></div><div class="gi"><dt>Ball wins in the final third</dt><dd>Interceptions, recoveries and won tackles in the opponent's final third: is the press actually winning the ball high up?</dd></div><div class="gi"><dt>Counter-press regains</dt><dd>Times the team won the ball back within 5 seconds of losing it, out of the times it lost it.</dd></div><div class="gi"><dt>Pressure (H)</dt><dd>An event for the defender who closes down the ball carrier without winning the ball. Use it when you want to credit the presser.</dd></div><div class="gi"><dt>Duels</dt><dd>Ground and aerial 50/50 contests; won / contested.</dd></div></dl></section>
+    <section class="card gsec"><h3 class="sec">Team style</h3><dl class="glist"><div class="gi"><dt>Possession (share of passes)</dt><dd>Each team's share of all passes in the match, a common stand-in for time on the ball.</dd></div><div class="gi"><dt>Field tilt</dt><dd>Each team's share of both teams' passes in the final third: who spent more time attacking.</dd></div><div class="gi"><dt>Possessions · Passes per possession</dt><dd>A possession is a spell where one team keeps the ball. Passes per possession shows patient build-up (high) or direct play (low).</dd></div><div class="gi"><dt>Direct speed</dt><dd>Average metres gained towards goal per second in possessions of 3 seconds or more. Higher = more direct.</dd></div></dl></section>
+    <section class="card gsec"><h3 class="sec">Phases of play</h3><p class="sub">Every event gets a phase automatically (shown as <i>auto</i> in the log). You can change any of them in the event editor, and <kbd>Y</kbd> marks a set piece. Zones are counted from the acting team's own goal: the pitch is split into six bands, 1–2 near their own goal, 5–6 near the opponent's goal.</p><dl class="glist"><div class="gi"><dt>Build-up</dt><dd><b>In possession, zones 1–2</b> (own third): playing out from the back, through the first line of pressure.</dd></div><div class="gi"><dt>Progression</dt><dd><b>In possession, zones 3–4</b> (middle third): moving the ball up the pitch towards the final third.</dd></div><div class="gi"><dt>Chance creation</dt><dd><b>In possession, zones 5–6</b> (final third): working openings, crosses, through balls and shots.</dd></div><div class="gi"><dt>Attacking transition</dt><dd>In possession, within 5 seconds of winning the ball (interception, recovery or won tackle), wherever it happens, the moment to counter-attack before the opponent is organised.</dd></div><div class="gi"><dt>Defensive transition</dt><dd>Out of possession, within 5 seconds of losing the ball, counter-pressing or recovering shape straight after a turnover.</dd></div><div class="gi"><dt>High press</dt><dd>Out of possession, defending in zones 5–6 - Winning or contesting the ball in the opponent's third.</dd></div><div class="gi"><dt>Mid block</dt><dd>Out of possession, zones 3–4 - A compact block around the halfway line.</dd></div><div class="gi"><dt>Low block</dt><dd>Out of possession, zones 1–2 - Defending deep near your own goal.</dd></div><div class="gi"><dt>Set piece</dt><dd>Corners, free kicks, throw-ins, penalties and kick-offs. Marked by you with <kbd>Y</kbd> while tagging.</dd></div></dl></section>
+    <section class="card gsec"><h3 class="sec">Actions you tag</h3><dl class="glist"><div class="gi"><dt>Dribble (D)</dt><dd>Taking on an opponent who is pressing you, to get past him or create space. Click where the take-on starts and where you come out with the ball; <kbd>Enter</kbd> = beat him, <kbd>Z</kbd> = lost it.</dd></div><div class="gi"><dt>Carry (C)</dt><dd>Moving with the ball without pressure, from one point to another.</dd></div><div class="gi"><dt>Ball lost (K) · Recovery (R)</dt><dd>A heavy touch or a loose ball: ball lost for the player who lost it, recovery for whoever picks it up.</dd></div><div class="gi"><dt>Interception (I) · Tackle (T)</dt><dd>Interception: cutting out a pass. Tackle: winning the ball off a player's feet.</dd></div></dl></section>
   </section>
 
   <!-- ============ TAG ============ -->
@@ -368,6 +409,7 @@ html { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area
         <button id="plStop">■ Stop</button>
       </div>
 
+      <div class="insbar" id="insBar" hidden><span id="insText"></span><button id="insDone" class="primary">Done</button></div>
       <div class="composer" id="composer" aria-live="polite">
         <div class="row"><span class="what" id="cWhat">Ready</span><span class="grow"></span><span class="mono" id="cTime"></span></div>
         <div class="hint" id="cHint">Pick the player on the ball (type the shirt number), then press an action key.</div>
@@ -432,7 +474,7 @@ html { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area
       <div class="panel" style="display:grid;gap:10px">
         <div class="row" style="justify-content:space-between">
           <div class="views" id="views"></div>
-          <div class="row"><button id="bClips" title="Play the filtered events back to back on the Tag tab">▶ Play as clips</button><button id="bPng">Save chart as image</button></div>
+          <div class="row"><button id="bClips" title="Play the filtered events back to back on the Tag tab">▶ Play as clips</button><button id="bPng">Save chart as image</button><button id="bCsvView" title="Download the numbers behind this view as a spreadsheet (CSV)">Export CSV</button></div>
         </div>
         <div class="profctl" id="profCtl" hidden>
           <label>Player<select id="pPlayer"></select></label>
@@ -519,7 +561,7 @@ const ACTIONS = {
   P: ["Pass", "ball", true, "Pass"],
   X: ["Cross", "ball", true, "Cross"],
   C: ["Carry", "ball", true, "Dribble / Carry"],
-  D: ["Dribble", "ball", false, "Dribble / Carry"],
+  D: ["Dribble", "ball", true, "Dribble / Carry"],
   S: ["Shot", "ball", false, "Shot"],
   K: ["Ball lost", "ball", false, "Ball Lost"],
   T: ["Tackle", "def", false, "Tackle"],
@@ -536,7 +578,9 @@ const ACTIONS = {
 const ACTION_BY_NAME = Object.fromEntries(Object.entries(ACTIONS).map(([k, v]) => [v[0], { key: k, name: v[0], kind: v[1], needsEnd: v[2], tk: v[3] }]));
 const SHOT_OUT = { G: "Goal", O: "On target", W: "Off target", B: "Blocked" };
 // pass qualifiers: one key each, toggled while tagging or on the last pass
-const QUAL = { Q: ["through", "Through ball"], E: ["linebreak", "Line-breaking"] };
+const QUAL = { Q: ["through", "Through ball"], E: ["linebreak", "Line-breaking"], J: ["pressured", "Under pressure"] };
+// through ball / line-breaking: passes and crosses only; under pressure: any on-ball action
+const qualFits = (id, a) => id === "pressured" ? ACTION_BY_NAME[a]?.kind === "ball" : isPassLike(a);
 const QUAL_NAME = Object.fromEntries(Object.values(QUAL));
 const hasQ = (e, q) => Array.isArray(e.q) && e.q.includes(q);
 const isPassLike = (a) => a === "Pass" || a === "Cross";
@@ -722,7 +766,7 @@ function setSave(t, cls = "") { const el = $("saveState"); el.textContent = t; e
 /* ================= set / render match ================= */
 function setMatch(m, ev, isExample) {
   if (S.play && S.play.on) { S.play.on = false; $("plBar").hidden = true; }
-  S.match = m; S.events = ev; S.isExample = isExample; S.onBall = null; S.comp = null; S.sel = null; S.active = 0;
+  S.match = m; S.events = ev; S.isExample = isExample; S.onBall = null; S.comp = null; S.sel = null; S.active = 0; S.insertAt = null;
   $("exampleBanner").hidden = !isExample;
   $("matchTitle").textContent = m.title;
   $("videoWanted").textContent = m.video ? "File for this match: " + m.video : "";
@@ -746,7 +790,9 @@ function pitchSVG(lines = true) {
     s.push(`<rect x="${sg > 0 ? 0 : L - 16.5}" y="${(W - 40.32) / 2}" width="16.5" height="40.32" ${st}/>`,
       `<rect x="${sg > 0 ? 0 : L - 5.5}" y="${(W - 18.32) / 2}" width="5.5" height="18.32" ${st}/>`,
       `<rect x="${sg > 0 ? -1.6 : L}" y="${(W - 7.32) / 2}" width="1.6" height="7.32" ${st}/>`,
-      `<circle cx="${x0 + sg * 11}" cy="${W / 2}" r=".45" fill="var(--turf-line)"/>`);
+      `<circle cx="${x0 + sg * 11}" cy="${W / 2}" r=".45" fill="var(--turf-line)"/>`,
+      // penalty arc ("the D"): 9.15 m from the penalty spot, outside the box
+      `<path d="M${sg > 0 ? 16.5 : L - 16.5} ${W / 2 - 7.312} A9.15 9.15 0 0 ${sg > 0 ? 1 : 0} ${sg > 0 ? 16.5 : L - 16.5} ${W / 2 + 7.312}" ${st}/>`);
   }
   return s.join("");
 }
@@ -813,7 +859,7 @@ function startAction(name) {
   if (k.kind === "ball" && S.onBall.team !== S.active) S.active = S.onBall.team;
   const c = { a: name, t: r1(t), tm: S.onBall.team, p: S.onBall.p, x: null, y: null, ex: null, ey: null, r: "", stage: "start", autoStart: false, sp: false, q: [] };
   // continue from the last action's end point if it's the same player and recent
-  const ev = sorted(), last = ev[ev.length - 1];
+  const ev = sorted().filter((q) => q.t <= t + 0.05), last = ev[ev.length - 1];
   if (last && k.kind === "ball" && last.tm === c.tm && t - last.t < 6) {
     const lp = (last.r === c.p && last.ex != null) ? [last.ex, last.ey] : (last.p === c.p ? (last.ex != null ? [last.ex, last.ey] : [last.x, last.y]) : null);
     if (lp) { c.x = lp[0]; c.y = lp[1]; c.autoStart = true; c.stage = k.needsEnd ? "end" : "outcome"; }
@@ -827,7 +873,7 @@ function pitchClick(evt) {
   if (!c) { toast("Press an action key first (P pass, S shot…)"); return; }
   const k = ACTION_BY_NAME[c.a];
   if (evt.shiftKey || c.stage === "start") { c.x = p[0]; c.y = p[1]; c.autoStart = false; c.stage = k.needsEnd ? "end" : "outcome"; }
-  else if (c.stage === "end" || c.stage === "receiver") { c.ex = p[0]; c.ey = p[1]; c.stage = c.a === "Carry" ? "outcome" : "receiver"; }
+  else if (c.stage === "end" || c.stage === "receiver") { c.ex = p[0]; c.ey = p[1]; c.stage = (c.a === "Carry" || c.a === "Dribble") ? "outcome" : "receiver"; }
   else if (c.stage === "outcome" && k.needsEnd) { c.ex = p[0]; c.ey = p[1]; }
   else if (c.stage === "outcome") { c.x = p[0]; c.y = p[1]; c.autoStart = false; }
   if (c.a === "Carry" && c.stage === "outcome") { commit("Successful"); return; }
@@ -841,9 +887,19 @@ function commit(outcome) {
   let o = outcome;
   if (c.a === "Shot" && !Object.values(SHOT_OUT).includes(o)) { toast("Shot outcome: G goal, O on target, W off target, B blocked"); return; }
   if (["Interception", "Recovery", "Clearance", "Block", "Pressure", "Foul", "Save", "Ball lost"].includes(c.a) && o === "Successful") o = "";
-  const e = { i: uid(), t: c.t, tm: c.tm, p: c.p, a: c.a, o, x: c.x, y: c.y, ex: c.ex, ey: c.ey, r: o === "Successful" ? c.r : "", ph: "", pa: true, n: "", c: false, q: isPassLike(c.a) ? c.q.slice() : [] };
+  const e = { i: uid(), t: c.t, tm: c.tm, p: c.p, a: c.a, o, x: c.x, y: c.y, ex: c.ex, ey: c.ey, r: o === "Successful" ? c.r : "", ph: "", pa: true, n: "", c: false, q: c.q.filter((id) => qualFits(id, c.a)) };
   if (c.sp) { e.ph = "Set piece"; e.pa = false; } else e.ph = autoPhaseFor(e, sorted(), S.match);
+  const inserted = S.events.some((q) => q.t > e.t);
   S.events.push(e);
+  if (inserted) {
+    // added in the middle of the log: refresh the automatic phases of everything after it
+    const all = sorted(); all.forEach((q) => { if (q.pa && q.t >= e.t) q.ph = autoPhaseFor(q, all, S.match); });
+    if (S.insertAt) {
+      const nxt = all.find((q) => q.t > e.t);
+      S.insertAt.t = r1(nxt ? Math.min(e.t + 0.1, (e.t + nxt.t) / 2) : e.t + 0.1);
+      if (!V.src) toast("Added. Keep tagging to add more here, or press Done in the yellow box");
+    }
+  }
   // who's on the ball next
   const nxt = possessionAfter(e);
   if (e.r) S.onBall = { team: e.tm, p: e.r };
@@ -859,6 +915,9 @@ function cancelComp() { S.comp = null; renderComposer(); renderPitch(); }
 function renderComposer() {
   const box = $("composer"), c = S.comp, m = S.match;
   if (typeof markActBar === "function") markActBar();
+  $("insBar").hidden = !S.insertAt;
+  if (S.insertAt) $("insText").textContent = V.src ? `Adding events in the middle: the video is at ${mmss(V.currentTime, true)}. Move it to the right moment and tag as usual — new events slot into the log by time.`
+    : `Adding events after ${mmss(S.insertAt.after, true)} (no video open, so they get times just after it, in order).`;
   box.classList.toggle("live", !!c);
   if (!m) return;
   if (!c) {
@@ -873,8 +932,10 @@ function renderComposer() {
   $("cWhat").innerHTML = `<span class="swatch" style="background:${esc(m.teams[c.tm].color)}"></span> ${esc(shortName(c.p))} — ${esc(c.a)}`;
   $("cTime").textContent = mmss(c.t, true);
   const hints = {
-    start: "Click the pitch where it happened.",
-    end: `Click where the ball went.${c.autoStart ? " (Start continues from the last action — Shift+click to move it.)" : ""} <kbd>Z</kbd> if it failed.`,
+    start: c.a === "Dribble" ? "Click where he started taking the opponent on (where the pressure began)." : c.a === "Carry" ? "Click where the carry started." : "Click the pitch where it happened.",
+    end: c.a === "Dribble" ? `Click where he ended up with the ball: past the opponent or in the space he created.${c.autoStart ? " (Start continues from the last action — Shift+click to move it.)" : ""} <kbd>Z</kbd> if he lost it.`
+      : c.a === "Carry" ? `Click where the carry ended.${c.autoStart ? " (Start continues from the last action — Shift+click to move it.)" : ""}`
+      : `Click where the ball went.${c.autoStart ? " (Start continues from the last action — Shift+click to move it.)" : ""} <kbd>Z</kbd> if it failed.`,
     receiver: `Who received it? Type the shirt number or click a teammate. <kbd>Enter</kbd> = completed, no receiver set. <kbd>Z</kbd> = failed.`,
     outcome: c.a === "Shot" ? "Outcome: <kbd>G</kbd> goal · <kbd>O</kbd> on target · <kbd>W</kbd> off target · <kbd>B</kbd> blocked" :
       (k.kind === "def" && !["Tackle", "Duel", "Aerial duel"].includes(c.a)) || c.a === "Ball lost" ? "<kbd>Enter</kbd> to save." : "<kbd>Enter</kbd> = successful · <kbd>Z</kbd> = unsuccessful",
@@ -883,7 +944,7 @@ function renderComposer() {
   const chips = [];
   if (c.a === "Shot" && c.stage === "outcome") Object.entries(SHOT_OUT).forEach(([kk, v]) => chips.push(`<button class="chip" data-out="${v}">${kk} · ${v}</button>`));
   else if (c.stage === "outcome" || c.stage === "receiver" || c.stage === "end") { chips.push(`<button class="chip" data-out="Successful">✓ ${c.stage === "receiver" ? "Completed" : "Save"}</button>`, `<button class="chip" data-out="Unsuccessful">✕ Failed (Z)</button>`); }
-  if (isPassLike(c.a)) Object.entries(QUAL).forEach(([kk, [id, nm]]) => chips.push(`<button class="chip" aria-pressed="${c.q.includes(id)}" data-q="${id}">${nm} (${kk})</button>`));
+  Object.entries(QUAL).forEach(([kk, [id, nm]]) => { if (qualFits(id, c.a)) chips.push(`<button class="chip" aria-pressed="${c.q.includes(id)}" data-q="${id}">${nm} (${kk})</button>`); });
   chips.push(`<button class="chip" aria-pressed="${c.sp}" data-sp="1">Set piece (Y)</button>`, `<button class="chip" data-cancel="1">Cancel (Esc)</button>`);
   $("cChips").innerHTML = chips.join("");
 }
@@ -910,7 +971,7 @@ function renderEditor() {
   const outs = e.a === "Shot" ? Object.values(SHOT_OUT) : ["Successful", "Unsuccessful", ""];
   box.hidden = false;
   box.innerHTML = `<div class="row" style="justify-content:space-between;margin-bottom:8px"><span class="lbl">Edit event at ${mmss(e.t, true)}</span>
-    <div class="row"><button id="eSeek">Watch this moment</button><span id="eDelWrap"><button id="eDel">Delete</button></span><button id="eClose">Close</button></div></div>
+    <div class="row"><button id="eIns" class="primary" title="Tag new events that happened after this one (shortcut: +)">＋ Add after this <kbd>+</kbd></button><button id="eSeek">Watch this moment</button><span id="eDelWrap"><button id="eDel">Delete</button></span><button id="eClose">Close</button></div></div>
     <div class="editor">
       <label>Time<input type="text" id="eT" class="mono" value="${mmss(e.t, true)}"></label>
       <label>Team<select id="eTm"><option value="0" ${e.tm === 0 ? "selected" : ""}>${esc(m.teams[0].name)}</option><option value="1" ${e.tm === 1 ? "selected" : ""}>${esc(m.teams[1].name)}</option></select></label>
@@ -921,9 +982,10 @@ function renderEditor() {
       <label>Phase<select id="ePh"><option value=""></option>${opt(PHASES, e.ph)}</select></label>
       <label>Note<input type="text" id="eN" value="${esc(e.n)}"></label>
       <label class="check"><input type="checkbox" id="eC" ${e.c ? "checked" : ""}> Clip for reel</label>
-      ${isPassLike(e.a) ? Object.values(QUAL).map(([id, nm]) => `<label class="check"><input type="checkbox" data-eq="${id}" ${hasQ(e, id) ? "checked" : ""}> ${nm}</label>`).join("") : ""}
+      ${Object.values(QUAL).filter(([id]) => qualFits(id, e.a)).map(([id, nm]) => `<label class="check"><input type="checkbox" data-eq="${id}" ${hasQ(e, id) ? "checked" : ""}> ${nm}</label>`).join("")}
     </div>`;
   const upd = (f) => { f(e); markDirty(); renderLog(); renderPitch(); };
+  $("eIns").onclick = () => insertAfter(e);
   $("eT").onchange = (ev) => { const v = parseT(ev.target.value); if (v != null) upd((q) => { q.t = r1(v); }); };
   $("eTm").onchange = (ev) => upd((q) => { q.tm = +ev.target.value; });
   $("eP").onchange = (ev) => upd((q) => { q.p = ev.target.value; });
@@ -946,7 +1008,7 @@ function renderEditor() {
 
 /* ================= video ================= */
 const V = $("video");
-function curT() { return V.src ? V.currentTime : 0; }
+function curT() { return S.insertAt && !V.src ? S.insertAt.t : (V.src ? V.currentTime : 0); }
 function loadVideoFile(f) {
   if (!f) return;
   if (V.src) URL.revokeObjectURL(V.src);
@@ -975,7 +1037,7 @@ function seek(d) { if (V.src) V.currentTime = Math.max(0, V.currentTime + d); re
 const KEYHELP = [["Space", "play / pause"], ["← →", "−/+ 2 s"], ["Shift ← →", "−/+ 0.2 s"], ["[ ]", "slower / faster"], ["0–99", "pick player (shirt no.)"], ["Tab", "switch team"],
   ["P", "pass"], ["X", "cross"], ["C", "carry"], ["D", "dribble"], ["S", "shot"], ["K", "ball lost"], ["T", "tackle"], ["I", "interception"], ["R", "recovery"], ["L", "clearance"],
   ["B", "block"], ["H", "pressure"], ["U", "duel"], ["A", "aerial duel"], ["F", "foul"], ["V", "save"], ["Enter", "save / successful"], ["Z", "unsuccessful"], ["Y", "set piece"], ["Esc", "cancel"],
-  ["Q", "through ball (pass)"], ["E", "line-breaking (pass)"], ["Backspace", "undo last"], ["M", "mark last as clip"], ["N", "note on last"]];
+  ["Q", "through ball (pass)"], ["E", "line-breaking (pass)"], ["J", "under pressure"], ["Backspace", "undo last"], ["+", "add events after the selected one"], ["M", "mark last as clip"], ["N", "note on last"]];
 $("keyList").innerHTML = KEYHELP.map(([k, d]) => `<span><kbd>${k}</kbd>${d}</span>`).join("");
 document.addEventListener("keydown", (e) => {
   if ($("view-tag").hidden) return;
@@ -1006,13 +1068,14 @@ document.addEventListener("keydown", (e) => {
     if (k === "Enter") { e.preventDefault(); commit("Successful"); return; }
     if (up === "Z") { commit("Unsuccessful"); return; }
     if (up === "Y") { c.sp = !c.sp; renderComposer(); return; }
-    if (QUAL[up] && isPassLike(c.a)) { toggleQ(c.q, QUAL[up][0]); renderComposer(); return; }
+    if (QUAL[up] && qualFits(QUAL[up][0], c.a)) { toggleQ(c.q, QUAL[up][0]); renderComposer(); return; }
     if (ACTIONS[up]) { S.comp = null; startAction(ACTIONS[up][0]); return; }
     return;
   }
   if (k === "Backspace") { e.preventDefault(); undoLast(); return; }
+  if (k === "+" || k === "=") { const sel = S.events.find((q) => q.i === S.sel); if (sel) { e.preventDefault(); insertAfter(sel); } else toast("Click an event in the log first, then press + to add events after it"); return; }
   if (QUAL[up]) {
-    const l = sorted().filter((q) => isPassLike(q.a)).pop();
+    const l = sorted().filter((q) => qualFits(QUAL[up][0], q.a)).pop();
     if (l) { l.q = Array.isArray(l.q) ? l.q : []; const on = toggleQ(l.q, QUAL[up][0]); markDirty(); renderLog(); toast(`${QUAL[up][1]} ${on ? "added to" : "removed from"} ${shortName(l.p)}'s ${l.a.toLowerCase()} at ${mmss(l.t)}`); }
     return;
   }
@@ -1020,9 +1083,19 @@ document.addEventListener("keydown", (e) => {
   if (up === "N") { const l = sorted().pop(); if (l) { S.sel = l.i; renderLog(); setTimeout(() => $("eN") && $("eN").focus(), 0); } return; }
   if (ACTIONS[up]) { startAction(ACTIONS[up][0]); return; }
 });
+// start adding events right after event e (the "+" key or the button in the event editor)
+function insertAfter(e) {
+  S.insertAt = { t: r1(e.t + 0.1), after: e.t };
+  if (V.src) { V.pause(); V.currentTime = e.t + 0.2; }
+  if (e.r) S.onBall = { team: e.tm, p: e.r }; else if (possessionAfter(e) === e.tm) S.onBall = { team: e.tm, p: e.p }; else { S.onBall = null; S.active = 1 - e.tm; }
+  if (S.onBall) S.active = S.onBall.team;
+  S.sel = null; renderLog(); renderComposer(); renderSquads(); renderPitch();
+  toast(V.src ? "Video moved to just after that event: tag what happened next" : "Tag what happened next; it goes in after that event");
+}
 function toggleQ(arr, id) { const i = arr.indexOf(id); if (i >= 0) { arr.splice(i, 1); return false; } arr.push(id); return true; }
 function undoLast() { const l = sorted().pop(); if (!l) return; S.events = S.events.filter((q) => q.i !== l.i); S.sel = null; markDirty(); renderLog(); renderPitch(); toast("Removed: " + l.a + " by " + shortName(l.p)); }
 $("bUndo").onclick = undoLast;
+$("insDone").onclick = () => { S.insertAt = null; renderComposer(); toast("Back to normal tagging"); };
 $("pitch").addEventListener("click", pitchClick);
 $("squads").addEventListener("click", (e) => { const b = e.target.closest(".pbtn"); if (b) { b.blur(); choosePlayer(+b.dataset.team, b.dataset.p); } });
 $("cChips").addEventListener("click", (e) => {
@@ -1032,7 +1105,12 @@ $("cChips").addEventListener("click", (e) => {
   if (b.dataset.q) { toggleQ(S.comp.q, b.dataset.q); return renderComposer(); }
   if (b.dataset.out) commit(b.dataset.out);
 });
-$("logBody").addEventListener("click", (e) => { const tr = e.target.closest("tr[data-i]"); if (!tr) return; S.sel = tr.dataset.i; renderLog(); });
+$("logBody").addEventListener("click", (e) => {
+  const tr = e.target.closest("tr[data-i]"); if (!tr) return; S.sel = tr.dataset.i;
+  const ev = S.events.find((q) => q.i === S.sel);
+  if (ev && V.src && !S.comp) { V.pause(); V.currentTime = Math.max(0, ev.t - 1.5); }      // show the moment
+  renderLog();
+});
 $("bSwap").onclick = () => {
   if (!V.src) { toast("Open the video and go to the 2nd-half kick-off first"); return; }
   if (S.match.swaps.some((sw) => Math.abs(sw - curT()) < 1)) { toast("Sides already switched here"); return; }
@@ -1102,10 +1180,10 @@ $("bExportToolkit").onclick = () => {
   sorted().forEach((e) => rows.push([mmss(e.t), m.teams[e.tm].name, e.p, ACTION_BY_NAME[e.a].tk, TK_OUT[e.o] || e.o, zoneOf(norm(m, e)), zoneOf(norm(m, e, true)), e.r, e.ph, [...(e.q || []).map((q) => QUAL_NAME[q]), e.n].filter(Boolean).join("; "), e.c ? "Y" : ""]));
   offerFile(safeName(m.title) + "_toolkit_events.csv", csv(rows));
 };
-const FULL_HEAD = ["time_s", "video_time", "team", "player", "action", "outcome", "receiver", "x_screen", "y_screen", "end_x_screen", "end_y_screen", "x", "y", "end_x", "end_y", "start_zone", "end_zone", "phase", "phase_auto", "clip", "note", "attacks_right", "through_ball", "line_breaking"];
+const FULL_HEAD = ["time_s", "video_time", "team", "player", "action", "outcome", "receiver", "x_screen", "y_screen", "end_x_screen", "end_y_screen", "x", "y", "end_x", "end_y", "start_zone", "end_zone", "phase", "phase_auto", "clip", "note", "attacks_right", "through_ball", "line_breaking", "under_pressure"];
 $("bExportFull").onclick = () => {
   const m = S.match, rows = [FULL_HEAD];
-  sorted().forEach((e) => { const a = norm(m, e), b = norm(m, e, true); rows.push([e.t, mmss(e.t, true), m.teams[e.tm].name, e.p, e.a, e.o, e.r, e.x, e.y, e.ex, e.ey, a && r1(a[0]), a && r1(a[1]), b && r1(b[0]), b && r1(b[1]), zoneOf(a), zoneOf(b), e.ph, e.pa ? "Y" : "", e.c ? "Y" : "", e.n, attacksRight(m, e.tm, e.t) ? "Y" : "N", hasQ(e, "through") ? "Y" : "", hasQ(e, "linebreak") ? "Y" : ""]); });
+  sorted().forEach((e) => { const a = norm(m, e), b = norm(m, e, true); rows.push([e.t, mmss(e.t, true), m.teams[e.tm].name, e.p, e.a, e.o, e.r, e.x, e.y, e.ex, e.ey, a && r1(a[0]), a && r1(a[1]), b && r1(b[0]), b && r1(b[1]), zoneOf(a), zoneOf(b), e.ph, e.pa ? "Y" : "", e.c ? "Y" : "", e.n, attacksRight(m, e.tm, e.t) ? "Y" : "N", hasQ(e, "through") ? "Y" : "", hasQ(e, "linebreak") ? "Y" : "", hasQ(e, "pressured") ? "Y" : ""]); });
   offerFile(safeName(m.title) + "_events.csv", csv(rows));
 };
 function parseCSV(text) {
@@ -1130,7 +1208,7 @@ $("importFile").onchange = async (ev) => {
     const tm = Math.max(0, teams.indexOf(r[ix("team")]));
     const num = (k) => r[ix(k)] === "" || r[ix(k)] == null ? null : +r[ix(k)];
     return { i: uid(), t: +r[ix("time_s")], tm, p: r[ix("player")], a: r[ix("action")], o: r[ix("outcome")], r: r[ix("receiver")], x: num("x_screen"), y: num("y_screen"), ex: num("end_x_screen"), ey: num("end_y_screen"), ph: r[ix("phase")], pa: r[ix("phase_auto")] === "Y", n: r[ix("note")], c: r[ix("clip")] === "Y",
-      q: [r[ix("through_ball")] === "Y" ? "through" : "", r[ix("line_breaking")] === "Y" ? "linebreak" : ""].filter(Boolean) };
+      q: [r[ix("through_ball")] === "Y" ? "through" : "", r[ix("line_breaking")] === "Y" ? "linebreak" : "", r[ix("under_pressure")] === "Y" ? "pressured" : ""].filter(Boolean) };
   }).filter((e) => ACTION_BY_NAME[e.a]);
   // squads from the players seen; direction from the first event's flag
   [0, 1].forEach((t) => { m.teams[t].players = [...new Set(ev2.filter((e) => e.tm === t).flatMap((e) => [e.p, e.r]).filter(Boolean))].sort((a, b) => (+shirt(a) || 99) - (+shirt(b) || 99)); });
@@ -1193,6 +1271,7 @@ async function importToolkit(f) {
     if (String(v(lg, "E" + r)).trim() === "Set Piece") e.ph = "Set piece";
     if (/through ball/i.test(notes)) e.q.push("through");
     if (/line-breaking/i.test(notes)) e.q.push("linebreak");
+    if (/under pressure/i.test(notes)) e.q.push("pressured");
     // zone centres are in the acting team's direction; convert to screen positions
     const raw = (pt) => attacksRight(m, tm, t) ? pt : [L - pt[0], W - pt[1]];
     [e.x, e.y] = raw(s0).map(r1); if (e0) [e.ex, e.ey] = raw(e0).map(r1);
@@ -1332,6 +1411,8 @@ function drawTurf() {
     CX.strokeRect(px(s > 0 ? 0 : L - 16.5), py((W - 40.32) / 2), 16.5 * SC, 40.32 * SC);
     CX.strokeRect(px(s > 0 ? 0 : L - 5.5), py((W - 18.32) / 2), 5.5 * SC, 18.32 * SC);
     CX.strokeRect(px(s > 0 ? -1.6 : L), py((W - 7.32) / 2), 1.6 * SC, 7.32 * SC);
+    const a0 = Math.acos(5.5 / 9.15);
+    CX.beginPath(); if (s > 0) CX.arc(px(11), py(W / 2), 9.15 * SC, -a0, a0); else CX.arc(px(L - 11), py(W / 2), 9.15 * SC, Math.PI - a0, Math.PI + a0); CX.stroke();
   }
 }
 function teamLabelSel() { const t = $("fTeam").value; return t === "" ? "Both teams" : S.match.teams[+t].name; }
@@ -1438,7 +1519,7 @@ function possessions(m, evs) {
 }
 function computeStats(evs, m = S.match, all = sorted()) {
   const by = {};
-  const g = (p, tm) => (by[p] ??= { player: p, team: tm, touches: 0, passes: 0, passOk: 0, prog: 0, f3: 0, key: 0, thr: 0, thrOk: 0, lb: 0, lbOk: 0, longB: 0, longOk: 0, sw: 0, boxP: 0, recF3: 0, recLb: 0, sca: 0, gca: 0, xt: 0, xtPass: 0, xtCarry: 0, ppd: 0, pcd: 0, hs: 0, crosses: 0, crossOk: 0, carries: 0, progCarry: 0, drib: 0, dribOk: 0, shots: 0, onT: 0, goals: 0, tackles: 0, tackleOk: 0, inter: 0, rec: 0, clear: 0, blocks: 0, press: 0, duels: 0, duelOk: 0, fouls: 0, lost: 0, saves: 0 });
+  const g = (p, tm) => (by[p] ??= { player: p, team: tm, touches: 0, passes: 0, passOk: 0, prog: 0, f3: 0, key: 0, thr: 0, thrOk: 0, lb: 0, lbOk: 0, longB: 0, longOk: 0, sw: 0, boxP: 0, recF3: 0, recLb: 0, sca: 0, gca: 0, xt: 0, xtPass: 0, xtCarry: 0, ppd: 0, pcd: 0, hs: 0, crosses: 0, crossOk: 0, carries: 0, progCarry: 0, drib: 0, dribOk: 0, shots: 0, onT: 0, goals: 0, tackles: 0, tackleOk: 0, inter: 0, rec: 0, clear: 0, blocks: 0, press: 0, duels: 0, duelOk: 0, fouls: 0, lost: 0, saves: 0, upr: 0, uprOk: 0, uprPass: 0, uprPassOk: 0 });
   evs.forEach((e) => {
     const s = g(e.p, e.tm); const k = ACTION_BY_NAME[e.a];
     if (k.kind === "ball" || WINS.has(e.a) || e.a === "Tackle") s.touches++;
@@ -1458,6 +1539,7 @@ function computeStats(evs, m = S.match, all = sorted()) {
     if (e.a === "Carry") { s.carries++; if (isProgressive(m, e)) s.progCarry++; if (e.o === "Successful" && a && b) s.pcd += Math.max(0, b[0] - a[0]); }
     { const v = xtAdded(m, e); if (v) { s.xt += v; if (e.a === "Carry") s.xtCarry += v; else s.xtPass += v; } }
     if (e.a === "Dribble") { s.drib++; if (e.o === "Successful") s.dribOk++; }
+    if (hasQ(e, "pressured")) { const okp = ["Successful", "Goal", "On target"].includes(e.o); s.upr++; if (okp) s.uprOk++; if (isPassLike(e.a)) { s.uprPass++; if (e.o === "Successful") s.uprPassOk++; } }
     if (e.a === "Shot") { s.shots++; if (e.o === "On target" || e.o === "Goal") s.onT++; if (e.o === "Goal") s.goals++; }
     if (e.a === "Tackle") { s.tackles++; if (e.o === "Successful") s.tackleOk++; }
     if (e.a === "Interception") s.inter++; if (e.a === "Recovery") s.rec++; if (e.a === "Clearance") s.clear++; if (e.a === "Block") s.blocks++;
@@ -1639,9 +1721,15 @@ const ZERO = () => computeStats([], S.match, [])[0];
 function addStats(a, b) { for (const k in b) if (typeof b[k] === "number" && k !== "team") a[k] = (a[k] || 0) + b[k]; return a; }
 const metricVal = (s, key, min) => { const [, f, kind] = MET[key]; const v = f(s); if (v == null) return null; return kind === "pct" ? v : (min > 0 ? v * 90 / min : 0); };
 // one entry per player: stats + minutes (+ position group), for this match or all saved matches
+// phase filter applies to every match; the From/To time filter only to the open match (video times differ between matches)
+function profFilter(ev, isCurrent) {
+  const ph = $("fPhase").value, from = parseT($("fFrom").value), to = parseT($("fTo").value);
+  return ev.filter((e) => (!ph || e.ph === ph) && (!isCurrent || ((from == null || e.t >= from) && (to == null || e.t <= to))));
+}
 async function profilePool(scope) {
   const build = (m, ev, matchId) => {
-    const st = computeStats(ev, m, ev.slice().sort((a, b) => a.t - b.t));
+    const all = ev.slice().sort((a, b) => a.t - b.t);
+    const st = computeStats(profFilter(all, matchId === S.match.id), m, all);
     const { minutes } = minutesMap(m, ev);
     return st.map((s) => ({ key: m.teams[s.team].name + "|" + s.player, player: s.player, teamName: m.teams[s.team].name, color: m.teams[s.team].color,
       s, min: minutes[pkey(s.team, s.player)] || 0, pos: posOf(m, s.team, s.player), matches: 1, matchId }));
@@ -1732,7 +1820,8 @@ async function renderProfile() {
   CX.fillStyle = ink2; CX.font = `15px ${css("--font-body")}`;
   const subOf = (R) => `${R.teamName} · ${R.pos || "position not set"} · ${Math.round(R.min)} min${scope === "all" ? ` · ${R.matches} match${R.matches === 1 ? "" : "es"}` : ""}`;
   CX.fillText(C ? `${subOf(P)}   |   ${subOf(C)}` : subOf(P), 40, 72);
-  CX.fillStyle = ink3; CX.font = `13px ${css("--font-body")}`; CX.fillText(`Per 90 minutes · percentile ranks against ${poolLabel} · ${tpl} template`, 40, 94);
+  const fl = [$("fPhase").value && `phase: ${$("fPhase").value}`, ($("fFrom").value || $("fTo").value) && `time ${$("fFrom").value || "start"}–${$("fTo").value || "end"}`].filter(Boolean).join(" · ");
+  CX.fillStyle = ink3; CX.font = `13px ${css("--font-body")}`; CX.fillText(`Per 90 minutes · percentile ranks against ${poolLabel} · ${tpl} template${fl ? " · only " + fl : ""}`, 40, 94);
   // index badges (top right)
   const badge = (x, label, val, col) => {
     CX.fillStyle = css("--panel-2"); CX.strokeStyle = col; CX.lineWidth = 3; CX.beginPath(); CX.roundRect(x, 18, 150, 78, 10); CX.fill(); CX.stroke();
@@ -1764,8 +1853,8 @@ async function renderProfile() {
   CX.textAlign = "left";
   // heatmaps (analyst view) — one per player
   const ptsFor = (key) => (scope === "all"
-    ? Object.values(S.poolCache || {}).flatMap((c) => c.ev.filter((e) => c.m.teams[e.tm].name + "|" + e.p === key).map((e) => norm(c.m, e))).concat(S.events.filter((e) => m.teams[e.tm].name + "|" + e.p === key).map((e) => norm(m, e)))
-    : S.events.filter((e) => m.teams[e.tm].name + "|" + e.p === key).map((e) => norm(m, e))).filter(Boolean);
+    ? Object.values(S.poolCache || {}).flatMap((c) => profFilter(c.ev, false).filter((e) => c.m.teams[e.tm].name + "|" + e.p === key).map((e) => norm(c.m, e))).concat(profFilter(S.events, true).filter((e) => m.teams[e.tm].name + "|" + e.p === key).map((e) => norm(m, e)))
+    : profFilter(S.events, true).filter((e) => m.teams[e.tm].name + "|" + e.p === key).map((e) => norm(m, e))).filter(Boolean);
   const save = [PADX, PADY, SC];
   const mini = (R0, col, top, w) => {
     PADX = 790; PADY = top; SC = w / L; drawTurf(); const pts = ptsFor(R0.key); heat(pts);
@@ -1781,6 +1870,10 @@ async function renderProfile() {
   const top = ps.filter((q) => q.p != null).sort((a, b) => b.p - a.p);
   const pill = (p) => `<span class="pctpill" style="background:${pctColor(p)}">${p ?? "–"}</span>`;
   $("kpis").classList.toggle("wide", !!C);
+  S.profExport = [["Metric", `${P.player} (per 90)`, `${P.player} percentile`, ...(C ? [`${C.player} (per 90)`, `${C.player} percentile`] : [])],
+    ["Profile index", "", iP ?? "", ...(C ? ["", iC ?? ""] : [])],
+    ...ps.map((q, i) => [MET[q.k][0], q.v == null ? "" : +q.v.toFixed(2), q.p ?? "", ...(C ? [cs[i].v == null ? "" : +cs[i].v.toFixed(2), cs[i].p ?? ""] : [])]),
+    [], ["Minutes", Math.round(P.min), "", ...(C ? [Math.round(C.min), ""] : [])], ["Template", tpl], ["Ranked against", poolLabel]];
   if (!C) {
     $("kpis").innerHTML = `<div class="kpi kidx" style="border-color:${esc(colA)}"><div class="lbl">Profile index</div><div class="v">${iP ?? "–"} <span class="sep">/ 100</span></div></div>` +
       ps.map((q) => `<div class="kpi"><div class="lbl">${esc(MET[q.k][0])}</div><div class="v">${fmtK(q.k, q.v)} ${pill(q.p)}</div></div>`).join("");
@@ -1792,7 +1885,7 @@ async function renderProfile() {
   }
   const strengths = top.filter((q) => q.p >= 70).slice(0, 3).map((q) => lc1(MET[q.k][0]));
   const weak = top.filter((q) => q.p <= 30).slice(-2).map((q) => lc1(MET[q.k][0]).replace(" (fewer is better)", ""));
-  const myEv = (scope === "all" ? [] : S.events).filter((e) => m.teams[e.tm].name + "|" + e.p === P.key);
+  const myEv = (scope === "all" ? [] : profFilter(S.events, true)).filter((e) => m.teams[e.tm].name + "|" + e.p === P.key);
   const zones = {}; myEv.forEach((e) => { const z = zoneOf(norm(m, e)); if (z) zones[z] = (zones[z] || 0) + 1; });
   const zTop = Object.entries(zones).sort((a, b) => b[1] - a[1]).slice(0, 2).map(([z]) => z);
   const small = P.min < 30 || (C && C.min < 30) ? ` Under 30 minutes of data, so per-90 numbers are rough.` : "";
@@ -1909,7 +2002,13 @@ $("viewNote").addEventListener("click", (e) => {
   if (b.dataset.nav === "clips") startPlaylist(S.events.filter((q) => q.tm === tm && q.p === p && isPassLike(q.a)), `${shortName(p)} · Passes`);
   if (b.dataset.nav === "team") { $("fPlayer").value = ""; renderAnalysis(); }
 });
-$("tableBox").addEventListener("click", (e) => { const b = e.target.closest("[data-prof]"); if (!b) return; const v = b.dataset.prof, k = v.indexOf("|"); goProfile(+v.slice(0, k), v.slice(k + 1)); });
+$("tableBox").addEventListener("change", (e) => {
+  if (e.target.id === "pMinMin") { S.pMinMin = Math.max(0, +e.target.value || 0); renderAnalysis(); }
+});
+$("tableBox").addEventListener("click", (e) => {
+  const ps = e.target.closest("[data-pset]"); if (ps) { S.pSet = ps.dataset.pset; renderAnalysis(); return; }
+  const so = e.target.closest("[data-sort]"); if (so) { const k = so.dataset.sort; S.pSort = S.pSort && S.pSort.k === k ? { k, dir: -S.pSort.dir } : { k, dir: -1 }; renderAnalysis(); return; }
+  const b = e.target.closest("[data-prof]"); if (!b) return; const v = b.dataset.prof, k = v.indexOf("|"); goProfile(+v.slice(0, k), v.slice(k + 1)); });
 // ---- home
 function renderHome() {
   const m = S.match, b = $("hContinue"); if (!m) return;
@@ -2030,32 +2129,101 @@ function renderAnalysis() {
     } });
     $("viewNote").textContent = "Same 18 zones as your Zone Map and Toolkit (L/C/R from the acting team's view)." + (videoView() ? " Zones always use each team's own direction, whatever the orientation setting." : "");
   } else if (view === "players") {
-    const st = computeStats(filtered({ ignoreAction: true })).sort((a, b) => a.team - b.team || (+shirt(a.player) || 99) - (+shirt(b.player) || 99));
-    const pct = (a, b) => b ? Math.round(100 * a / b) + "%" : "–";
+    const st = computeStats(filtered({ ignoreAction: true }));
     const MM = minutesMap(m, S.events), p90 = $("fPer").value === "p90";
-    const mins = (s) => MM.minutes[pkey(s.team, s.player)] || 0;
-    // in per-90 mode every count is scaled to 90 minutes; pairs show successes per 90
-    const N = (s, v) => p90 ? (mins(s) > 0 ? (v * 90 / mins(s)).toFixed(1) : "–") : v;
-    const rawCols = [["Player", (s) => `<button class="linkbtn" data-prof="${s.team}|${esc(s.player)}" title="Open player profile">${esc(s.player)}</button>`], ["Team", (s) => `<span class="tdot" style="background:${esc(m.teams[s.team].color)}"></span>${esc(m.teams[s.team].name)}`], ["Pos", (s) => esc(posOf(m, s.team, s.player))], ["Minutes", (s) => Math.round(mins(s))], ["Touches", (s) => s.touches],
-      ["Passes", (s) => s.passes], ["Pass %", (s) => pct(s.passOk, s.passes)], ["Prog. passes", (s) => s.prog], ["Final ⅓ passes", (s) => s.f3], ["Key passes", (s) => s.key],
-      ["Through balls", (s) => s.thrOk + "/" + s.thr], ["Line-breaking", (s) => s.lbOk + "/" + s.lb], ["Long balls", (s) => s.longOk + "/" + s.longB], ["Switches", (s) => s.sw], ["Passes into box", (s) => s.boxP],
-      ["Received in final ⅓", (s) => s.recF3], ["Received line-breaking", (s) => s.recLb], ["Half-space receptions", (s) => s.hs],
-      ["Shot-creating actions", (s) => s.sca], ["Goal-creating actions", (s) => s.gca], ["xT added", (s) => s.xt.toFixed(2)], ["xT passing", (s) => s.xtPass.toFixed(2)], ["xT carrying", (s) => s.xtCarry.toFixed(2)],
-      ["Prog. pass distance (m)", (s) => Math.round(s.ppd)], ["Prog. carry distance (m)", (s) => Math.round(s.pcd)],
-      ["Crosses", (s) => s.crossOk + "/" + s.crosses], ["Carries", (s) => s.carries], ["Prog. carries", (s) => s.progCarry], ["Dribbles", (s) => s.dribOk + "/" + s.drib],
-      ["Shots", (s) => s.shots], ["On target", (s) => s.onT], ["Goals", (s) => s.goals], ["Tackles won", (s) => s.tackleOk + "/" + s.tackles], ["Interceptions", (s) => s.inter],
-      ["Recoveries", (s) => s.rec], ["Clearances", (s) => s.clear], ["Blocks", (s) => s.blocks], ["Pressures", (s) => s.press], ["Duels won", (s) => s.duelOk + "/" + s.duels], ["Fouls", (s) => s.fouls], ["Ball lost", (s) => s.lost]];
-    // wrap numeric columns for per-90 mode: plain counts scale, "a/b" shows a per 90, %, xT decimals and distances scale too
-    const cols = rawCols.map(([h, f], i) => i < 4 || h.endsWith("%") ? [h, f] : [p90 ? h + " /90" : h, (s) => {
-      const v = f(s);
-      if (!p90) return v;
-      if (typeof v === "number") return N(s, v);
-      if (typeof v === "string" && /^\d+\/\d+$/.test(v)) return N(s, +v.split("/")[0]);
-      if (typeof v === "string" && /^-?\d+(\.\d+)?$/.test(v)) return mins(s) > 0 ? (parseFloat(v) * 90 / mins(s)).toFixed(2) : "–";
-      return v;
-    }]);
-    $("tableBox").innerHTML = `<table><thead><tr>${cols.map(([h], i) => `<th class="${i > 2 ? "num" : ""}">${h}</th>`).join("")}</tr></thead><tbody>${st.map((s) => `<tr>${cols.map(([, f], i) => `<td class="${i > 2 ? "num" : ""}">${f(s)}</td>`).join("")}</tr>`).join("") || `<tr><td colspan="${cols.length}" class="note">No events match the filters.</td></tr>`}</tbody></table>`;
-    $("viewNote").textContent = (p90 ? "Per 90: each count scaled to 90 minutes on the pitch (minutes from Line-ups in Matches & squads" + (MM.assumed.some(Boolean) ? "; a team with no starters ticked counts everyone for the whole time" : "") + "). Be careful with players under 30 minutes. " : "") + "Shot-creating actions = the two attacking actions (pass, cross, carry, dribble) directly before a shot. xT added = how much each completed pass/carry raised the chance of scoring (expected threat). Progressive distance = metres the ball moved towards the opponent's goal. Half-space receptions = completed passes received in the channels between the box edge and the six-yard box line, in the opposition half. Key pass = completed pass/cross whose receiver shoots within 5 s. Long ball = pass of 32 m+. Switch = completed pass that moves the ball 30 m+ across the pitch. 'Received' columns show who gets on the ball in dangerous places.";
+    const mins = (s2) => MM.minutes[pkey(s2.team, s2.player)] || 0;
+    const per = (s2, v) => p90 ? (mins(s2) > 0 ? v * 90 / mins(s2) : null) : v;
+    // column kinds: n = count, r = made/attempted, p = percentage, d = decimal (xT), m = metres
+    const C = (h, kind, f, tip, low) => ({ h, kind, f, tip, low });
+    const COLS = {
+      passes: C("Passes", "r", (s2) => [s2.passOk, s2.passes], "Completed / attempted passes (crosses are separate)"),
+      passPct: C("Pass %", "p", (s2) => s2.passes ? 100 * s2.passOk / s2.passes : null, "Share of passes completed"),
+      prog: C("Prog. passes", "n", (s2) => s2.prog, "Completed passes that move the ball clearly closer to goal (30 m in own half, 15 m into the opposition half, 10 m inside it)"),
+      f3: C("Final ⅓ passes", "n", (s2) => s2.f3, "Completed passes from outside into the final third"),
+      key: C("Key passes", "n", (s2) => s2.key, "Completed passes/crosses whose receiver shoots within 5 s"),
+      thr: C("Through balls", "r", (s2) => [s2.thrOk, s2.thr], "Tagged with Q: passes into space behind the defence"),
+      lb: C("Line-breaking", "r", (s2) => [s2.lbOk, s2.lb], "Tagged with E: passes that beat a line of the opponent's shape"),
+      longB: C("Long balls", "r", (s2) => [s2.longOk, s2.longB], "Passes of 32 m or more"),
+      sw: C("Switches", "n", (s2) => s2.sw, "Completed passes moving the ball 30 m+ across the pitch"),
+      boxP: C("Passes into box", "n", (s2) => s2.boxP, "Completed passes ending in the opponent's box"),
+      cross: C("Crosses", "r", (s2) => [s2.crossOk, s2.crosses], "Completed / attempted crosses"),
+      uprP: C("Passes under pressure", "r", (s2) => [s2.uprPassOk, s2.uprPass], "Tagged with J: passes made with an opponent closing in"),
+      ppd: C("Prog. pass dist.", "m", (s2) => s2.ppd, "Metres completed passes moved the ball towards goal"),
+      xt: C("xT added", "d", (s2) => s2.xt, "Expected threat: how much his completed passes and carries raised the chance of a goal"),
+      xtPass: C("xT passing", "d", (s2) => s2.xtPass, "xT from passes and crosses"),
+      xtCarry: C("xT carrying", "d", (s2) => s2.xtCarry, "xT from carries"),
+      sca: C("SCA", "n", (s2) => s2.sca, "Shot-creating actions: the last two attacking actions (pass, cross, carry, dribble) before a shot"),
+      gca: C("GCA", "n", (s2) => s2.gca, "Goal-creating actions: the same, for goals"),
+      shots: C("Shots", "n", (s2) => s2.shots, "All shots"),
+      onT: C("On target", "n", (s2) => s2.onT, "Shots on target, including goals"),
+      goals: C("Goals", "n", (s2) => s2.goals, "Goals"),
+      touches: C("Touches", "n", (s2) => s2.touches, "On-ball actions plus ball wins"),
+      carries: C("Carries", "n", (s2) => s2.carries, "Moving with the ball without pressure"),
+      progC: C("Prog. carries", "n", (s2) => s2.progCarry, "Carries that move the ball clearly closer to goal"),
+      pcd: C("Prog. carry dist.", "m", (s2) => s2.pcd, "Metres carries moved the ball towards goal"),
+      drib: C("Dribbles", "r", (s2) => [s2.dribOk, s2.drib], "Won / attempted take-ons against a pressing opponent"),
+      recF3: C("Received in final ⅓", "n", (s2) => s2.recF3, "Completed passes received in the final third"),
+      hs: C("Half-space rec.", "n", (s2) => s2.hs, "Completed passes received in a half-space in the opponent's half"),
+      recLb: C("Received line-breaking", "n", (s2) => s2.recLb, "Line-breaking passes received"),
+      tackle: C("Tackles", "r", (s2) => [s2.tackleOk, s2.tackles], "Won / attempted tackles"),
+      inter: C("Interceptions", "n", (s2) => s2.inter, "Passes cut out"),
+      rec: C("Recoveries", "n", (s2) => s2.rec, "Loose balls picked up"),
+      clear: C("Clearances", "n", (s2) => s2.clear, "Clearances"),
+      blocks: C("Blocks", "n", (s2) => s2.blocks, "Shots or passes blocked"),
+      press: C("Pressures", "n", (s2) => s2.press, "Pressure events: closing down the ball carrier"),
+      duels: C("Duels", "r", (s2) => [s2.duelOk, s2.duels], "Won / contested ground and aerial duels"),
+      fouls: C("Fouls", "n", (s2) => s2.fouls, "Fouls committed", true),
+      upr: C("Actions under pressure", "r", (s2) => [s2.uprOk, s2.upr], "Tagged with J: on-ball actions with an opponent closing in"),
+      lost: C("Ball losses", "n", (s2) => s2.lost, "Ball lost, failed passes, crosses and dribbles (fewer is better)", true),
+    };
+    const SETS = {
+      basic: ["passes", "passPct", "prog", "key", "xt", "sca", "shots", "goals", "drib", "tackle", "inter", "rec", "lost"],
+      passing: ["passes", "passPct", "prog", "f3", "key", "thr", "lb", "longB", "sw", "boxP", "cross", "uprP", "ppd", "xtPass"],
+      attacking: ["touches", "shots", "onT", "goals", "sca", "gca", "xt", "xtCarry", "carries", "progC", "pcd", "drib", "recF3", "hs", "recLb"],
+      defending: ["tackle", "inter", "rec", "clear", "blocks", "press", "duels", "fouls", "upr", "lost"],
+    };
+    SETS.all = Object.keys(COLS);
+    S.pSet ??= "basic";
+    const keys = SETS[S.pSet] || SETS.basic;
+    // value used for sorting and highlighting (per 90 when chosen; % stays a %)
+    const val = (s2, c) => { const v = c.f(s2); if (v == null) return null; if (c.kind === "p") return v; return per(s2, c.kind === "r" ? v[0] : v); };
+    const show = (s2, c) => {
+      const v = c.f(s2);
+      if (v == null) return "–";
+      if (c.kind === "p") return Math.round(v) + "%";
+      if (c.kind === "r") return p90 ? (per(s2, v[0]) == null ? "–" : per(s2, v[0]).toFixed(1)) : `${v[0]}<span class="of">/${v[1]}</span>`;
+      const x = per(s2, v); if (x == null) return "–";
+      return c.kind === "d" ? (Math.abs(x) < 0.005 ? 0 : x).toFixed(2) : c.kind === "m" ? Math.round(x) : (p90 ? x.toFixed(1) : x);
+    };
+    // top 3 per column (among players who played) get highlighted
+    S.pMinMin ??= 0;
+    const stAll = st; st.splice(0, st.length, ...stAll.filter((s2) => mins(s2) >= S.pMinMin));
+    const played = st.filter((s2) => mins(s2) > 0 || !p90);
+    const top = {}; keys.forEach((k) => {
+      const c = COLS[k]; if (c.low || c.kind === "p") { top[k] = null; return; }
+      const vs = played.map((s2) => val(s2, c)).filter((v) => v != null && v > 0.005).sort((x, y) => y - x);
+      if (!vs.length) { top[k] = null; return; }
+      const third = vs[Math.min(2, vs.length - 1)], hits = vs.filter((v) => v >= third);
+      top[k] = hits.length > 4 ? [vs[0]] : [...new Set(hits)];      // many ties: only the best value
+    });
+    // sorting
+    S.pSort ??= { k: null, dir: -1 };
+    const rows = st.slice().sort((a, b) => {
+      if (S.pSort.k && COLS[S.pSort.k]) { const c = COLS[S.pSort.k]; const va = val(a, c) ?? -1e9, vb = val(b, c) ?? -1e9; if (va !== vb) return S.pSort.dir * (va - vb); }
+      if (S.pSort.k === "min") { const d = S.pSort.dir * (mins(a) - mins(b)); if (d) return d; }
+      return a.team - b.team || (+shirt(a.player) || 99) - (+shirt(b.player) || 99);
+    });
+    const arrow = (k) => S.pSort.k === k ? (S.pSort.dir < 0 ? " ▼" : " ▲") : "";
+    const head = `<tr><th class="stick">Player</th><th>Pos</th><th class="num sortable" data-sort="min" title="Minutes on the pitch (from Line-ups)">Min${arrow("min")}</th>${keys.map((k) => `<th class="num sortable" data-sort="${k}" title="${esc(COLS[k].tip)}">${COLS[k].h}${p90 && COLS[k].kind !== "p" ? " <span class='of'>/90</span>" : ""}${arrow(k)}</th>`).join("")}</tr>`;
+    const body = rows.map((s2) => `<tr><td class="stick"><span class="tdot" style="background:${esc(m.teams[s2.team].color)}"></span><button class="linkbtn" data-prof="${s2.team}|${esc(s2.player)}" title="Open player profile">${esc(s2.player)}</button></td><td>${esc(posOf(m, s2.team, s2.player))}</td><td class="num">${Math.round(mins(s2))}</td>${keys.map((k) => { const v = val(s2, COLS[k]); const hi = top[k] && v != null && top[k].includes(v); return `<td class="num${hi ? " best" : ""}">${show(s2, COLS[k])}</td>`; }).join("")}</tr>`).join("");
+    const setBtns = [["basic", "Basic"], ["passing", "Passing"], ["attacking", "Attacking"], ["defending", "Defending"], ["all", "All columns"]].map(([k, n]) => `<button data-pset="${k}" aria-pressed="${S.pSet === k}">${n}</button>`).join("");
+    const ctl = `<label class="pctl">Min. minutes <input type="number" id="pMinMin" min="0" max="120" step="5" value="${S.pMinMin}"></label>`;
+    $("tableBox").innerHTML = `<div class="psets" role="group" aria-label="Which stats">${setBtns}<span class="grow"></span>${ctl}</div><div class="ptable"><table class="pstats"><thead>${head}</thead><tbody>${body || `<tr><td colspan="${keys.length + 3}" class="note">No events match the filters.</td></tr>`}</tbody></table></div>`;
+    S.tableExport = [["Player", "Team", "Pos", "Minutes", ...keys.map((k) => COLS[k].h + (p90 && COLS[k].kind !== "p" ? " per 90" : ""))],
+      ...rows.map((s2) => [s2.player, m.teams[s2.team].name, posOf(m, s2.team, s2.player), Math.round(mins(s2)), ...keys.map((k) => { const c = COLS[k], v = c.f(s2); if (v == null) return "";
+        if (c.kind === "r" && !p90) return `${v[0]}/${v[1]}`; const x = val(s2, c); return x == null ? "" : c.kind === "p" ? Math.round(x) : +(+x).toFixed(2); })])];
+    $("viewNote").innerHTML = (S.pMinMin ? `Showing players with at least ${S.pMinMin} minutes (${stAll === st ? st.length : st.length} shown). ` : "") + `Click a column name to sort, hover it for a short explanation, or open the <b>Guide</b> tab for full definitions. <span class="best-key">Highlighted</span> = the top 3 in that column (only the best one when many players are level). Click a player to open his profile.` +
+      (p90 ? ` Per 90 uses minutes from Line-ups${MM.assumed.some(Boolean) ? " (a team with no starters ticked counts everyone for the whole time)" : ""}; be careful with players under 30 minutes.` : "");
     $("bPng").hidden = true;
   } else if (view === "teams") {
     const ev = filtered({ ignoreAction: true, bothTeams: true, allPlayers: true });
@@ -2090,7 +2258,7 @@ function renderAnalysis() {
     const shotPct = (P) => P.length ? Math.round(100 * P.filter((q) => q.shot).length / P.length) + "%" : "–";
     const boxPct = (P) => P.length ? Math.round(100 * P.filter((q) => q.box).length / P.length) + "%" : "–";
     const dspeed = (P) => { const Q = P.filter((q) => q.t1 - q.t0 >= 3 && q.x0 != null && q.x1 != null); return Q.length ? (Q.reduce((a, q) => a + (q.x1 - q.x0) / (q.t1 - q.t0), 0) / Q.length).toFixed(1) : "–"; };
-    const k2 = (n, a, b) => `<div class="kpi"><div class="lbl">${n}</div><div class="v"><span class="h" style="color:${esc(m.teams[0].color)}">${a}</span><span class="sep">v</span><span class="a" style="color:${esc(m.teams[1].color)}">${b}</span></div></div>`;
+    const k2 = (n, a, b) => `<div class="kpi${String(a).replace(/<[^>]*>/g, "").length + String(b).replace(/<[^>]*>/g, "").length > 10 ? " span2" : ""}"><div class="lbl">${n}</div><div class="v"><span class="h" style="color:${esc(m.teams[0].color)}">${a}</span><span class="sep">v</span><span class="a" style="color:${esc(m.teams[1].color)}">${b}</span></div></div>`;
     $("kpis").innerHTML = k2("Possession (share of passes)", tot ? Math.round(100 * T[0].pass / tot) + "%" : "–", tot ? Math.round(100 * T[1].pass / tot) + "%" : "–") +
       k2("Passes completed", `${T[0].ok}/${T[0].pass}`, `${T[1].ok}/${T[1].pass}`) + k2("Progressive passes", T[0].prog, T[1].prog) + k2("Final-third entries", T[0].f3, T[1].f3) +
       k2("Box entries", T[0].box, T[1].box) + k2("Shots (on target)", `${T[0].shots} (${T[0].onT})`, `${T[1].shots} (${T[1].onT})`) + k2("Goals", T[0].goals, T[1].goals) +
@@ -2111,16 +2279,31 @@ function renderAnalysis() {
   }
 }
 const kpi = (n, v) => `<div class="kpi"><div class="lbl">${n}</div><div class="v">${v}</div></div>`;
+$("bCsvView").onclick = () => {
+  const m = S.match, base = safeName(m.title) + "_" + S.view;
+  if (S.view === "players" && S.tableExport) return offerFile(base + ".csv", csv(S.tableExport));
+  if (S.view === "profile" && S.profExport) return offerFile(base + "_" + safeName(($("pPlayer").value || "").split("|")[1]) + ".csv", csv(S.profExport));
+  if (S.view === "teams") {
+    const rows = [["Stat", m.teams[0].name, m.teams[1].name], ...[...$("kpis").querySelectorAll(".kpi")].map((k) => [k.querySelector(".lbl")?.textContent.trim() || "", k.querySelector(".v .h")?.textContent.trim() || "", k.querySelector(".v .a")?.textContent.trim() || ""])];
+    const t = $("tableBox").querySelector("table");
+    if (t) rows.push([], ...[...t.querySelectorAll("tr")].map((tr) => [...tr.children].map((c) => c.textContent.trim())));
+    return offerFile(base + ".csv", csv(rows));
+  }
+  // charts: the events drawn on this chart, with their coordinates
+  const ev = filtered(); const rows = [["time", "team", "player", "action", "outcome", "receiver", "x", "y", "end_x", "end_y", "start_zone", "end_zone", "phase"]];
+  ev.forEach((e) => { const a = norm(m, e), b = norm(m, e, true); rows.push([mmss(e.t, true), m.teams[e.tm].name, e.p, e.a, e.o, e.r, a && r1(a[0]), a && r1(a[1]), b && r1(b[0]), b && r1(b[1]), zoneOf(a), zoneOf(b), e.ph]); });
+  offerFile(base + "_events.csv", csv(rows));
+};
 $("bPng").onclick = () => CV.toBlob((b) => b && offerFile(safeName(S.match.title) + "_" + S.view + ".png", b), "image/png");
 
 /* ================= tabs & toast ================= */
 function selectTab(name) {
-  ["home", "tag", "analyse", "setup"].forEach((n) => { $("tab-" + n).setAttribute("aria-selected", n === name); $("view-" + n).hidden = n !== name; });
+  ["home", "tag", "analyse", "setup", "guide"].forEach((n) => { $("tab-" + n).setAttribute("aria-selected", n === name); $("view-" + n).hidden = n !== name; });
   if (name === "home") renderHome();
   if (name === "analyse") renderAnalysis();
   try { localStorage.setItem("mt_tab", name); } catch (_) {}
 }
-["home", "tag", "analyse", "setup"].forEach((n) => { $("tab-" + n).onclick = () => selectTab(n); });
+["home", "tag", "analyse", "setup", "guide"].forEach((n) => { $("tab-" + n).onclick = () => selectTab(n); });
 let toastT = null;
 function toast(msg) { const t = $("toast"); t.textContent = msg; t.hidden = false; clearTimeout(toastT); toastT = setTimeout(() => { t.hidden = true; }, 2600); }
 window.addEventListener("beforeunload", () => { if (S.dirty) saveNow(); });
