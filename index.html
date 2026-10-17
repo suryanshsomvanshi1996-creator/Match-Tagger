@@ -361,7 +361,7 @@ html { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area
     <section class="card gsec"><h3 class="sec">Defending and pressing</h3><dl class="glist"><div class="gi"><dt>PPDA</dt><dd>Passes allowed per defensive action: the opponent's passes in their own 60% of the pitch ÷ your tackles, interceptions, fouls and ground duels in that area. <b>Lower = more intense pressing</b> (around 7–10 is a high-pressing team). Needs the opponent's passes to be tagged.</dd></div><div class="gi"><dt>Ball wins in the final third</dt><dd>Interceptions, recoveries and won tackles in the opponent's final third: is the press actually winning the ball high up?</dd></div><div class="gi"><dt>Counter-press regains</dt><dd>Times the team won the ball back within 5 seconds of losing it, out of the times it lost it.</dd></div><div class="gi"><dt>Pressure (H)</dt><dd>An event for the defender who closes down the ball carrier without winning the ball. Use it when you want to credit the presser.</dd></div><div class="gi"><dt>Duels</dt><dd>Ground and aerial 50/50 contests; won / contested.</dd></div></dl></section>
     <section class="card gsec"><h3 class="sec">Team style</h3><dl class="glist"><div class="gi"><dt>Possession (share of passes)</dt><dd>Each team's share of all passes in the match, a common stand-in for time on the ball.</dd></div><div class="gi"><dt>Field tilt</dt><dd>Each team's share of both teams' passes in the final third: who spent more time attacking.</dd></div><div class="gi"><dt>Possessions · Passes per possession</dt><dd>A possession is a spell where one team keeps the ball. Passes per possession shows patient build-up (high) or direct play (low).</dd></div><div class="gi"><dt>Direct speed</dt><dd>Average metres gained towards goal per second in possessions of 3 seconds or more. Higher = more direct.</dd></div></dl></section>
     <section class="card gsec"><h3 class="sec">Phases of play</h3><p class="sub">Every event gets a phase automatically (shown as <i>auto</i> in the log). You can change any of them in the event editor, and <kbd>Y</kbd> marks a set piece. Zones are counted from the acting team's own goal: the pitch is split into six bands, 1–2 near their own goal, 5–6 near the opponent's goal.</p><dl class="glist"><div class="gi"><dt>Build-up</dt><dd><b>In possession, zones 1–2</b> (own third): playing out from the back, through the first line of pressure.</dd></div><div class="gi"><dt>Progression</dt><dd><b>In possession, zones 3–4</b> (middle third): moving the ball up the pitch towards the final third.</dd></div><div class="gi"><dt>Chance creation</dt><dd><b>In possession, zones 5–6</b> (final third): working openings, crosses, through balls and shots.</dd></div><div class="gi"><dt>Attacking transition</dt><dd>In possession, within 5 seconds of winning the ball (interception, recovery or won tackle), wherever it happens, the moment to counter-attack before the opponent is organised.</dd></div><div class="gi"><dt>Defensive transition</dt><dd>Out of possession, within 5 seconds of losing the ball, counter-pressing or recovering shape straight after a turnover.</dd></div><div class="gi"><dt>High press</dt><dd>Out of possession, defending in zones 5–6 - Winning or contesting the ball in the opponent's third.</dd></div><div class="gi"><dt>Mid block</dt><dd>Out of possession, zones 3–4 - A compact block around the halfway line.</dd></div><div class="gi"><dt>Low block</dt><dd>Out of possession, zones 1–2 - Defending deep near your own goal.</dd></div><div class="gi"><dt>Set piece</dt><dd>Corners, free kicks, throw-ins, penalties and kick-offs. Marked by you with <kbd>Y</kbd> while tagging.</dd></div></dl></section>
-    <section class="card gsec"><h3 class="sec">Actions you tag</h3><dl class="glist"><div class="gi"><dt>Dribble (D)</dt><dd>Taking on an opponent who is pressing you, to get past him or create space. Click where the take-on starts and where you come out with the ball; <kbd>Enter</kbd> = beat him, <kbd>Z</kbd> = lost it.</dd></div><div class="gi"><dt>Carry (C)</dt><dd>Moving with the ball without pressure, from one point to another.</dd></div><div class="gi"><dt>Ball lost (K) · Recovery (R)</dt><dd>A heavy touch or a loose ball: ball lost for the player who lost it, recovery for whoever picks it up.</dd></div><div class="gi"><dt>Interception (I) · Tackle (T)</dt><dd>Interception: cutting out a pass. Tackle: winning the ball off a player's feet.</dd></div></dl></section>
+    <section class="card gsec"><h3 class="sec">Actions you tag</h3><dl class="glist"><div class="gi"><dt>Dribble (D)</dt><dd>Taking on an opponent who is pressing you, to get past him or create space. Click where the take-on starts and where you come out with the ball; <kbd>Enter</kbd> = beat him, <kbd>Z</kbd> = lost it.</dd></div><div class="gi"><dt>Carry (C)</dt><dd>Moving with the ball without pressure, from one point to another.</dd></div><div class="gi"><dt>Ball lost (K) · Recovery (R)</dt><dd>A heavy touch or a loose ball: ball lost for the player who lost it, recovery for whoever picks it up.</dd></div><div class="gi"><dt>Interception (I) · Tackle (T)</dt><dd>Interception: cutting out a pass. Tackle: winning the ball off a player's feet.</dd></div><div class="gi"><dt>Quick tagging · Ball out (O)</dt><dd>Tick <b>quick tagging</b> under the video to tag one click per touch. A pass, cross or carry is saved <i>open</i>, and your next tag completes it: a team-mate's touch = completed pass to him, ending where he touched it; an opponent's touch = failed pass; the same player's next action = where his carry ended. Pressures are skipped. A foul, a set piece or a gap of more than 8 seconds leaves it open. Press <b>O</b> and click if the ball went out of play. Filled-in events show <i>auto</i> in the log; editing the outcome or receiver by hand switches that off.</dd></div></dl></section>
   </section>
 
   <!-- ============ TAG ============ -->
@@ -388,6 +388,7 @@ html { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area
           <option value="0.5">0.5×</option><option value="0.75">0.75×</option><option value="1" selected>1×</option><option value="1.5">1.5×</option><option value="2">2×</option>
         </select>
         <label class="row" style="font-size:12px;gap:4px"><input type="checkbox" id="autoPause" checked> pause while tagging</label>
+        <label class="row" style="font-size:12px;gap:4px" title="One click per touch: a pass, cross or carry gets its end point, receiver and outcome from the next event you tag. O = ball went out of play."><input type="checkbox" id="chainMode"> quick tagging</label>
       </div>
       <div class="clipfind">
         <span class="lbl">Player clips</span>
@@ -721,6 +722,7 @@ const shirt = (p) => { const m = /^(\d+)\s/.exec(p || ""); return m ? m[1] : "";
 const CHUNK = 900;
 let saveTimer = null;
 function markDirty() {
+  if (S.events && S.events.some((q) => q.ci === true)) resolveChain();
   S.dirty = true; S.match.updated = Date.now();
   setSave("Unsaved changes", "warn");
   clearTimeout(saveTimer); saveTimer = setTimeout(saveNow, 1200);
@@ -860,7 +862,7 @@ function startAction(name) {
   const c = { a: name, t: r1(t), tm: S.onBall.team, p: S.onBall.p, x: null, y: null, ex: null, ey: null, r: "", stage: "start", autoStart: false, sp: false, q: [] };
   // continue from the last action's end point if it's the same player and recent
   const ev = sorted().filter((q) => q.t <= t + 0.05), last = ev[ev.length - 1];
-  if (last && k.kind === "ball" && last.tm === c.tm && t - last.t < 6) {
+  if (!S.chain && last && k.kind === "ball" && last.tm === c.tm && t - last.t < 6) {
     const lp = (last.r === c.p && last.ex != null) ? [last.ex, last.ey] : (last.p === c.p ? (last.ex != null ? [last.ex, last.ey] : [last.x, last.y]) : null);
     if (lp) { c.x = lp[0]; c.y = lp[1]; c.autoStart = true; c.stage = k.needsEnd ? "end" : "outcome"; }
   }
@@ -870,8 +872,10 @@ function startAction(name) {
 }
 function pitchClick(evt) {
   const p = pitchPoint(evt), c = S.comp;
+  if (!c && S.outMode) { ballOut(p); return; }
   if (!c) { toast("Press an action key first (P pass, S shot…)"); return; }
   const k = ACTION_BY_NAME[c.a];
+  if (S.chain && c.stage === "start" && CHAIN_ACTS.has(c.a)) { c.x = p[0]; c.y = p[1]; c.ci = true; commit(""); return; }
   if (evt.shiftKey || c.stage === "start") { c.x = p[0]; c.y = p[1]; c.autoStart = false; c.stage = k.needsEnd ? "end" : "outcome"; }
   else if (c.stage === "end" || c.stage === "receiver") { c.ex = p[0]; c.ey = p[1]; c.stage = (c.a === "Carry" || c.a === "Dribble") ? "outcome" : "receiver"; }
   else if (c.stage === "outcome" && k.needsEnd) { c.ex = p[0]; c.ey = p[1]; }
@@ -879,18 +883,60 @@ function pitchClick(evt) {
   if (c.a === "Carry" && c.stage === "outcome") { commit("Successful"); return; }
   renderComposer(); renderPitch();
 }
+/* ---------- quick tagging (chain inference) ----------
+   A pass, cross or carry tagged with one click is saved "open". The next event fills it in:
+   a teammate's touch = completed pass to him (ended where he touched it); an opponent's touch = failed pass;
+   the same player's next action = where his carry ended. Pressures are skipped; a foul, a set piece
+   or a gap of more than 8 s leaves it open for you to finish (O = it went out of play). */
+const CHAIN_ACTS = new Set(["Pass", "Cross", "Carry"]), CHAIN_GAP = 8;
+function resolveChain() {
+  const ev = sorted();
+  ev.forEach((e, i) => {
+    if (e.ci !== true) return;
+    e.ex = null; e.ey = null; e.r = ""; e.o = "";
+    let n = null;
+    for (let j = i + 1; j < ev.length; j++) { const q = ev[j]; if (q.t - e.t > CHAIN_GAP) break; if (q.a === "Pressure") continue; n = q; break; }
+    if (!n || n.a === "Foul" || (n.ph === "Set piece" && !n.pa)) return;
+    const lostDuel = ["Duel", "Aerial duel", "Tackle"].includes(n.a) && n.o === "Unsuccessful";
+    if (e.a === "Carry") {
+      if (n.tm === e.tm && n.p === e.p) { e.ex = n.x; e.ey = n.y; e.o = "Successful"; }
+      else if (n.tm !== e.tm && !lostDuel) { e.ex = n.x; e.ey = n.y; e.o = "Unsuccessful"; }
+      return;
+    }
+    if (n.tm === e.tm) {
+      if (n.p === e.p) return;
+      e.ex = n.x; e.ey = n.y;
+      if (lostDuel) e.o = "Unsuccessful"; else { e.o = "Successful"; e.r = n.p; }
+    } else if (!lostDuel) { e.ex = n.x; e.ey = n.y; e.o = "Unsuccessful"; }
+  });
+}
+// O key in quick tagging: the last open pass, cross or carry went out of play — click where
+function startBallOut() {
+  const open = sorted().filter((q) => q.ci === true && q.ex == null).pop();
+  if (!open) { toast("No open pass or carry to end. O is for quick tagging, after a one-click pass"); return; }
+  S.outMode = open.i; toast(`Click where ${shortName(open.p)}'s ${open.a.toLowerCase()} went out of play (Esc to cancel)`);
+}
+function ballOut(p) {
+  const e = S.events.find((q) => q.i === S.outMode); S.outMode = null; if (!e) return;
+  e.ex = p[0]; e.ey = p[1]; e.o = "Unsuccessful"; e.r = ""; e.ci = "out";
+  S.onBall = null; S.active = 1 - e.tm;
+  markDirty(); renderComposer(); renderPitch(); renderSquads(); renderLog();
+  toast("Out of play. Tag the restart next (Y marks it as a set piece)");
+}
 function commit(outcome) {
   const c = S.comp; if (!c) return;
   const k = ACTION_BY_NAME[c.a];
   if (c.x == null) { toast("Click the pitch to set where it happened"); return; }
-  if (k.needsEnd && c.ex == null && outcome !== "Unsuccessful") { toast("Click where the ball went"); return; }
+  if (k.needsEnd && c.ex == null && outcome !== "Unsuccessful" && !c.ci) { toast("Click where the ball went"); return; }
   let o = outcome;
   if (c.a === "Shot" && !Object.values(SHOT_OUT).includes(o)) { toast("Shot outcome: G goal, O on target, W off target, B blocked"); return; }
   if (["Interception", "Recovery", "Clearance", "Block", "Pressure", "Foul", "Save", "Ball lost"].includes(c.a) && o === "Successful") o = "";
   const e = { i: uid(), t: c.t, tm: c.tm, p: c.p, a: c.a, o, x: c.x, y: c.y, ex: c.ex, ey: c.ey, r: o === "Successful" ? c.r : "", ph: "", pa: true, n: "", c: false, q: c.q.filter((id) => qualFits(id, c.a)) };
-  if (c.sp) { e.ph = "Set piece"; e.pa = false; } else e.ph = autoPhaseFor(e, sorted(), S.match);
+  if (c.ci) e.ci = true;
   const inserted = S.events.some((q) => q.t > e.t);
   S.events.push(e);
+  resolveChain(); // quick tagging: this event may complete the pass or carry before it
+  if (c.sp) { e.ph = "Set piece"; e.pa = false; } else e.ph = autoPhaseFor(e, sorted(), S.match);
   if (inserted) {
     // added in the middle of the log: refresh the automatic phases of everything after it
     const all = sorted(); all.forEach((q) => { if (q.pa && q.t >= e.t) q.ph = autoPhaseFor(q, all, S.match); });
@@ -902,7 +948,8 @@ function commit(outcome) {
   }
   // who's on the ball next
   const nxt = possessionAfter(e);
-  if (e.r) S.onBall = { team: e.tm, p: e.r };
+  if (e.ci && e.a !== "Carry") { S.onBall = null; S.active = e.tm; } // receiver comes from the next tag
+  else if (e.r) S.onBall = { team: e.tm, p: e.r };
   else if (nxt === e.tm && k.kind === "ball") S.onBall = { team: e.tm, p: e.p };
   else if (nxt === e.tm) S.onBall = { team: e.tm, p: e.p };
   else if (nxt === 1 - e.tm) { S.onBall = null; S.active = 1 - e.tm; }
@@ -932,7 +979,7 @@ function renderComposer() {
   $("cWhat").innerHTML = `<span class="swatch" style="background:${esc(m.teams[c.tm].color)}"></span> ${esc(shortName(c.p))} — ${esc(c.a)}`;
   $("cTime").textContent = mmss(c.t, true);
   const hints = {
-    start: c.a === "Dribble" ? "Click where he started taking the opponent on (where the pressure began)." : c.a === "Carry" ? "Click where the carry started." : "Click the pitch where it happened.",
+    start: S.chain && CHAIN_ACTS.has(c.a) ? (c.a === "Carry" ? "Click where the carry started. It ends where his next action is." : `Click where he played it. Where it ended and who got it fill in from your next tag (<kbd>O</kbd> if it goes out).`) : c.a === "Dribble" ? "Click where he started taking the opponent on (where the pressure began)." : c.a === "Carry" ? "Click where the carry started." : "Click the pitch where it happened.",
     end: c.a === "Dribble" ? `Click where he ended up with the ball: past the opponent or in the space he created.${c.autoStart ? " (Start continues from the last action — Shift+click to move it.)" : ""} <kbd>Z</kbd> if he lost it.`
       : c.a === "Carry" ? `Click where the carry ended.${c.autoStart ? " (Start continues from the last action — Shift+click to move it.)" : ""}`
       : `Click where the ball went.${c.autoStart ? " (Start continues from the last action — Shift+click to move it.)" : ""} <kbd>Z</kbd> if it failed.`,
@@ -957,7 +1004,7 @@ function renderLog() {
     const n = ev.length - idx;
     return `<tr data-i="${e.i}" class="${S.sel === e.i ? "sel" : ""}"><td class="num mono">${n}</td><td class="mono">${mmss(e.t, true)}</td>
       <td><span class="tdot" style="background:${esc(m.teams[e.tm].color)}"></span>${esc(m.teams[e.tm].name)}</td><td>${esc(e.p)}</td><td>${esc(e.a)}${(e.q || []).map((q) => ` <span class="pill" style="padding:0 6px;font-size:11px">${esc(QUAL_NAME[q] || q)}</span>`).join("")}</td>
-      <td class="${outcomeClass(e)}">${esc(e.o)}</td><td class="mono">${zoneOf(norm(m, e))}</td><td class="mono">${zoneOf(norm(m, e, true))}</td>
+      <td class="${outcomeClass(e)}">${e.ci === true && e.ex == null ? '<span style="color:var(--warn,#c98a1b);font-size:12px" title="Waiting for the next tag (or press O if it went out)">open</span>' : esc(e.o)}${e.ci === true && e.ex != null ? ' <span style="color:var(--ink-3);font-size:11px" title="Filled in from the next event">auto</span>' : ""}</td><td class="mono">${zoneOf(norm(m, e))}</td><td class="mono">${zoneOf(norm(m, e, true))}</td>
       <td>${esc(e.r)}</td><td>${esc(e.ph)}${e.pa && e.ph ? ' <span style="color:var(--ink-3);font-size:11px">auto</span>' : ""}</td><td>${e.c ? "Y" : ""}</td><td>${esc(e.n)}</td></tr>`;
   });
   $("logBody").innerHTML = rows.join("") || `<tr><td colspan="12" class="note" style="padding:14px">No events yet. Open the video, type a shirt number, press <kbd>P</kbd>, and click the pitch twice.</td></tr>`;
@@ -989,9 +1036,10 @@ function renderEditor() {
   $("eT").onchange = (ev) => { const v = parseT(ev.target.value); if (v != null) upd((q) => { q.t = r1(v); }); };
   $("eTm").onchange = (ev) => upd((q) => { q.tm = +ev.target.value; });
   $("eP").onchange = (ev) => upd((q) => { q.p = ev.target.value; });
-  $("eA").onchange = (ev) => upd((q) => { q.a = ev.target.value; });
-  $("eO").onchange = (ev) => upd((q) => { q.o = ev.target.value; });
-  $("eR").onchange = (ev) => upd((q) => { q.r = ev.target.value; });
+  // changing these by hand switches off quick-tagging inference for this event
+  $("eA").onchange = (ev) => upd((q) => { q.a = ev.target.value; delete q.ci; });
+  $("eO").onchange = (ev) => upd((q) => { q.o = ev.target.value; delete q.ci; });
+  $("eR").onchange = (ev) => upd((q) => { q.r = ev.target.value; delete q.ci; });
   $("ePh").onchange = (ev) => upd((q) => { q.ph = ev.target.value; q.pa = false; });
   $("eN").onchange = (ev) => upd((q) => { q.n = ev.target.value; });
   $("eC").onchange = (ev) => upd((q) => { q.c = ev.target.checked; });
@@ -1037,7 +1085,7 @@ function seek(d) { if (V.src) V.currentTime = Math.max(0, V.currentTime + d); re
 const KEYHELP = [["Space", "play / pause"], ["← →", "−/+ 2 s"], ["Shift ← →", "−/+ 0.2 s"], ["[ ]", "slower / faster"], ["0–99", "pick player (shirt no.)"], ["Tab", "switch team"],
   ["P", "pass"], ["X", "cross"], ["C", "carry"], ["D", "dribble"], ["S", "shot"], ["K", "ball lost"], ["T", "tackle"], ["I", "interception"], ["R", "recovery"], ["L", "clearance"],
   ["B", "block"], ["H", "pressure"], ["U", "duel"], ["A", "aerial duel"], ["F", "foul"], ["V", "save"], ["Enter", "save / successful"], ["Z", "unsuccessful"], ["Y", "set piece"], ["Esc", "cancel"],
-  ["Q", "through ball (pass)"], ["E", "line-breaking (pass)"], ["J", "under pressure"], ["Backspace", "undo last"], ["+", "add events after the selected one"], ["M", "mark last as clip"], ["N", "note on last"]];
+  ["Q", "through ball (pass)"], ["E", "line-breaking (pass)"], ["J", "under pressure"], ["O", "ball out (quick tagging)"], ["Backspace", "undo last"], ["+", "add events after the selected one"], ["M", "mark last as clip"], ["N", "note on last"]];
 $("keyList").innerHTML = KEYHELP.map(([k, d]) => `<span><kbd>${k}</kbd>${d}</span>`).join("");
 document.addEventListener("keydown", (e) => {
   if ($("view-tag").hidden) return;
@@ -1049,7 +1097,7 @@ document.addEventListener("keydown", (e) => {
   if (k === "ArrowLeft" || k === "ArrowRight") { e.preventDefault(); seek((k === "ArrowLeft" ? -1 : 1) * (e.shiftKey ? 0.2 : 2)); return; }
   if (k === "[" || k === "]") { const sp = $("speed"); sp.selectedIndex = Math.max(0, Math.min(sp.options.length - 1, sp.selectedIndex + (k === "]" ? 1 : -1))); V.playbackRate = +sp.value; toast(sp.value + "×"); return; }
   if (k === "Tab") { e.preventDefault(); S.active = 1 - S.active; renderSquads(); renderComposer(); return; }
-  if (k === "Escape") { cancelComp(); return; }
+  if (k === "Escape") { if (S.outMode) { S.outMode = null; toast("Cancelled"); } cancelComp(); return; }
   if (/^\d$/.test(k)) {
     numBuf += k; clearTimeout(numTimer);
     const pick = () => {
@@ -1079,6 +1127,7 @@ document.addEventListener("keydown", (e) => {
     if (l) { l.q = Array.isArray(l.q) ? l.q : []; const on = toggleQ(l.q, QUAL[up][0]); markDirty(); renderLog(); toast(`${QUAL[up][1]} ${on ? "added to" : "removed from"} ${shortName(l.p)}'s ${l.a.toLowerCase()} at ${mmss(l.t)}`); }
     return;
   }
+  if (up === "O") { startBallOut(); return; }
   if (up === "M") { const l = sorted().pop(); if (l) { l.c = !l.c; markDirty(); renderLog(); toast(l.c ? "Marked for clip reel" : "Clip mark removed"); } return; }
   if (up === "N") { const l = sorted().pop(); if (l) { S.sel = l.i; renderLog(); setTimeout(() => $("eN") && $("eN").focus(), 0); } return; }
   if (ACTIONS[up]) { startAction(ACTIONS[up][0]); return; }
@@ -1095,6 +1144,10 @@ function insertAfter(e) {
 function toggleQ(arr, id) { const i = arr.indexOf(id); if (i >= 0) { arr.splice(i, 1); return false; } arr.push(id); return true; }
 function undoLast() { const l = sorted().pop(); if (!l) return; S.events = S.events.filter((q) => q.i !== l.i); S.sel = null; markDirty(); renderLog(); renderPitch(); toast("Removed: " + l.a + " by " + shortName(l.p)); }
 $("bUndo").onclick = undoLast;
+// quick tagging switch, remembered on this device
+try { S.chain = localStorage.getItem("mt_chain") === "1"; } catch (_) { S.chain = false; }
+$("chainMode").checked = S.chain;
+$("chainMode").onchange = (ev) => { S.chain = ev.target.checked; try { localStorage.setItem("mt_chain", S.chain ? "1" : "0"); } catch (_) {} if (S.comp) cancelComp(); toast(S.chain ? "Quick tagging on: one click per touch, the next tag completes each pass" : "Quick tagging off: click start and end of each pass"); };
 $("insDone").onclick = () => { S.insertAt = null; renderComposer(); toast("Back to normal tagging"); };
 $("pitch").addEventListener("click", pitchClick);
 $("squads").addEventListener("click", (e) => { const b = e.target.closest(".pbtn"); if (b) { b.blur(); choosePlayer(+b.dataset.team, b.dataset.p); } });
@@ -1839,10 +1892,14 @@ async function renderProfile() {
   poly(ps, colA, C ? 0.28 : 0.35);
   if (cs) poly(cs, colB, 0.16, [9, 6]);
   ps.forEach((q, i) => {
-    const a = -Math.PI / 2 + 2 * Math.PI * i / n, x = cx + Math.cos(a) * (R + 24), y = cy + Math.sin(a) * (R + 30) + (Math.sin(a) < -0.9 ? (C ? -34 : -14) : 0);
+    const a = -Math.PI / 2 + 2 * Math.PI * i / n, y = cy + Math.sin(a) * (R + 30) + (Math.sin(a) < -0.9 ? (C ? -34 : -14) : 0);
+    let x = cx + Math.cos(a) * (R + 24);
     const al = Math.abs(Math.cos(a)) < 0.2 ? "center" : Math.cos(a) > 0 ? "left" : "right";
     CX.textAlign = al;
-    CX.fillStyle = ink; CX.font = `600 15px ${css("--font-body")}`; CX.fillText(MET[q.k][0], x, y);
+    CX.fillStyle = ink; CX.font = `600 15px ${css("--font-body")}`;
+    // keep long labels on the left side inside the chart
+    if (al === "right") x = Math.max(x, CX.measureText(MET[q.k][0]).width + 12);
+    CX.fillText(MET[q.k][0], x, y);
     CX.font = `14px ${css("--font-mono")}`;
     if (!cs) { CX.fillStyle = ink2; CX.fillText(`${fmtK(q.k, q.v)}${q.p != null ? "  (" + q.p + ")" : ""}`, x, y + 19); return; }
     const w = lead(q.k, q.v, cs[i].v);
