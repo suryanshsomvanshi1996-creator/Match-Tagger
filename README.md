@@ -2,9 +2,9 @@
 
 **A free football match-analysis tool that runs in your browser.** Play a match video, log every action with a key press or a tap on the pitch, and get professional-style analysis straight away: heatmaps, pass networks, expected threat (xT), player profiles with percentile radars, team stats and video clips of any player's actions.
 
-Built by **Suryansh Somvanshi**.
+Built by **Suryansh Somvanshi**, a data analyst and former video analyst at REBALL.
 
-> **Try it:** Match tagger - https://suryanshsomvanshi1996-creator.github.io/Match-Tagger/
+> **Try it:** open the live site (GitHub Pages link in the repository's *About* box), or download `index.html` and double-click it. It works offline in Chrome, Edge, Safari or Firefox on a laptop, tablet or phone.
 
 ---
 
@@ -13,12 +13,13 @@ Built by **Suryansh Somvanshi**.
 2. [What you can do](#what-you-can-do)
 3. [Quick start](#quick-start)
 4. [Player profiles and percentiles, explained](#player-profiles-and-percentiles-explained)
-5. [Metrics glossary](#metrics-glossary)
-6. [Keyboard shortcuts](#keyboard-shortcuts)
-7. [Saving, backups and moving between devices](#saving-backups-and-moving-between-devices)
-8. [Limitations](#limitations)
-9. [Privacy](#privacy)
-10. [Credits](#credits)
+5. [Quick tagging, explained](#quick-tagging-explained)
+6. [Metrics glossary](#metrics-glossary)
+7. [Keyboard shortcuts](#keyboard-shortcuts)
+8. [Saving, backups and moving between devices](#saving-backups-and-moving-between-devices)
+9. [Limitations](#limitations)
+10. [Privacy](#privacy)
+11. [Credits](#credits)
 
 ---
 
@@ -35,8 +36,12 @@ Built by **Suryansh Somvanshi**.
 ### 1. Tag a match
 - **16 actions:** pass, cross, carry, dribble, shot, ball lost, tackle, interception, recovery, clearance, block, pressure, ground duel, aerial duel, foul and save.
 - **Exact locations:** click (or tap) where the action happened on a 105 × 68 m pitch, plus where the ball ended for passes, crosses and carries.
+- **Quick tagging (one click per touch):** tick *quick tagging* under the video and a pass, cross or carry needs only one click, where it was played. The **next event you tag** fills in the rest: a team-mate's touch makes it a completed pass to him, ending where he touched the ball; an opponent's touch makes it a failed pass; the same player's next action marks where his carry ended. Press **O** and click when the ball goes out of play. Anything the tool can't be sure of (a foul, a set piece, nothing tagged for 8 seconds) is left **open** in the log for you to finish. On a passing move this roughly halves the inputs. See [Quick tagging, explained](#quick-tagging-explained).
 - **Outcomes, receivers and shot results:** successful/unsuccessful, who received the pass, and goal / on target / off target / blocked for shots.
 - **Pass tags:** mark passes as **through balls** and **line-breaking passes**.
+- **Under pressure:** flag any on-ball action (pass, carry, dribble, shot…) taken with an opponent closing in (J). Player stats then show passes and actions completed under pressure.
+- **Dribbles and carries with a path:** a **dribble** is taking on an opponent who is pressing (start = where the take-on began, end = where the player came out past him or into the space he created; successful or not). A **carry** is moving with the ball without pressure (start → end).
+- **Add events in the middle:** select an event in the log (the video jumps to it) and press **+** (or **＋ Add after this**), then tag what happened; events always sit in time order, and automatic phases and quick-tagged passes update around it.
 - **Automatic phase of play** for every event (build-up, progression, chance creation, attacking/defensive transition, high press, mid block, low block, set piece). You can override any of them.
 - **Two ways to tag:** keyboard shortcuts on a laptop, or big tap buttons on a phone or tablet.
 - **Direction handling:** choose which way each team shoots and press *Half-time: switch sides* at the second-half kick-off. Every chart is then shown in the standard analyst view.
@@ -59,10 +64,10 @@ Filter any view by **team, player, action type, outcome, phase of play and time 
 | **Pass network** | Average positions and passing links. Click a player to highlight his connections, then jump to his profile or his clips |
 | **Shot map** | Every shot, coloured by outcome |
 | **Zones** | Counts in the same 18 zones (L/C/R × 1–6) as the Match Analysis Toolkit and Zone Map |
-| **Player stats** | 40+ columns per player, as totals or **per 90 minutes**. Click a name to open his profile |
+| **Player stats** | A clean **Basic** table (passes, pass %, progressive and key passes, xT, SCA, shots, goals, dribbles, tackles, interceptions, recoveries, ball losses), plus **Passing / Attacking / Defending / All** groups. Totals or **per 90**, a **minimum minutes** filter, sortable by any column, top 3 highlighted, hover a column for its meaning. Click a name to open his profile |
 | **Team stats** | Possession, field tilt, PPDA, counter-press regains, passes per possession, box entries, direct speed and phase counts |
 
-Every chart can be saved as a **PNG** for reports and presentations.
+Every chart can be saved as a **PNG** for reports and presentations, and **Export CSV** downloads the numbers behind whatever view is open (the player table, team stats, a profile or the filtered events behind a chart) to open in Excel.
 
 ### 4. Watch clips
 - **Player clips:** pick a player (or a whole team) and an action type, such as *Xavi → passes*, and every matching moment plays back to back from your video.
@@ -79,7 +84,7 @@ Every chart can be saved as a **PNG** for reports and presentations.
 ### 6. Use it anywhere
 - Works on **laptops, tablets and phones**, with a layout that adapts to the screen.
 - **Dark, light or automatic theme** (button at the top; dark by default).
-- A **Home page** explains the tool to anyone you share it with.
+- A **Home page** explains the tool to anyone you share it with, and a **Guide** tab explains every stat and phase of play in plain language.
 
 ---
 
@@ -87,7 +92,10 @@ Every chart can be saved as a **PNG** for reports and presentations.
 1. **Matches & squads → New match.** Type the match name, both team names and colours, and both squads, one player per line as `8 Iniesta`. Pick which way each team shoots at kick-off and click **Save match details**.
 2. **Line-ups:** pick a formation for each team and put a player in every spot. Add substitutions with their video time.
 3. **Tag tab → Choose video…** and open the match file. It plays from your device and is never uploaded.
-4. **Tag:** type the shirt number (or tap the player), press the action key (or tap the button), click where it happened on the pitch (and where it ended for passes), then **Enter** for successful or **Z** for unsuccessful. For passes, type the receiver's number.
+4. **Tag:** type the shirt number (or tap the player), press the action key (or tap the button) and click where it happened on the pitch.
+   - With **quick tagging** ticked (recommended), that's it for passes, crosses and carries: the next tag completes them.
+   - Without it, also click where the ball ended, then type the receiver's number, or press **Enter** (successful) / **Z** (unsuccessful).
+   - Shots finish with **G O W B**, dribbles and duels with **Enter / Z**.
 5. At the second-half kick-off, press **Half-time: switch sides**.
 6. **Analyse:** explore the views, open player profiles, compare players and play clips.
 7. **Back up:** Matches & squads → **Back up all matches**, and keep the file in OneDrive or Google Drive.
@@ -152,6 +160,27 @@ Both players are ranked against the same group (the one chosen by the template),
 
 ---
 
+## Quick tagging, explained
+In a passing move, each touch already tells you about the one before it: whoever touches the ball next received it, and where they touched it is where the pass ended. Quick tagging uses that, so you tag each touch once (**who, what, where**) and the tool links the chain.
+
+| Your next tag is… | The pass or cross becomes | The carry becomes |
+|---|---|---|
+| A team-mate's action | Completed, to him, ending where he touched it | Unchanged (waits for his own next action) |
+| The same player's next action | Unchanged | Ended there, successful |
+| An opponent's action (interception, tackle, recovery, clearance, block) | Failed, ending where the opponent won it | Ended there, ball lost |
+| A pressure | Skipped: the tag after it decides | Skipped |
+| A foul, a set piece, or nothing within 8 seconds | Left **open** | Left **open** |
+
+**Example:** Xavi → Iniesta → Messi shoots is tagged as `6 P` click, `8 P` click, `10 S` click `O`. Xavi's and Iniesta's passes are filled in automatically as completed, to the right receivers, ending at the right spots.
+
+- Filled-in events show **auto** in the event log; unfinished ones show **open** in amber.
+- **O** then a click ends the last open pass or carry out of play (failed, possession to the other team).
+- Undo, delete or insert an event and the chain re-links by itself.
+- Change an event's outcome or receiver by hand and the tool stops filling that event in, so your correction always wins.
+- Dribbles, shots and defensive actions work as before.
+
+---
+
 ## Metrics glossary
 | Metric | Definition used here |
 |---|---|
@@ -164,6 +193,7 @@ Both players are ranked against the same group (the one chosen by the template),
 | **Long ball** | Pass of 32 m or more |
 | **Switch** | Completed pass moving the ball 30 m+ across the pitch |
 | **Through ball / line-breaking pass** | Tagged by you while tagging (Q / E) |
+| **Under pressure** | Tagged by you (J): an opponent is close enough to affect the action (roughly within 2–3 m and closing in) |
 | **PPDA** | Opponent passes in their own 60% of the pitch ÷ your tackles, interceptions, duels and fouls in that area (lower = more pressing) |
 | **Field tilt** | Your share of both teams' final-third passes |
 | **Counter-press regains** | Times the ball was won back within 5 seconds of losing it, out of times it was lost |
@@ -182,8 +212,11 @@ Both players are ranked against the same group (the one chosen by the template),
 | `Enter` / `Z` | Save as successful / unsuccessful |
 | `G` `O` `W` `B` (after a shot) | Goal, on target, off target (wide), blocked |
 | `Q` / `E` | Through ball / line-breaking (pass tags) |
+| `J` | Under pressure (any on-ball action) |
 | `Y` | Set piece |
 | `M` / `N` | Mark last event as a clip / add a note |
+| `O` | Quick tagging: the ball went out of play (then click where) |
+| `+` | Add events after the one selected in the log |
 | `Esc` / `Backspace` | Cancel / undo last event |
 | `Space`, `←` `→`, `Shift + ←` `→`, `[` `]` | Play/pause, ±2 s, ±0.2 s, slower/faster |
 
@@ -204,9 +237,10 @@ On phones and tablets every action has a tap button, so no keyboard is needed.
 Match Tagger is an honest manual-coding tool. These are its limits:
 
 **Data collection**
-- **Tagging is manual.** Data quality depends on the analyst: a 90-minute match takes several hours to code in full. Nothing is detected automatically from the video.
+- **Tagging is manual.** Data quality depends on the analyst: a 90-minute match takes several hours to code in full. Quick tagging cuts the clicks, but nothing is detected automatically from the video.
+- **Quick tagging follows fixed rules.** It links each pass to the next tagged touch, so a missed or mis-numbered touch produces a wrong receiver. Fouls, set pieces and gaps over 8 seconds are left open rather than guessed, and need finishing by hand.
 - **Locations are judgement.** You click where you see the action on a 2D pitch; broadcast camera angles make this approximate (typically within a few metres), especially far from the camera.
-- **The definitions are created on my own.** Progressive passes, key passes, SCA, PPDA and so on follow common public definitions but are not identical to Opta, StatsBomb or Wyscout, so numbers are not directly comparable with theirs.
+- **The definitions are the tool's own.** Progressive passes, key passes, SCA, PPDA and so on follow common public definitions but are not identical to Opta, StatsBomb or Wyscout, so numbers are not directly comparable with theirs.
 - **Automatic phases are rule-based.** They use pitch zone and recent changes of possession, not the context a human sees (game state, shape). Check and edit them where it matters.
 - **Toolkit (.xlsx) imports place events in the centre of their zone**, because the workbook stores zones, not coordinates. Heatmaps and pass maps from imported data are therefore blockier than from tagged data.
 
