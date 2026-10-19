@@ -520,7 +520,8 @@ html { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area
         </div>
         <label>Shooting direction at the start of the video (1st half)<select id="sHomeRight"><option value="1"></option><option value="0"></option></select></label>
         <div><span class="lbl">Ends swapped at</span> <span id="swapList" class="mono"></span></div>
-        <div class="row"><button class="primary" id="bSaveSetup">Save match details</button><span id="setupMsg" class="note"></span></div>
+        <div class="row"><button class="primary" id="bSaveSetup">Save match details</button><button id="bSwapTeams" title="Make the away team the home team: names, colours, squads, line-ups and every event move together">⇄ Swap home and away</button><span id="setupMsg" class="note"></span></div>
+        <p class="note" style="margin-top:6px">Editing a team's name only renames it: its events stay with it. To change which team is home, use <b>Swap home and away</b>.</p>
       </div>
       <div class="panel" style="display:grid;gap:10px">
         <h2 style="font-size:20px">Squads</h2>
@@ -1252,9 +1253,12 @@ function parseCSV(text) {
 $("importFile").onchange = async (ev) => {
   const f = ev.target.files[0]; if (!f) return; ev.target.value = "";
   if (/\.xlsx$/i.test(f.name)) { importToolkit(f); return; }
-  const rows = parseCSV(await f.text()); const head = rows.shift() || [];
+  const rows = parseCSV((await f.text()).replace(/^\ufeff/, "")); const head = (rows.shift() || []).map((h) => String(h).trim());
   const ix = (n) => head.indexOf(n);
-  if (ix("x_screen") < 0) { toast("That isn't a Match Tagger 'full data' CSV"); return; }
+  if (ix("x_screen") < 0) {
+    if (head.some((h) => /^video time/i.test(h)) && head.some((h) => /^start zone/i.test(h))) { importToolkitCsv(f, head.map((h) => h.replace(/^\ufeff/, "").trim()), rows); return; }
+    toast("That CSV isn't one Match Tagger can read: use 'Export full data (CSV)', 'Export for Toolkit (CSV)', a Toolkit workbook (.xlsx) or a backup (.json)"); return;
+  }
   const teams = [...new Set(rows.map((r) => r[ix("team")]))].slice(0, 2);
   const m = newMatchObj(f.name.replace(/\.csv$/i, "").replace(/_events$/, "").replace(/_/g, " "), teams[0] || "Home", teams[1] || "Away", css("--home") || "#2856b8", css("--away") || "#c8372d");
   const ev2 = rows.map((r) => {
@@ -1298,6 +1302,50 @@ function toolkitTime(v) {
   }
   return parseT(v);
 }
+// one Toolkit Event Log row -> a Match Tagger event (positions = zone centres); null if it can't be used
+function tkEvent(c, m) {
+  const tm = c.team === m.teams[0].name ? 0 : c.team === m.teams[1].name ? 1 : -1;
+  let act = TK_ACTION[c.action];
+  const t = toolkitTime(c.time), s0 = zoneCentre(c.sz);
+  if (tm < 0 || !act || t == null || !s0) return null;
+  const outcome = TK_OUTCOME[c.outcome] || c.outcome;
+  // the Toolkit has one "Dribble / Carry" type: a failed one was a take-on (dribble), otherwise a carry
+  if (c.action === "Dribble / Carry" && outcome === "Unsuccessful") act = "Dribble";
+  const e0 = act === "Shot" ? null : zoneCentre(c.ez);
+  const notes = String(c.notes || "").trim();
+  const e = { i: uid(), t, tm, p: c.player, a: act, o: outcome, r: c.recv, ph: c.phase, pa: false, n: (notes + " [from Toolkit; position = zone centre]").trim(),
+    c: String(c.clip || "").trim().toUpperCase() === "Y", q: [], x: 0, y: 0, ex: null, ey: null };
+  if (c.action === "Set Piece") e.ph = "Set piece";
+  if (/through ball/i.test(notes)) e.q.push("through");
+  if (/line-breaking/i.test(notes)) e.q.push("linebreak");
+  if (/under pressure/i.test(notes)) e.q.push("pressured");
+  // zone centres are in the acting team's direction; convert to screen positions
+  const raw = (pt) => attacksRight(m, tm, t) ? pt : [L - pt[0], W - pt[1]];
+  [e.x, e.y] = raw(s0).map(r1); if (e0) [e.ex, e.ey] = raw(e0).map(r1);
+  if (e.p && !m.teams[tm].players.includes(e.p)) m.teams[tm].players.push(e.p);
+  if (e.r && !m.teams[tm].players.includes(e.r)) m.teams[tm].players.push(e.r);
+  return e;
+}
+// the "Export for Toolkit" CSV (Event Log columns) read back in
+function importToolkitCsv(f, head, rows) {
+  const col = (re) => head.findIndex((h) => re.test(h));
+  const ci = { time: col(/^video time/i), team: col(/^team$/i), player: col(/^player$/i), action: col(/^action$/i), outcome: col(/^outcome$/i), sz: col(/^start zone/i), ez: col(/^end zone/i),
+    recv: col(/^receiver/i), phase: col(/^phase/i), notes: col(/notes/i), clip: col(/^clip/i) };
+  const teams = [...new Set(rows.map((r) => String(r[ci.team] || "").trim()).filter(Boolean))].slice(0, 2);
+  if (!teams.length) { toast("No teams found in that file"); return; }
+  const m = newMatchObj(f.name.replace(/\.csv$/i, "").replace(/_?toolkit_?events$/i, "").replace(/_/g, " ").trim() + " (from Toolkit CSV)", teams[0], teams[1] || "Opponent", css("--home") || "#2856b8", css("--away") || "#c8372d");
+  m.homeRight = true;
+  const ev2 = []; let skipped = 0;
+  rows.forEach((r) => {
+    const g = (k) => ci[k] < 0 ? "" : String(r[ci[k]] ?? "").trim();
+    const e = tkEvent({ time: g("time"), team: g("team"), player: g("player"), action: g("action"), outcome: g("outcome"), sz: g("sz"), ez: g("ez"), recv: g("recv"), phase: g("phase"), notes: g("notes"), clip: g("clip") }, m);
+    if (e) ev2.push(e); else skipped++;
+  });
+  if (!ev2.length) { toast("No events found (rows need a team, action, time and start zone)"); return; }
+  [0, 1].forEach((t) => m.teams[t].players.sort((a, b) => (+shirt(a) || 99) - (+shirt(b) || 99)));
+  setMatch(m, ev2, false); markDirty(); selectTab("tag");
+  toast(`Imported ${ev2.length} events from the Toolkit CSV${skipped ? ` (${skipped} rows skipped)` : ""}. Positions are zone centres; set line-ups and directions in Matches & squads`);
+}
 async function importToolkit(f) {
   let X; try { X = await loadSheetJS(); } catch (_) { toast("Couldn't load the Excel reader — check your internet connection, or export the Event Log as CSV"); return; }
   let wb; try { wb = X.read(await f.arrayBuffer(), { type: "array" }); } catch (_) { toast("Couldn't read that workbook"); return; }
@@ -1311,25 +1359,9 @@ async function importToolkit(f) {
   const ev2 = []; let skipped = 0;
   for (let r = 6; r <= 1005; r++) {
     const team = String(v(lg, "C" + r)).trim(); if (!team) continue;
-    const tm = team === home ? 0 : team === away ? 1 : -1;
-    const act = TK_ACTION[String(v(lg, "E" + r)).trim()];
-    const t = toolkitTime(v(lg, "B" + r));
-    const s0 = zoneCentre(v(lg, "G" + r));
-    if (tm < 0 || !act || t == null || !s0) { skipped++; continue; }
-    const e0 = act === "Shot" ? null : zoneCentre(v(lg, "H" + r));
-    const notes = String(v(lg, "K" + r)).trim();
-    const e = { i: uid(), t, tm, p: String(v(lg, "D" + r)).trim(), a: act, o: TK_OUTCOME[String(v(lg, "F" + r)).trim()] || String(v(lg, "F" + r)).trim(),
-      r: String(v(lg, "I" + r)).trim(), ph: String(v(lg, "J" + r)).trim(), pa: false, n: (notes + " [from Toolkit; position = zone centre]").trim(),
-      c: String(v(lg, "L" + r)).trim().toUpperCase() === "Y", q: [], x: 0, y: 0, ex: null, ey: null };
-    if (String(v(lg, "E" + r)).trim() === "Set Piece") e.ph = "Set piece";
-    if (/through ball/i.test(notes)) e.q.push("through");
-    if (/line-breaking/i.test(notes)) e.q.push("linebreak");
-    if (/under pressure/i.test(notes)) e.q.push("pressured");
-    // zone centres are in the acting team's direction; convert to screen positions
-    const raw = (pt) => attacksRight(m, tm, t) ? pt : [L - pt[0], W - pt[1]];
-    [e.x, e.y] = raw(s0).map(r1); if (e0) [e.ex, e.ey] = raw(e0).map(r1);
-    if (e.p && !m.teams[tm].players.includes(e.p)) m.teams[tm].players.push(e.p);
-    if (e.r && !m.teams[tm].players.includes(e.r)) m.teams[tm].players.push(e.r);
+    const g = (col) => String(v(lg, col + r)).trim();
+    const e = tkEvent({ time: v(lg, "B" + r), team, player: g("D"), action: g("E"), outcome: g("F"), sz: g("G"), ez: g("H"), recv: g("I"), phase: g("J"), notes: g("K"), clip: g("L") }, m);
+    if (!e) { skipped++; continue; }
     ev2.push(e);
   }
   if (!ev2.length) { toast("No events found in the Event Log (rows need a team, action, time and start zone)"); return; }
@@ -1362,6 +1394,22 @@ $("bSaveSetup").onclick = () => {
   markDirty(); $("matchTitle").textContent = m.title; renderAll(); $("setupMsg").textContent = "Saved.";
   setTimeout(() => { $("setupMsg").textContent = ""; }, 2000);
 };
+// swap home and away properly: teams, events, line-ups, formations, substitutions and direction all move together
+function swapHomeAway() {
+  const m = S.match; if (!m || S.isExample) return;
+  m.teams.reverse();
+  S.events.forEach((e) => { e.tm = 1 - e.tm; });
+  const lu = lineupOf(m), flipKeys = (o) => Object.fromEntries(Object.entries(o || {}).map(([k, v]) => [k.replace(/^([01])\|/, (_, t) => (1 - +t) + "|"), v]));
+  lu.starters = flipKeys(lu.starters); lu.pos = flipKeys(lu.pos);
+  const sw = (o) => { const a = o[0], b = o[1]; delete o[0]; delete o[1]; if (b !== undefined) o[0] = b; if (a !== undefined) o[1] = a; };
+  sw(lu.form); sw(lu.slots);
+  m.subs.forEach((q) => { q.tm = 1 - q.tm; });
+  m.homeRight = !m.homeRight; // positions on screen don't move; the new home team attacks the other way
+  S.active = 1 - S.active; if (S.onBall) S.onBall.team = 1 - S.onBall.team; S.comp = null;
+  markDirty(); renderAll(); if (typeof renderSetup === "function") renderSetup();
+  toast(`${m.teams[0].name} are now the home team`);
+}
+$("bSwapTeams").onclick = swapHomeAway;
 $("bNew").onclick = () => {
   const m = newMatchObj("New match " + new Date().toLocaleDateString("en-GB"), "Home", "Away", "#2856b8", "#c8372d");
   setMatch(m, [], false); markDirty(); selectTab("setup"); $("sTitle").focus(); toast("New match created — fill in the teams and squads");
