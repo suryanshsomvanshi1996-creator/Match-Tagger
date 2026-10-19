@@ -4,7 +4,8 @@
 
 Built by **Suryansh Somvanshi**, a data analyst and former video analyst at REBALL.
 
-> **Try it:** https://suryanshsomvanshi1996-creator.github.io/Match-Tagger/
+> **Try it:** open the live site (GitHub Pages link in the repository's *About* box), or download `index.html` and double-click it. It works offline in Chrome, Edge, Safari or Firefox on a laptop, tablet or phone.
+
 ---
 
 ## Contents
@@ -59,7 +60,7 @@ Filter any view by **team, player, action type, outcome, phase of play and time 
 | **Player profile** | Percentile radar, profile index, heatmap and an automatic written summary, with optional comparison against a second player |
 | **Heatmap** | Where actions happened, as a smooth density map |
 | **Pass map** | Every pass as an arrow; completed vs failed |
-| **Threat (xT)** | Passes and carries that made the team more dangerous, drawn over the expected-threat grid |
+| **Threat (xT)** | Passes, carries and dribbles that made the team more dangerous, drawn over the expected-threat grid |
 | **Pass network** | Average positions and passing links. Click a player to highlight his connections, then jump to his profile or his clips |
 | **Shot map** | Every shot, coloured by outcome |
 | **Zones** | Counts in the same 18 zones (L/C/R × 1–6) as the Match Analysis Toolkit and Zone Map |
@@ -187,7 +188,7 @@ In a passing move, each touch already tells you about the one before it: whoever
 | **Final-third pass** | Completed pass that ends in the final third, starting outside it |
 | **Key pass** | Completed pass or cross whose receiver shoots within 5 seconds |
 | **Shot-creating actions (SCA)** | The two attacking actions (completed pass, cross, carry or dribble) by the shooting team directly before a shot, within 15 seconds. **Goal-creating actions (GCA)** are the same for goals |
-| **Expected threat (xT)** | How much a completed pass or carry raised the chance of scoring soon, using a 12 × 8 grid of pitch values |
+| **Expected threat (xT)** | How much a completed pass, cross or carry, or a successful dribble, raised the chance of scoring soon, using a 12 × 8 grid of pitch values: value where it ended minus value where it started (backwards moves count as negative, failed actions as zero). Split into xT passing, carrying and dribbling in the player table |
 | **Half-space reception** | Completed pass received in the opponent's half, in the channel between the edge of the box and the six-yard-box line |
 | **Long ball** | Pass of 32 m or more |
 | **Switch** | Completed pass moving the ball 30 m+ across the pitch |
