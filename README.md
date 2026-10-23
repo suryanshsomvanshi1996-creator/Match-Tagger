@@ -1,10 +1,10 @@
 # Match Tagger
 
-**A free football match-analysis tool that runs in your browser.** Play a match video, log every action with a key press or a tap on the pitch, and get professional-style analysis straight away: heatmaps, pass networks, expected threat (xT), player profiles with percentile radars, team stats and video clips of any player's actions.
+**A free football match-analysis tool that runs in your browser.** Play a match video, log every action with a key press or a tap on the pitch, and get professional-style analysis straight away: **team shape** with and without the ball, **player profiles and comparisons** with percentile radars, **quick tagging and freeze frames** that keep up with the video, and **clips** of any player's actions, plus heatmaps, pass networks, expected threat (xT) and team stats.
 
 Built by **Suryansh Somvanshi**, a data analyst and former video analyst at REBALL.
 
-> **Try it:** https://suryanshsomvanshi1996-creator.github.io/Match-Tagger/
+> **Try it:** open the live site (GitHub Pages link in the repository's *About* box), or download `index.html` and double-click it. It works offline in Chrome, Edge, Safari or Firefox on a laptop, tablet or phone.
 
 ---
 
@@ -34,7 +34,7 @@ Built by **Suryansh Somvanshi**, a data analyst and former video analyst at REBA
 ## What you can do
 
 ### 1. Tag a match
-- **16 actions:** pass, cross, carry, dribble, shot, ball lost, tackle, interception, recovery, clearance, block, pressure, ground duel, aerial duel, foul and save.
+- **16 actions** (pressures are tagged with Opponent pressure, G): pass, cross, carry, dribble, shot, ball lost, tackle, interception, recovery, clearance, block, pressure, ground duel, aerial duel, foul and save.
 - **Exact locations:** click (or tap) where the action happened on a 105 × 68 m pitch, plus where the ball ended for passes, crosses and carries.
 - **Quick tagging (one click per touch):** tick *quick tagging* under the video and a pass, cross or carry needs only one click, where it was played. The **next event you tag** fills in the rest: a team-mate's touch makes it a completed pass to him, ending where he touched the ball; an opponent's touch makes it a failed pass; the same player's next action marks where his carry ended. Press **O** and click when the ball goes out of play. Anything the tool can't be sure of (a foul, a set piece, nothing tagged for 8 seconds) is left **open** in the log for you to finish. On a passing move this roughly halves the inputs. See [Quick tagging, explained](#quick-tagging-explained).
 - **Outcomes, receivers and shot results:** successful/unsuccessful, who received the pass, and goal / on target / off target / blocked for shots.
@@ -45,6 +45,8 @@ Built by **Suryansh Somvanshi**, a data analyst and former video analyst at REBA
 - **Automatic phase of play** for every event (build-up, progression, chance creation, attacking/defensive transition, high press, mid block, low block, set piece). You can override any of them.
 - **Two ways to tag:** keyboard shortcuts on a laptop, or big tap buttons on a phone or tablet.
 - **Direction handling:** choose which way each team shoots and press *Half-time: switch sides* at the second-half kick-off. Every chart is then shown in the standard analyst view.
+- **Opponent pressure (G):** log a defender closing down the ball carrier without switching team; the carrier stays selected and his next action is marked *under pressure* automatically.
+- **Freeze frames (Shift + F):** pause on a moment and click where every visible player of both teams stands, optionally naming each dot by shirt number. Frames capture off-the-ball positions that events can't, and feed the Team shape view.
 - **Mark clips** (M) and add notes (N) to any event.
 
 ### 2. Set line-ups, formations and substitutions
@@ -62,6 +64,7 @@ Filter any view by **team, player, action type, outcome, phase of play and time 
 | **Pass map** | Every pass as an arrow; completed vs failed |
 | **Threat (xT)** | Passes, carries and dribbles that made the team more dangerous, drawn over the expected-threat grid |
 | **Pass network** | Average positions and passing links. Click a player to highlight his connections, then jump to his profile or his clips |
+| **Team shape** | How a team sets up with and without the ball, in any phase: each player's average position from his events and your freeze frames, joined into lines from the line-up. Width, depth, line height and compactness in metres, or one freeze frame shown exactly |
 | **Shot map** | Every shot, coloured by outcome |
 | **Zones** | Counts in the same 18 zones (L/C/R × 1–6) as the Match Analysis Toolkit and Zone Map |
 | **Player stats** | A clean **Basic** table (passes, pass %, progressive and key passes, xT, SCA, shots, goals, dribbles, tackles, interceptions, recoveries, ball losses), plus **Passing / Attacking / Defending / All** groups. Totals or **per 90**, a **minimum minutes** filter, sortable by any column, top 3 highlighted, hover a column for its meaning. Click a name to open his profile |
@@ -207,7 +210,7 @@ In a passing move, each touch already tells you about the one before it: whoever
 | `0`–`99` | Pick a player by shirt number |
 | `Tab` | Switch team |
 | `P` `X` `C` `D` `S` `K` | Pass, cross, carry, dribble, shot, ball lost |
-| `T` `I` `R` `L` `B` `H` | Tackle, interception, recovery, clearance, block, pressure |
+| `T` `I` `R` `L` `B` | Tackle, interception, recovery, clearance, block |
 | `U` `A` `F` `V` | Ground duel, aerial duel, foul, save |
 | `Enter` / `Z` | Save as successful / unsuccessful |
 | `G` `O` `W` `B` (after a shot) | Goal, on target, off target (wide), blocked |
@@ -216,6 +219,8 @@ In a passing move, each touch already tells you about the one before it: whoever
 | `Y` | Set piece |
 | `M` / `N` | Mark last event as a clip / add a note |
 | `O` | Quick tagging: the ball went out of play (then click where) |
+| `G` | Opponent pressure (keeps the ball carrier selected) |
+| `Shift + F` | Freeze frame: then click players, `Tab` switch team, number = name the next dot, `Enter` save |
 | `+` | Add events after the one selected in the log |
 | `Esc` / `Backspace` | Cancel / undo last event |
 | `Space`, `←` `→`, `Shift + ←` `→`, `[` `]` | Play/pause, ±2 s, ±0.2 s, slower/faster |
@@ -254,6 +259,7 @@ Match Tagger is an honest manual-coding tool. These are its limits:
 - **Percentiles are relative to your own data,** not to a league or a scouting database. A 90th percentile means "among the players you tagged".
 - **Minutes depend on the line-up.** If starters and substitutions aren't entered, everyone is assumed to have played the whole time.
 - **Expected threat (xT)** uses one model trained on Premier League 2015/16 open play. It values ball movement only (not off-ball runs, defending or set pieces) and doesn't adjust for league, opponent or game state.
+- **Team shape comes from events and freeze frames, not tracking.** Events show where players *acted*; freeze frames add where they *stood*, but only at the moments you capture and only for players on screen. Without frames, the out-of-possession shape is usually thin, because players make fewer defensive actions than passes. Role matching of unnamed frame dots assumes the team roughly holds its formation; rotations can swap roles.
 - **No tracking data:** no distance covered, speed, off-ball runs or defensive shape. Only on-ball events are recorded.
 - **Templates are fixed** at 8 metrics per position group; you can switch template but not edit the metrics.
 

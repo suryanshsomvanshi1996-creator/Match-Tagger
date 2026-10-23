@@ -180,6 +180,8 @@ svg.pitch { width: 100%; height: auto; display: block; border-radius: 6px; curso
 .home .foot { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; color: var(--ink-3); font-size: 13px }
 .insbar { margin-top: 8px; border: 1px solid var(--warn); border-radius: 8px; padding: 8px 10px; display: flex; gap: 10px; align-items: center; flex-wrap: wrap; background: color-mix(in srgb, var(--warn) 12%, var(--panel)) }
 .insbar span { flex: 1 1 240px; min-width: 0 }
+.framebar { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 12%, var(--panel)) }
+.fchip { display: inline-flex; gap: 4px; align-items: center; margin: 0 6px 4px 0; padding: 2px 8px; border: 1px solid var(--line); border-radius: 999px; background: var(--panel-2); cursor: pointer; font: inherit; font-size: 12px; color: var(--ink) }
 .plbar { margin-top: 8px; border: 1px solid var(--accent); border-radius: 8px; padding: 8px 10px; display: flex; gap: 8px; align-items: center; flex-wrap: wrap; background: var(--panel-2) }
 .plbar .now { font-family: var(--font-display); font-size: 17px; font-weight: 600; min-width: 0 }
 .plbar input[type=number] { width: 4.2em }
@@ -309,7 +311,7 @@ html { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area
     <div class="card hero">
       <div>
         <span class="lbl eyebrow">Football video analysis</span>
-        <h2>Tag the match.<br><em>Read the game.</em></h2>
+        <h2>Tag the match<br><em>Read the game</em></h2>
         <p>Noticed a winger drifting inside or a midfielder dropping deep? Upload the match to Match Tagger, tag the moments as they unfold, and watch your instincts turn into evidence, with live visuals and analysis that confirm what you saw and uncover what you missed.</p>
         <p>Whether you’re an analyst building your portfolio, a coach breaking down your own team, or a scout comparing players, Match Tagger puts Opta-style data in your hands. All you need is the match footage.</p>
         <div class="cta">
@@ -326,12 +328,12 @@ html { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area
       <h3 class="sec">What you can do</h3>
       <p class="sub">Everything runs from one page, on a laptop or a phone.</p>
       <div class="feats">
-        <div class="feat"><h4>Tag events</h4><p>16 actions — pass, cross, carry, dribble, shot, tackle, interception, recovery, clearance, block, pressure, duels, fouls, saves — with exact pitch location, outcome, receiver and an automatic phase of play.</p></div>
-        <div class="feat"><h4>Analyse the match</h4><p>Heatmaps, pass maps, expected threat (xT), pass networks, shot maps and the 18-zone grid, filtered by team, player, phase or time.</p></div>
-        <div class="feat"><h4>Profile players</h4><p>Radar charts per 90 minutes with percentile ranks against the same position, a heatmap and a written summary. Compare any two players.</p></div>
+        <div class="feat"><h4>Team shape</h4><p>See how a team sets up with and without the ball, in any phase of play. Visualise the high press and a high defensive line, and measure the team's width, depth, line height and compactness in metres.</p></div>
+        <div class="feat"><h4>Profile and compare players</h4><p>Percentile radars per 90 minutes against the same position, or a position of your choice. A player profile index and heatmaps, next to each other.</p></div>
+        <div class="feat"><h4>Tag while you watch</h4><p>16 actions with pitch location and outcome. Quick tagging completes each pass from your next tag, and freeze frames capture where every player stands.</p></div>
         <div class="feat"><h4>Watch player clips</h4><p>Pick a player and an action — every pass, shot or tackle plays back to back from your video, ready for a report or a coach.</p></div>
-        <div class="feat"><h4>Team stats</h4><p>Possession, field tilt, PPDA, counter-press regains, passes per possession, box entries and direct speed.</p></div>
-        <div class="feat"><h4>Export and import</h4><p>CSV for your Match Analysis Toolkit in Excel, a full data CSV with coordinates, PNG charts — and import Toolkit workbooks.</p></div>
+        <div class="feat"><h4>Analyse the match</h4><p>Heatmaps, pass maps, expected threat (xT), pass networks, shot maps and team stats such as possession, field tilt and PPDA, filtered by team, player, phase or time.</p></div>
+        <div class="feat"><h4>Export and import</h4><p>CSV for your Match Analysis Toolkit in Excel, a full data CSV with coordinates, PNG charts — and import Toolkit workbooks or CSVs.</p></div>
       </div>
     </div>
 
@@ -344,7 +346,7 @@ html { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area
         <li><b>Tag as you watch</b><span>Type the shirt number (or tap the player), press the action key (or tap the button), click where it happened on the pitch, then Enter for successful or Z for not.</span></li>
         <li><b>Analyse</b><span>Open <i>Analyse</i> for charts, player profiles and stats. Click a player in the pass network or the stats table to jump to his profile.</span></li>
       </ol>
-      <div class="keyline"><span><kbd>P</kbd>pass</span><span><kbd>C</kbd>carry</span><span><kbd>S</kbd>shot</span><span><kbd>T</kbd>tackle</span><span><kbd>R</kbd>recovery</span><span><kbd>H</kbd>pressure</span><span><kbd>Enter</kbd>successful</span><span><kbd>Z</kbd>unsuccessful</span><span><kbd>Tab</kbd>switch team</span><span><kbd>M</kbd>mark as clip</span></div>
+      <div class="keyline"><span><kbd>P</kbd>pass</span><span><kbd>C</kbd>carry</span><span><kbd>S</kbd>shot</span><span><kbd>T</kbd>tackle</span><span><kbd>R</kbd>recovery</span><span><kbd>G</kbd>opponent pressure</span><span><kbd>Enter</kbd>successful</span><span><kbd>Z</kbd>unsuccessful</span><span><kbd>Tab</kbd>switch team</span><span><kbd>M</kbd>mark as clip</span></div>
     </div>
 
     <div class="foot"><span>Your videos and matches stay on this device</span><span>Pitch 105 × 68 m · xT model trained on StatsBomb open data</span></div>
@@ -355,13 +357,13 @@ html { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area
   <section id="view-guide" role="tabpanel" aria-labelledby="tab-guide" class="home guide" hidden>
     <div class="card"><span class="lbl eyebrow" style="color:var(--accent)">Guide</span><h2 style="font-size:clamp(28px,4vw,40px);margin:4px 0 6px">What the numbers mean</h2>
       <p class="sub" style="margin:0">Plain-language definitions of every stat and phase in Match Tagger, with how each one is worked out. Hover any column name in Player stats for a one-line version.</p></div>
-    <section class="card gsec"><h3 class="sec">Reading the numbers</h3><p class="sub">How the tool turns events into comparable numbers.</p><dl class="glist"><div class="gi"><dt>Per 90</dt><dd>Every count scaled to 90 minutes on the pitch, so players with different minutes can be compared. <i>4 progressive passes in 30 minutes = 4 × 90 ÷ 30 = 12 per 90.</i> Minutes come from the line-up and substitutions. Under about 30 minutes, per-90 numbers are unreliable.</dd></div><div class="gi"><dt>Percentile</dt><dd>The share of the comparison group a player beats on a metric. <b>85</b> = better than 85% of the group, <b>50</b> = typical. The group is players in the same position group, from this match or from all your matches (<i>Rank against</i>).</dd></div><div class="gi"><dt>Profile index</dt><dd>The average of the player's 8 percentiles in the chosen template, 0–100. Around 50 is typical for the role, 70+ stands out, under 30 is weak.</dd></div></dl></section>
+    <section class="card gsec"><h3 class="sec">Reading the numbers</h3><p class="sub">How the tool turns events into comparable numbers.</p><dl class="glist"><div class="gi"><dt>Per 90</dt><dd>Every count scaled to 90 minutes on the pitch, so players with different minutes can be compared. <i>4 progressive passes in 30 minutes = 4 × 90 ÷ 30 = 12 per 90.</i> Minutes come from the line-up and substitutions. Under about 30 minutes, per-90 numbers are unreliable.</dd></div><div class="gi"><dt>Percentile</dt><dd>The share of the comparison group a player beats on a metric. <b>85</b> = better than 85% of the group, <b>50</b> = typical. The group is players in the same position group, from this match or from all your matches (<i>Rank against</i>).</dd></div><div class="gi"><dt>Profile index</dt><dd>The average of the player's 8 percentiles in the chosen template, 0–100. Around 50 is typical for the role, 70+ stands out, under 30 is weak.</dd></div><div class="gi"><dt>Team shape</dt><dd>Where each player stands with and without the ball, in any phase: his average position from his events and your freeze frames. Width, depth, back line height and compactness are in metres. Pick one freeze frame to see that moment exactly.</dd></div></dl></section>
     <section class="card gsec"><h3 class="sec">Passing and progression</h3><dl class="glist"><div class="gi"><dt>Progressive pass / carry</dt><dd>Moves the ball closer to the opponent's goal, at least 30 m closer within its own half, 15 m from its own half into the opponent's, or 10 m inside the opponent's half.</dd></div><div class="gi"><dt>Final-third pass</dt><dd>A completed pass that starts outside the final third and ends inside it.</dd></div><div class="gi"><dt>Key pass</dt><dd>A completed pass or cross whose receiver shoots within 5 seconds.</dd></div><div class="gi"><dt>Through ball (Q)</dt><dd>A pass into space behind or between the last line of defenders for a team-mate running onto it.</dd></div><div class="gi"><dt>Line-breaking pass (E)</dt><dd>A forward pass that goes past a line of the opponent's shape (forwards, midfield or defence) and is received behind or between it.</dd></div><div class="gi"><dt>Long ball · Switch</dt><dd>Long ball: a pass of 32 m or more. Switch: a completed pass that moves the ball 30 m or more across the pitch.</dd></div><div class="gi"><dt>Progressive distance</dt><dd>Metres a player's completed passes (or carries) moved the ball towards the opponent's goal.</dd></div><div class="gi"><dt>Under pressure (J)</dt><dd>Tagged by you on any on-ball action: an opponent is close enough to affect it, roughly within 2–3 m and closing in. Shows who stays calm under pressure.</dd></div></dl></section>
     <section class="card gsec"><h3 class="sec">Creating chances</h3><dl class="glist"><div class="gi"><dt>Shot-creating actions (SCA)</dt><dd>For every shot, the tool looks back at the shooting team's actions before it (up to 15 seconds, and only within the same spell of possession) and credits the <b>last two attacking actions</b>: completed passes, crosses, carries or dribbles. Each one gives its player 1 SCA. <i>Example: Xavi passes to Iniesta, Iniesta dribbles past Carrick, then passes to Messi, who shoots. The two actions before the shot are Iniesta's pass and Iniesta's dribble, so Iniesta gets 2 SCA and Xavi gets 0.</i> A player's own carry right before his shot counts too.</dd></div><div class="gi"><dt>Goal-creating actions (GCA)</dt><dd>The same two actions, but only for shots that became goals.</dd></div><div class="gi"><dt>Expected threat (xT)</dt><dd>Each area of the pitch has a value: the chance that having the ball there leads to a goal soon (from a model trained on the StatsBomb 2015/16 Premier League data). <b>xT added</b> = value where a completed pass, cross or carry, or a successful dribble, ended minus value where it started. <i>A pass from the centre circle (0.011) to the edge of the box in the middle (0.093) adds 0.08.</i> Sideways balls add almost nothing and backwards ones count as negative. Failed actions add nothing.</dd></div><div class="gi"><dt>Half-space reception</dt><dd>A completed pass received in one of the two channels between the edge of the six-yard box and the edge of the penalty box (9–20 m either side of the middle), in the opponent's half.</dd></div><div class="gi"><dt>Box entry · Final-third entry</dt><dd>A completed pass, cross or carry that ends inside the opponent's box / final third, having started outside it.</dd></div></dl></section>
-    <section class="card gsec"><h3 class="sec">Defending and pressing</h3><dl class="glist"><div class="gi"><dt>PPDA</dt><dd>Passes allowed per defensive action: the opponent's passes in their own 60% of the pitch ÷ your tackles, interceptions, fouls and ground duels in that area. <b>Lower = more intense pressing</b> (around 7–10 is a high-pressing team). Needs the opponent's passes to be tagged.</dd></div><div class="gi"><dt>Ball wins in the final third</dt><dd>Interceptions, recoveries and won tackles in the opponent's final third: is the press actually winning the ball high up?</dd></div><div class="gi"><dt>Counter-press regains</dt><dd>Times the team won the ball back within 5 seconds of losing it, out of the times it lost it.</dd></div><div class="gi"><dt>Pressure (H)</dt><dd>An event for the defender who closes down the ball carrier without winning the ball. Use it when you want to credit the presser.</dd></div><div class="gi"><dt>Duels</dt><dd>Ground and aerial 50/50 contests; won / contested.</dd></div></dl></section>
+    <section class="card gsec"><h3 class="sec">Defending and pressing</h3><dl class="glist"><div class="gi"><dt>PPDA</dt><dd>Passes allowed per defensive action: the opponent's passes in their own 60% of the pitch ÷ your tackles, interceptions, fouls and ground duels in that area. <b>Lower = more intense pressing</b> (around 7–10 is a high-pressing team). Needs the opponent's passes to be tagged.</dd></div><div class="gi"><dt>Ball wins in the final third</dt><dd>Interceptions, recoveries and won tackles in the opponent's final third: is the press actually winning the ball high up?</dd></div><div class="gi"><dt>Counter-press regains</dt><dd>Times the team won the ball back within 5 seconds of losing it, out of the times it lost it.</dd></div><div class="gi"><dt>Pressure (G)</dt><dd>An event for the defender who closes down the ball carrier without winning the ball, credited to the presser. Tag it with <b>Opponent pressure (G)</b> while you follow the team on the ball.</dd></div><div class="gi"><dt>Duels</dt><dd>Ground and aerial 50/50 contests; won / contested.</dd></div></dl></section>
     <section class="card gsec"><h3 class="sec">Team style</h3><dl class="glist"><div class="gi"><dt>Possession (share of passes)</dt><dd>Each team's share of all passes in the match, a common stand-in for time on the ball.</dd></div><div class="gi"><dt>Field tilt</dt><dd>Each team's share of both teams' passes in the final third: who spent more time attacking.</dd></div><div class="gi"><dt>Possessions · Passes per possession</dt><dd>A possession is a spell where one team keeps the ball. Passes per possession shows patient build-up (high) or direct play (low).</dd></div><div class="gi"><dt>Direct speed</dt><dd>Average metres gained towards goal per second in possessions of 3 seconds or more. Higher = more direct.</dd></div></dl></section>
     <section class="card gsec"><h3 class="sec">Phases of play</h3><p class="sub">Every event gets a phase automatically (shown as <i>auto</i> in the log). You can change any of them in the event editor, and <kbd>Y</kbd> marks a set piece. Zones are counted from the acting team's own goal: the pitch is split into six bands, 1–2 near their own goal, 5–6 near the opponent's goal.</p><dl class="glist"><div class="gi"><dt>Build-up</dt><dd><b>In possession, zones 1–2</b> (own third): playing out from the back, through the first line of pressure.</dd></div><div class="gi"><dt>Progression</dt><dd><b>In possession, zones 3–4</b> (middle third): moving the ball up the pitch towards the final third.</dd></div><div class="gi"><dt>Chance creation</dt><dd><b>In possession, zones 5–6</b> (final third): working openings, crosses, through balls and shots.</dd></div><div class="gi"><dt>Attacking transition</dt><dd>In possession, within 5 seconds of winning the ball (interception, recovery or won tackle), wherever it happens, the moment to counter-attack before the opponent is organised.</dd></div><div class="gi"><dt>Defensive transition</dt><dd>Out of possession, within 5 seconds of losing the ball, counter-pressing or recovering shape straight after a turnover.</dd></div><div class="gi"><dt>High press</dt><dd>Out of possession, defending in zones 5–6 - Winning or contesting the ball in the opponent's third.</dd></div><div class="gi"><dt>Mid block</dt><dd>Out of possession, zones 3–4 - A compact block around the halfway line.</dd></div><div class="gi"><dt>Low block</dt><dd>Out of possession, zones 1–2 - Defending deep near your own goal.</dd></div><div class="gi"><dt>Set piece</dt><dd>Corners, free kicks, throw-ins, penalties and kick-offs. Marked by you with <kbd>Y</kbd> while tagging.</dd></div></dl></section>
-    <section class="card gsec"><h3 class="sec">Actions you tag</h3><dl class="glist"><div class="gi"><dt>Dribble (D)</dt><dd>Taking on an opponent who is pressing you, to get past him or create space. Click where the take-on starts and where you come out with the ball; <kbd>Enter</kbd> = beat him, <kbd>Z</kbd> = lost it.</dd></div><div class="gi"><dt>Carry (C)</dt><dd>Moving with the ball without pressure, from one point to another.</dd></div><div class="gi"><dt>Ball lost (K) · Recovery (R)</dt><dd>A heavy touch or a loose ball: ball lost for the player who lost it, recovery for whoever picks it up.</dd></div><div class="gi"><dt>Interception (I) · Tackle (T)</dt><dd>Interception: cutting out a pass. Tackle: winning the ball off a player's feet.</dd></div><div class="gi"><dt>Quick tagging · Ball out (O)</dt><dd>Tick <b>quick tagging</b> under the video to tag one click per touch. A pass, cross or carry is saved <i>open</i>, and your next tag completes it: a team-mate's touch = completed pass to him, ending where he touched it; an opponent's touch = failed pass; the same player's next action = where his carry ended. Pressures are skipped. A foul, a set piece or a gap of more than 8 seconds leaves it open. Press <b>O</b> and click if the ball went out of play. Filled-in events show <i>auto</i> in the log; editing the outcome or receiver by hand switches that off.</dd></div></dl></section>
+    <section class="card gsec"><h3 class="sec">Actions you tag</h3><dl class="glist"><div class="gi"><dt>Dribble (D)</dt><dd>Taking on an opponent who is pressing you, to get past him or create space. Click where the take-on starts and where you come out with the ball; <kbd>Enter</kbd> = beat him, <kbd>Z</kbd> = lost it.</dd></div><div class="gi"><dt>Carry (C)</dt><dd>Moving with the ball without pressure, from one point to another.</dd></div><div class="gi"><dt>Ball lost (K) · Recovery (R)</dt><dd>A heavy touch or a loose ball: ball lost for the player who lost it, recovery for whoever picks it up.</dd></div><div class="gi"><dt>Interception (I) · Tackle (T)</dt><dd>Interception: cutting out a pass. Tackle: winning the ball off a player's feet.</dd></div><div class="gi"><dt>Opponent pressure (G)</dt><dd>An opponent closes down the player on the ball. Press <b>G</b>, type the presser's shirt number and click where he pressed (either order). It's saved as his Pressure, the team on the ball stays selected, and the carrier's next action within 3 seconds is marked <i>under pressure</i> automatically.</dd></div><div class="gi"><dt>Freeze frames (⇧F)</dt><dd>Pause on a moment and click where every visible player of both teams stands (<b>Tab</b> switches team; type a shirt number before a click to name that dot; click a dot to remove it; <b>Enter</b> saves). Frames feed the <b>Team shape</b> view: they capture where players <i>stood</i>, including off the ball, which events can't. Saved frames appear as chips under the action buttons; click one to edit or delete it.</dd></div><div class="gi"><dt>Quick tagging · Ball out (O)</dt><dd>Tick <b>quick tagging</b> under the video to tag one click per touch. A pass, cross or carry is saved <i>open</i>, and your next tag completes it: a team-mate's touch = completed pass to him, ending where he touched it; an opponent's touch = failed pass; the same player's next action = where his carry ended. Pressures are skipped. A foul, a set piece or a gap of more than 8 seconds leaves it open. Press <b>O</b> and click if the ball went out of play. Filled-in events show <i>auto</i> in the log; editing the outcome or receiver by hand switches that off.</dd></div></dl></section>
   </section>
 
   <!-- ============ TAG ============ -->
@@ -411,6 +413,7 @@ html { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area
       </div>
 
       <div class="insbar" id="insBar" hidden><span id="insText"></span><button id="insDone" class="primary">Done</button></div>
+      <div class="insbar framebar" id="frameBar" hidden><span id="frameText"></span><button id="frameSave" class="primary">Save frame</button><button id="frameDel" hidden>Delete frame</button><button id="frameCancel">Cancel</button></div>
       <div class="composer" id="composer" aria-live="polite">
         <div class="row"><span class="what" id="cWhat">Ready</span><span class="grow"></span><span class="mono" id="cTime"></span></div>
         <div class="hint" id="cHint">Pick the player on the ball (type the shirt number), then press an action key.</div>
@@ -421,6 +424,11 @@ html { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area
         <div class="row" style="justify-content:space-between"><span class="lbl">Tap to tag</span>
           <div class="row" style="gap:6px"><button class="ghost" id="tTeam" style="padding:3px 10px">⇆ Switch team</button><button class="ghost" id="tUndo" style="padding:3px 10px">↶ Undo last</button></div></div>
         <div class="actbar" id="actBar"></div>
+        <div class="actbar" style="margin-top:6px">
+          <button id="bOppPress" class="def" title="An opponent closes down the player on the ball: log his pressure without switching team, and mark the carrier's next action as under pressure"><span>Opponent pressure</span><kbd>G</kbd></button>
+          <button id="bFrame" title="Pause and click where every player of both teams is standing, for the Team shape view"><span>📷 Freeze frame</span><kbd>⇧F</kbd></button>
+        </div>
+        <div class="note" id="frameList" style="margin-top:6px"></div>
       </div>
 
       <div style="margin-top:10px" class="keysbox">
@@ -484,6 +492,13 @@ html { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area
           <label>Position<select id="pPos"></select></label>
           <label>Template<select id="pTpl"></select></label>
           <button id="pNet" title="Show this player's passing links">Pass network ›</button>
+        </div>
+        <div class="profctl" id="shapeCtl" hidden>
+          <label>Show<select id="shMode"><option value="in">In possession</option><option value="out">Out of possession</option><option value="both">Both: how the shape changes</option></select></label>
+          <label>Min. actions per player<select id="shMin"><option>1</option><option selected>2</option><option>3</option><option>5</option></select></label>
+          <label style="display:flex;gap:6px;align-items:center;font-size:13px"><input type="checkbox" id="shLines" checked> Join the lines (uses line-up positions)</label>
+          <label style="display:flex;gap:6px;align-items:center;font-size:13px"><input type="checkbox" id="shPts"> Show freeze-frame points</label>
+          <label>Freeze frame<select id="shFrame"><option value="">Averages: events + all frames</option></select></label>
         </div>
         <div id="kpis" class="kpis"></div>
         <canvas class="chart" id="chart" width="1260" height="860"></canvas>
@@ -577,6 +592,8 @@ const ACTIONS = {
   F: ["Foul", "def", false, "Foul"],
   V: ["Save", "def", false, "Save"],
 };
+// Pressure is tagged only through "Opponent pressure" (G), so it has no key or button of its own
+const TAG_KEYS = Object.fromEntries(Object.entries(ACTIONS).filter(([k]) => k !== "H"));
 const ACTION_BY_NAME = Object.fromEntries(Object.entries(ACTIONS).map(([k, v]) => [v[0], { key: k, name: v[0], kind: v[1], needsEnd: v[2], tk: v[3] }]));
 const SHOT_OUT = { G: "Goal", O: "On target", W: "Off target", B: "Blocked" };
 // pass qualifiers: one key each, toggled while tagging or on the last pass
@@ -716,8 +733,9 @@ function autoPhaseFor(e, events, m) {
 }
 const sorted = () => S.events.slice().sort((a, b) => a.t - b.t);
 const label = (p) => p || "";
-const shortName = (p) => { const s = String(p || ""); return /^\d+\s/.test(s) ? s.replace(/^\d+\s+/, "") : s; };
-const shirt = (p) => { const m = /^(\d+)\s/.exec(p || ""); return m ? m[1] : ""; };
+// players are written "8 Iniesta" (also accepted: "8. Iniesta", "8 - Iniesta")
+const shortName = (p) => { const s = String(p || ""); return /^\d+\s*[.\-–]?\s+/.test(s) ? s.replace(/^\d+\s*[.\-–]?\s+/, "") : s; };
+const shirt = (p) => { const m = /^(\d+)\s*[.\-–]?\s/.exec(p || ""); return m ? m[1] : ""; };
 
 /* ================= storage ================= */
 const CHUNK = 900;
@@ -775,7 +793,7 @@ function setMatch(m, ev, isExample) {
   $("videoWanted").textContent = m.video ? "File for this match: " + m.video : "";
   renderAll();
 }
-function renderAll() { renderPitch(); renderSquads(); renderComposer(); renderLog(); renderSetup(); renderLineups(); renderMatchList(); renderClipFind(); renderHome(); if (!$("view-analyse").hidden) renderAnalysis(); }
+function renderAll() { renderFrameBar(); renderPitch(); renderSquads(); renderComposer(); renderLog(); renderSetup(); renderLineups(); renderMatchList(); renderClipFind(); renderHome(); if (!$("view-analyse").hidden) renderAnalysis(); }
 
 /* ================= pitch (tagging) ================= */
 function pitchSVG(lines = true) {
@@ -815,6 +833,12 @@ function renderPitch() {
     if (c.x != null) parts.push(`<circle cx="${c.x}" cy="${c.y}" r="1.5" fill="var(--hl)" stroke="#000" stroke-width=".25" ${c.autoStart ? 'stroke-dasharray=".6 .4"' : ""}/>`);
     if (c.ex != null) parts.push(`<line x1="${c.x}" y1="${c.y}" x2="${c.ex}" y2="${c.ey}" stroke="var(--hl)" stroke-width=".6" marker-end="url(#ah)"/>`, `<circle cx="${c.ex}" cy="${c.ey}" r="1.1" fill="none" stroke="var(--hl)" stroke-width=".4"/>`);
   }
+  if (S.frame) {
+    S.frame.pts.forEach((q) => {
+      parts.push(`<circle cx="${q.x}" cy="${q.y}" r="1.7" fill="${teamColor(q.tm)}" stroke="#fff" stroke-width=".35"/>`);
+      if (q.p) parts.push(`<text x="${q.x}" y="${q.y + 0.65}" text-anchor="middle" font-size="1.9" font-weight="700" fill="#fff" style="pointer-events:none">${esc(shirt(q.p) || "")}</text>`);
+    });
+  }
   parts.push(`<defs><marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="var(--hl)"/></marker></defs>`);
   svg.innerHTML = parts.join("");
   // direction line
@@ -849,7 +873,11 @@ function choosePlayer(team, p) {
     if (team !== S.comp.tm) { toast("Receiver must be a teammate — press Z if the pass failed"); return; }
     S.comp.r = p; commit("Successful"); return;
   }
-  if (S.comp && S.comp.stage !== "action") { S.comp.tm = team; S.comp.p = p; S.active = team; renderComposer(); renderSquads(); return; }
+  if (S.comp && S.comp.stage !== "action") {
+    S.comp.tm = team; S.comp.p = p; S.active = team;
+    if (S.comp.oppPress && S.comp.x != null) { commit(""); return; }
+    renderComposer(); renderSquads(); return;
+  }
   S.active = team; S.onBall = { team, p }; renderSquads(); renderComposer();
 }
 
@@ -873,9 +901,15 @@ function startAction(name) {
 }
 function pitchClick(evt) {
   const p = pitchPoint(evt), c = S.comp;
+  if (S.frame) { frameClick(p); return; }
   if (!c && S.outMode) { ballOut(p); return; }
   if (!c) { toast("Press an action key first (P pass, S shot…)"); return; }
   const k = ACTION_BY_NAME[c.a];
+  if (c.oppPress && c.stage === "start") {
+    c.x = p[0]; c.y = p[1]; c.stage = "outcome";
+    if (c.p) { commit(""); return; }
+    renderComposer(); renderPitch(); return;
+  }
   if (S.chain && c.stage === "start" && CHAIN_ACTS.has(c.a)) { c.x = p[0]; c.y = p[1]; c.ci = true; commit(""); return; }
   if (evt.shiftKey || c.stage === "start") { c.x = p[0]; c.y = p[1]; c.autoStart = false; c.stage = k.needsEnd ? "end" : "outcome"; }
   else if (c.stage === "end" || c.stage === "receiver") { c.ex = p[0]; c.ey = p[1]; c.stage = (c.a === "Carry" || c.a === "Dribble") ? "outcome" : "receiver"; }
@@ -924,9 +958,73 @@ function ballOut(p) {
   markDirty(); renderComposer(); renderPitch(); renderSquads(); renderLog();
   toast("Out of play. Tag the restart next (Y marks it as a set piece)");
 }
+/* ---------- opponent pressure (G): log the defender's press without leaving the team on the ball ---------- */
+function startOppPress() {
+  if (!S.match || S.frame) return;
+  const carrier = S.onBall ? S.onBall.team : S.active, opp = 1 - carrier;
+  const ret = { active: S.active, onBall: S.onBall };
+  S.active = opp;
+  S.comp = { a: "Pressure", t: r1(curT()), tm: opp, p: "", x: null, y: null, ex: null, ey: null, r: "", stage: "start", autoStart: false, sp: false, q: [], oppPress: true, ret };
+  if ($("autoPause").checked && V.src && !V.paused) V.pause();
+  renderComposer(); renderSquads(); renderPitch();
+}
+/* ---------- freeze frames: where every visible player of both teams stands at one moment ---------- */
+function startFrame(idx) {
+  const m = S.match; if (!m) return;
+  if (S.isExample) { toast("This is the example match — make your own match to add freeze frames"); return; }
+  S.comp = null; m.frames ??= [];
+  if (idx != null) {
+    const f = m.frames[idx]; if (!f) return;
+    S.frame = { idx, id: f.id, t: f.t, pts: f.pts.map((q) => ({ ...q })), team: S.active, nextP: "" };
+    if (V.src) { V.pause(); V.currentTime = f.t; }
+  } else {
+    if (V.src && !V.paused) V.pause();
+    S.frame = { idx: null, id: uid(), t: r1(curT()), pts: [], team: S.onBall ? S.onBall.team : S.active, nextP: "" };
+  }
+  renderFrameBar(); renderComposer(); renderPitch();
+}
+function frameClick(p) {
+  const f = S.frame;
+  const hit = f.pts.findIndex((q) => Math.hypot(q.x - p[0], q.y - p[1]) < 1.8);
+  if (hit >= 0) { f.pts.splice(hit, 1); }
+  else { f.pts.push({ tm: f.team, x: p[0], y: p[1], p: f.nextP || "" }); f.nextP = ""; }
+  renderFrameBar(); renderPitch();
+}
+function saveFrame() {
+  const m = S.match, f = S.frame; if (!f) return;
+  if (!f.pts.length) { toast("Click where the players are first"); return; }
+  if (V.src && f.idx == null) f.t = r1(V.currentTime);
+  const rec = { id: f.id, t: f.t, pts: f.pts };
+  m.frames ??= [];
+  if (f.idx != null) m.frames[f.idx] = rec; else m.frames.push(rec);
+  m.frames.sort((a, b) => a.t - b.t);
+  S.frame = null; markDirty(); renderFrameBar(); renderComposer(); renderPitch();
+  toast(`Freeze frame saved at ${mmss(rec.t)} (${rec.pts.length} players)`);
+}
+function cancelFrame() { S.frame = null; renderFrameBar(); renderComposer(); renderPitch(); }
+function renderFrameBar() {
+  const m = S.match, f = S.frame;
+  $("frameBar").hidden = !f;
+  if (f) {
+    const n = [0, 1].map((t) => f.pts.filter((q) => q.tm === t).length);
+    $("frameText").innerHTML = `<b>Freeze frame at ${mmss(V.src && f.idx == null ? V.currentTime : f.t, true)}</b> — click where each <b style="color:${esc(m.teams[f.team].color)}">${esc(m.teams[f.team].name)}</b> player stands (<kbd>Tab</kbd> switches team). ` +
+      (f.nextP ? `Next click = <b>${esc(shortName(f.nextP))}</b>. ` : `Type a shirt number first to name the next dot (optional). `) +
+      `Click a dot to remove it. ${esc(m.teams[0].name)} ${n[0]} · ${esc(m.teams[1].name)} ${n[1]}. <kbd>Enter</kbd> save · <kbd>Backspace</kbd> remove last · <kbd>Esc</kbd> cancel`;
+    $("frameDel").hidden = f.idx == null;
+  }
+  const fr = (m && m.frames) || [];
+  $("frameList").innerHTML = fr.length ? `Freeze frames: ` + fr.map((q, i) => `<button class="fchip" data-frame="${i}" title="Open to edit">${mmss(q.t)} · ${q.pts.length}</button>`).join("") : "";
+}
+$("bOppPress").onclick = (e) => { e.currentTarget.blur(); startOppPress(); };
+$("bFrame").onclick = (e) => { e.currentTarget.blur(); startFrame(); };
+$("frameSave").onclick = saveFrame;
+$("frameCancel").onclick = cancelFrame;
+$("frameDel").onclick = () => { const m = S.match, f = S.frame; if (!f || f.idx == null) return; m.frames.splice(f.idx, 1); S.frame = null; markDirty(); renderFrameBar(); renderPitch(); toast("Freeze frame deleted"); };
+$("frameList").addEventListener("click", (e) => { const b = e.target.closest("[data-frame]"); if (b) { b.blur(); startFrame(+b.dataset.frame); } });
 function commit(outcome) {
   const c = S.comp; if (!c) return;
   const k = ACTION_BY_NAME[c.a];
+  if (!c.p) { toast("Type the player's shirt number first (or click his name)"); return; }
   if (c.x == null) { toast("Click the pitch to set where it happened"); return; }
   if (k.needsEnd && c.ex == null && outcome !== "Unsuccessful" && !c.ci) { toast("Click where the ball went"); return; }
   let o = outcome;
@@ -934,6 +1032,11 @@ function commit(outcome) {
   if (["Interception", "Recovery", "Clearance", "Block", "Pressure", "Foul", "Save", "Ball lost"].includes(c.a) && o === "Successful") o = "";
   const e = { i: uid(), t: c.t, tm: c.tm, p: c.p, a: c.a, o, x: c.x, y: c.y, ex: c.ex, ey: c.ey, r: o === "Successful" ? c.r : "", ph: "", pa: true, n: "", c: false, q: c.q.filter((id) => qualFits(id, c.a)) };
   if (c.ci) e.ci = true;
+  // an opponent pressed just before: the carrier's next on-ball action is under pressure
+  if (S.pressNext && k.kind === "ball" && e.tm === S.pressNext.team) {
+    if (e.t >= S.pressNext.t - 0.5 && e.t - S.pressNext.t <= 3 && !e.q.includes("pressured")) e.q.push("pressured");
+    S.pressNext = null;
+  }
   const inserted = S.events.some((q) => q.t > e.t);
   S.events.push(e);
   resolveChain(); // quick tagging: this event may complete the pass or carry before it
@@ -954,12 +1057,13 @@ function commit(outcome) {
   else if (nxt === e.tm && k.kind === "ball") S.onBall = { team: e.tm, p: e.p };
   else if (nxt === e.tm) S.onBall = { team: e.tm, p: e.p };
   else if (nxt === 1 - e.tm) { S.onBall = null; S.active = 1 - e.tm; }
+  if (c.oppPress && c.ret) { S.active = c.ret.active; S.onBall = c.ret.onBall; S.pressNext = { team: 1 - e.tm, t: e.t }; }
   S.comp = null; S.sel = e.i;
   markDirty(); renderComposer(); renderPitch(); renderSquads(); renderLog();
   if ($("autoPause").checked && V.src && V.paused && wasPlaying) V.play();
 }
 let wasPlaying = false;
-function cancelComp() { S.comp = null; renderComposer(); renderPitch(); }
+function cancelComp() { const c = S.comp; if (c && c.oppPress && c.ret) { S.active = c.ret.active; S.onBall = c.ret.onBall; renderSquads(); } S.comp = null; renderComposer(); renderPitch(); }
 function renderComposer() {
   const box = $("composer"), c = S.comp, m = S.match;
   if (typeof markActBar === "function") markActBar();
@@ -977,15 +1081,15 @@ function renderComposer() {
     return;
   }
   const k = ACTION_BY_NAME[c.a];
-  $("cWhat").innerHTML = `<span class="swatch" style="background:${esc(m.teams[c.tm].color)}"></span> ${esc(shortName(c.p))} — ${esc(c.a)}`;
+  $("cWhat").innerHTML = `<span class="swatch" style="background:${esc(m.teams[c.tm].color)}"></span> ${c.p ? esc(shortName(c.p)) : esc(m.teams[c.tm].name)} — ${esc(c.oppPress ? "Pressure (opponent)" : c.a)}`;
   $("cTime").textContent = mmss(c.t, true);
   const hints = {
-    start: S.chain && CHAIN_ACTS.has(c.a) ? (c.a === "Carry" ? "Click where the carry started. It ends where his next action is." : `Click where he played it. Where it ended and who got it fill in from your next tag (<kbd>O</kbd> if it goes out).`) : c.a === "Dribble" ? "Click where he started taking the opponent on (where the pressure began)." : c.a === "Carry" ? "Click where the carry started." : "Click the pitch where it happened.",
+    start: c.oppPress ? `<b>${esc(m.teams[c.tm].name)}</b> pressure: ${c.p ? "" : "type the presser's shirt number and "}click where he closed down the ball${c.p ? "" : " (either order)"}. ${c.ret && c.ret.onBall ? esc(shortName(c.ret.onBall.p)) + " stays on the ball, and his next action is marked under pressure." : ""}` : S.chain && CHAIN_ACTS.has(c.a) ? (c.a === "Carry" ? "Click where the carry started. It ends where his next action is." : `Click where he played it. Where it ended and who got it fill in from your next tag (<kbd>O</kbd> if it goes out).`) : c.a === "Dribble" ? "Click where he started taking the opponent on (where the pressure began)." : c.a === "Carry" ? "Click where the carry started." : "Click the pitch where it happened.",
     end: c.a === "Dribble" ? `Click where he ended up with the ball: past the opponent or in the space he created.${c.autoStart ? " (Start continues from the last action — Shift+click to move it.)" : ""} <kbd>Z</kbd> if he lost it.`
       : c.a === "Carry" ? `Click where the carry ended.${c.autoStart ? " (Start continues from the last action — Shift+click to move it.)" : ""}`
       : `Click where the ball went.${c.autoStart ? " (Start continues from the last action — Shift+click to move it.)" : ""} <kbd>Z</kbd> if it failed.`,
     receiver: `Who received it? Type the shirt number or click a teammate. <kbd>Enter</kbd> = completed, no receiver set. <kbd>Z</kbd> = failed.`,
-    outcome: c.a === "Shot" ? "Outcome: <kbd>G</kbd> goal · <kbd>O</kbd> on target · <kbd>W</kbd> off target · <kbd>B</kbd> blocked" :
+    outcome: c.oppPress ? `Now type the presser's shirt number (${esc(m.teams[c.tm].name)}).` : c.a === "Shot" ? "Outcome: <kbd>G</kbd> goal · <kbd>O</kbd> on target · <kbd>W</kbd> off target · <kbd>B</kbd> blocked" :
       (k.kind === "def" && !["Tackle", "Duel", "Aerial duel"].includes(c.a)) || c.a === "Ball lost" ? "<kbd>Enter</kbd> to save." : "<kbd>Enter</kbd> = successful · <kbd>Z</kbd> = unsuccessful",
   };
   $("cHint").innerHTML = hints[c.stage] + ` <span style="color:var(--ink-3)">· <kbd>Esc</kbd> cancel · <kbd>Y</kbd> set piece</span>`;
@@ -1085,8 +1189,8 @@ function seek(d) { if (V.src) V.currentTime = Math.max(0, V.currentTime + d); re
 /* ================= keyboard ================= */
 const KEYHELP = [["Space", "play / pause"], ["← →", "−/+ 2 s"], ["Shift ← →", "−/+ 0.2 s"], ["[ ]", "slower / faster"], ["0–99", "pick player (shirt no.)"], ["Tab", "switch team"],
   ["P", "pass"], ["X", "cross"], ["C", "carry"], ["D", "dribble"], ["S", "shot"], ["K", "ball lost"], ["T", "tackle"], ["I", "interception"], ["R", "recovery"], ["L", "clearance"],
-  ["B", "block"], ["H", "pressure"], ["U", "duel"], ["A", "aerial duel"], ["F", "foul"], ["V", "save"], ["Enter", "save / successful"], ["Z", "unsuccessful"], ["Y", "set piece"], ["Esc", "cancel"],
-  ["Q", "through ball (pass)"], ["E", "line-breaking (pass)"], ["J", "under pressure"], ["O", "ball out (quick tagging)"], ["Backspace", "undo last"], ["+", "add events after the selected one"], ["M", "mark last as clip"], ["N", "note on last"]];
+  ["B", "block"], ["U", "duel"], ["A", "aerial duel"], ["F", "foul"], ["V", "save"], ["Enter", "save / successful"], ["Z", "unsuccessful"], ["Y", "set piece"], ["Esc", "cancel"],
+  ["Q", "through ball (pass)"], ["E", "line-breaking (pass)"], ["J", "under pressure"], ["O", "ball out (quick tagging)"], ["G", "opponent pressure"], ["Shift F", "freeze frame"], ["Backspace", "undo last"], ["+", "add events after the selected one"], ["M", "mark last as clip"], ["N", "note on last"]];
 $("keyList").innerHTML = KEYHELP.map(([k, d]) => `<span><kbd>${k}</kbd>${d}</span>`).join("");
 document.addEventListener("keydown", (e) => {
   if ($("view-tag").hidden) return;
@@ -1094,6 +1198,21 @@ document.addEventListener("keydown", (e) => {
   if (["input", "textarea", "select"].includes(tag) && e.target.type !== "range" && e.target.type !== "checkbox") return;
   if (e.ctrlKey || e.metaKey || e.altKey) return;
   const k = e.key, c = S.comp;
+  if (S.frame) {
+    const f = S.frame;
+    if (k === "Escape") { cancelFrame(); return; }
+    if (k === "Enter") { e.preventDefault(); saveFrame(); return; }
+    if (k === "Tab") { e.preventDefault(); f.team = 1 - f.team; f.nextP = ""; renderFrameBar(); return; }
+    if (k === "Backspace") { e.preventDefault(); f.pts.pop(); renderFrameBar(); renderPitch(); return; }
+    if (/^\d$/.test(k)) {
+      numBuf += k; clearTimeout(numTimer);
+      const P = S.match.teams[f.team].players;
+      const pick = () => { const p = P.find((q) => shirt(q) === numBuf); if (p) { f.nextP = p; renderFrameBar(); } else toast(`No #${numBuf} in ${S.match.teams[f.team].name}`); numBuf = ""; };
+      if (P.some((q) => shirt(q).startsWith(numBuf) && shirt(q) !== numBuf)) numTimer = setTimeout(pick, 550); else pick();
+      return;
+    }
+    if (k !== " " && !k.startsWith("Arrow")) return;
+  }
   if (k === " ") { e.preventDefault(); togglePlay(); return; }
   if (k === "ArrowLeft" || k === "ArrowRight") { e.preventDefault(); seek((k === "ArrowLeft" ? -1 : 1) * (e.shiftKey ? 0.2 : 2)); return; }
   if (k === "[" || k === "]") { const sp = $("speed"); sp.selectedIndex = Math.max(0, Math.min(sp.options.length - 1, sp.selectedIndex + (k === "]" ? 1 : -1))); V.playbackRate = +sp.value; toast(sp.value + "×"); return; }
@@ -1112,13 +1231,14 @@ document.addEventListener("keydown", (e) => {
     return;
   }
   const up = k.toUpperCase();
+  if (e.shiftKey && up === "F") { e.preventDefault(); startFrame(); return; }
   if (c) {
     if (c.a === "Shot" && c.stage === "outcome" && SHOT_OUT[up]) { commit(SHOT_OUT[up]); return; }
     if (k === "Enter") { e.preventDefault(); commit("Successful"); return; }
     if (up === "Z") { commit("Unsuccessful"); return; }
     if (up === "Y") { c.sp = !c.sp; renderComposer(); return; }
     if (QUAL[up] && qualFits(QUAL[up][0], c.a)) { toggleQ(c.q, QUAL[up][0]); renderComposer(); return; }
-    if (ACTIONS[up]) { S.comp = null; startAction(ACTIONS[up][0]); return; }
+    if (TAG_KEYS[up]) { S.comp = null; startAction(TAG_KEYS[up][0]); return; }
     return;
   }
   if (k === "Backspace") { e.preventDefault(); undoLast(); return; }
@@ -1129,9 +1249,10 @@ document.addEventListener("keydown", (e) => {
     return;
   }
   if (up === "O") { startBallOut(); return; }
+  if (up === "G") { startOppPress(); return; }
   if (up === "M") { const l = sorted().pop(); if (l) { l.c = !l.c; markDirty(); renderLog(); toast(l.c ? "Marked for clip reel" : "Clip mark removed"); } return; }
   if (up === "N") { const l = sorted().pop(); if (l) { S.sel = l.i; renderLog(); setTimeout(() => $("eN") && $("eN").focus(), 0); } return; }
-  if (ACTIONS[up]) { startAction(ACTIONS[up][0]); return; }
+  if (TAG_KEYS[up]) { startAction(TAG_KEYS[up][0]); return; }
 });
 // start adding events right after event e (the "+" key or the button in the event editor)
 function insertAfter(e) {
@@ -1436,7 +1557,7 @@ $("matchList").addEventListener("click", async (e) => {
 });
 
 /* ================= analysis ================= */
-const VIEWS = [["profile", "Player profile"], ["heat", "Heatmap"], ["passes", "Pass map"], ["threat", "Threat (xT)"], ["network", "Pass network"], ["shots", "Shot map"], ["zones", "Zones"], ["players", "Player stats"], ["teams", "Team stats"]];
+const VIEWS = [["profile", "Player profile"], ["heat", "Heatmap"], ["passes", "Pass map"], ["threat", "Threat (xT)"], ["network", "Pass network"], ["shape", "Team shape"], ["shots", "Shot map"], ["zones", "Zones"], ["players", "Player stats"], ["teams", "Team stats"]];
 $("views").innerHTML = VIEWS.map(([k, n]) => `<button data-view="${k}" aria-pressed="${k === S.view}">${n}</button>`).join("");
 $("views").addEventListener("click", (e) => { const b = e.target.closest("[data-view]"); if (!b) return; S.view = b.dataset.view; [...$("views").children].forEach((x) => x.setAttribute("aria-pressed", x.dataset.view === S.view)); renderAnalysis(); });
 const ACTION_GROUPS = { "": "All actions", Pass: "Passes", "__through": "Through balls", "__lb": "Line-breaking passes", "__long": "Long balls (32 m+)", "__switch": "Switches of play", "__hs": "Passes into half-spaces", Cross: "Crosses", Carry: "Carries", Dribble: "Dribbles", Shot: "Shots", "__def": "Defensive actions", "__win": "Ball wins (tackles won, interceptions, recoveries)", "__loss": "Losses (ball lost, failed passes/dribbles)", Pressure: "Pressures" };
@@ -1453,7 +1574,7 @@ function fillFilters() {
   $("fAction").innerHTML = Object.entries(ACTION_GROUPS).map(([k, n]) => `<option value="${k}" ${k === a ? "selected" : ""}>${n}</option>`).join("");
   $("fPhase").innerHTML = `<option value="">All phases</option>` + PHASES.map((q) => `<option ${q === ph ? "selected" : ""}>${q}</option>`).join("");
 }
-["fTeam", "fPlayer", "fAction", "fOutcome", "fPhase", "fFrom", "fTo", "fOrient", "fPer"].forEach((id) => $(id).addEventListener("change", renderAnalysis));
+["fTeam", "fPlayer", "fAction", "fOutcome", "fPhase", "fFrom", "fTo", "fOrient", "fPer", "shMode", "shMin", "shLines", "shPts", "shFrame"].forEach((id) => $(id).addEventListener("change", renderAnalysis));
 function filtered(opts = {}) {
   const team = $("fTeam").value, p = $("fPlayer").value, a = opts.ignoreAction ? "" : $("fAction").value, o = $("fOutcome").value, ph = $("fPhase").value;
   const from = parseT($("fFrom").value), to = parseT($("fTo").value);
@@ -1480,7 +1601,7 @@ function filtered(opts = {}) {
 const CV = $("chart"), CX = CV.getContext("2d");
 let PADX = 50, PADY = 50, SC = (CV.width - 2 * PADX) / L;
 const px = (x) => PADX + x * SC, py = (y) => PADY + y * SC;
-const ANALYST_ONLY = new Set(["heat", "zones", "players", "teams", "profile"]);
+const ANALYST_ONLY = new Set(["heat", "zones", "players", "teams", "profile", "shape"]);
 const videoView = () => !ANALYST_ONLY.has(S.view) && $("fOrient").value === "video";
 // point to draw: standard view = team attacking left->right; video view = where it was on screen
 const vp = (m, e, end = false) => videoView() ? ((end ? e.ex : e.x) == null ? null : [end ? e.ex : e.x, end ? e.ey : e.y]) : norm(m, e, end);
@@ -2128,12 +2249,230 @@ $("hContinue").onclick = () => selectTab($("hContinue").dataset.go || "tag");
 $("hNew").onclick = () => $("bNew").click();
 $("hExample").onclick = async () => { await saveNow(); const ex = exampleMatch(); setMatch(ex.m, ex.ev, true); selectTab("analyse"); };
 
+/* ---------- team shape from event data ----------
+   Each player's average position, with the ball (where he passed, carried, shot, and received passes)
+   and without it (where he tackled, intercepted, pressed, recovered...). Phase and time filters apply. */
+const LINE_OF = { RB: "def", LB: "def", RWB: "def", LWB: "def", CB: "def", RCB: "def", LCB: "def", DM: "mid", RDM: "mid", LDM: "mid", CM: "mid", RCM: "mid", LCM: "mid", RM: "mid", LM: "mid",
+  AM: "am", RAM: "am", LAM: "am", RW: "att", LW: "att", SS: "att", CF: "att", ST: "att" };
+// who had the ball at a freeze frame, where it was, and each team's phase (same rules as the events)
+function frameContext(m, f, all) {
+  const { team } = lastPossessionChange(all, f.t + 0.01);
+  const before = all.filter((e) => e.t <= f.t + 0.01), last = before[before.length - 1];
+  const ball = last ? (last.ex != null && last.o === "Successful" ? [last.ex, last.ey] : [last.x, last.y]) : null;
+  const ph = {};
+  if (team != null && ball) {
+    ph[team] = autoPhaseFor({ a: "Pass", tm: team, t: f.t, x: ball[0], y: ball[1] }, all, m);
+    ph[1 - team] = autoPhaseFor({ a: "Pressure", tm: 1 - team, t: f.t, x: ball[0], y: ball[1] }, all, m);
+  }
+  return { poss: team, ph, ball };
+}
+// frames inside the time window, with their context
+function shapeFrames(m) {
+  const all = sorted(), from = parseT($("fFrom").value), to = parseT($("fTo").value);
+  return (m.frames || []).filter((f) => (from == null || f.t >= from) && (to == null || f.t <= to)).map((f) => ({ f, ...frameContext(m, f, all) }));
+}
+// a team's shape: each player's average position from his events, plus his dots in freeze frames.
+// Unnamed frame dots are matched to the nearest player not already in that frame.
+function teamShape(m, ev, tm, state, frames) {
+  const pts = {}, src = {}, add = (p, q, kind) => { if (p && q) { (pts[p] ??= []).push(q); src[p] ??= { ev: 0, fr: 0 }; src[p][kind]++; } };
+  ev.forEach((e) => {
+    if (e.tm !== tm) return;
+    const k = ACTION_BY_NAME[e.a]; if (!k) return;
+    if (state === "in" && k.kind === "ball") {
+      add(e.p, norm(m, e), "ev");
+      if (isPassLike(e.a) && e.o === "Successful" && e.r) add(e.r, norm(m, e, true), "ev");   // where the receiver got it
+      if ((e.a === "Carry" || e.a === "Dribble") && e.o === "Successful") add(e.p, norm(m, e, true), "ev");
+    }
+    if (state === "out" && k.kind === "def") add(e.p, norm(m, e), "ev");
+  });
+  const ph = $("fPhase").value, used = [], anon = [];
+  (frames || []).forEach((fc) => {
+    const ok = state === "in" ? fc.poss === tm : fc.poss === 1 - tm;
+    if (!ok || (ph && fc.ph[tm] !== ph)) return;
+    const mine = fc.f.pts.filter((q) => q.tm === tm).map((q) => ({ ...q, n: norm(m, { x: q.x, y: q.y, tm, t: fc.f.t }) }));
+    mine.forEach((q) => q.p && add(q.p, q.n, "fr"));
+    anon.push({ fc, named: new Set(mine.filter((q) => q.p).map((q) => q.p)), mine });
+    used.push({ fc, pts: mine });
+  });
+  const avgOf = () => Object.fromEntries(Object.entries(pts).map(([p, v]) => [p, { x: v.reduce((a, q) => a + q[0], 0) / v.length, y: v.reduce((a, q) => a + q[1], 0) / v.length }]));
+  // unnamed dots: give each to the nearest player (by his average so far) who isn't already in that frame, within 20 m
+  const base = avgOf(), loose = [];
+  anon.forEach(({ fc, named, mine }) => {
+    // 1) role matching against the line-up formation (needs a formation and 7+ dots of this team in the frame)
+    const rm = roleMatch(m, tm, fc.f, mine);
+    if (rm) rm.forEach((p, i) => { add(p, mine[i].n, "fr"); named.add(p); });
+    // 2) the rest: nearest player by his average position so far
+    const ps = mine.filter((q, i) => !q.p && !(rm && rm.has(i)));
+    const free = new Set(Object.keys(base).filter((p) => !named.has(p)));
+    const pairs = [];
+    ps.forEach((q, i) => free.forEach((p) => pairs.push([Math.hypot(base[p].x - q.n[0], base[p].y - q.n[1]), i, p])));
+    pairs.sort((a, b) => a[0] - b[0]);
+    const gotQ = new Set(), gotP = new Set();
+    pairs.forEach(([d, i, p]) => { if (d > 20 || gotQ.has(i) || gotP.has(p)) return; gotQ.add(i); gotP.add(p); add(p, ps[i].n, "fr"); });
+    ps.forEach((q, i) => { if (!gotQ.has(i)) loose.push(q.n); });
+  });
+  const pl = {};
+  Object.entries(pts).forEach(([p, v]) => { pl[p] = { x: v.reduce((a, q) => a + q[0], 0) / v.length, y: v.reduce((a, q) => a + q[1], 0) / v.length, n: v.length, fr: src[p].fr, pos: posOf(m, tm, p) }; });
+  return { pl, loose, frames: used };
+}
+// the team's line-up as formation spots in metres (analyst view), with substitutes in their man's spot at time t
+function roleAnchors(m, tm, t) {
+  const lu = lineupOf(m), form = lu.form[tm], slots = lu.slots[tm];
+  if (!form || !slots || !FORMATIONS[form]) return null;
+  const subs = m.subs.filter((q) => q.tm === tm && q.t <= t).sort((a, b) => a.t - b.t);
+  const out = FORMATIONS[form].map(([code, across, down], i) => {
+    let p = slots[i]; if (!p) return null;
+    subs.forEach((q) => { if (q.off === p) p = q.on; });
+    return { p, x: (100 - down) / 100 * L, y: across / 100 * W };
+  }).filter(Boolean);
+  return out.length >= 7 ? out : null;
+}
+// match a frame's unnamed dots to formation roles: both shapes are centred and scaled, then each dot takes the nearest free role
+function roleMatch(m, tm, f, mine) {
+  const anchors = roleAnchors(m, tm, f.t); if (!anchors || mine.length < 7) return null;
+  const named = new Set(mine.filter((q) => q.p).map((q) => q.p));
+  const st = (arr, k) => { const mu = arr.reduce((a, v) => a + v[k], 0) / arr.length; return [mu, Math.max(3, Math.sqrt(arr.reduce((a, v) => a + (v[k] - mu) ** 2, 0) / arr.length))]; };
+  const D = mine.map((q) => ({ x: q.n[0], y: q.n[1] }));
+  const [dmx, dsx] = st(D, "x"), [dmy, dsy] = st(D, "y"), [tmx, tsx] = st(anchors, "x"), [tmy, tsy] = st(anchors, "y");
+  const pairs = [];
+  mine.forEach((q, i) => {
+    if (q.p) return;
+    const a = [(q.n[0] - dmx) / dsx, (q.n[1] - dmy) / dsy];
+    anchors.forEach((c) => { if (named.has(c.p)) return; pairs.push([Math.hypot(a[0] - (c.x - tmx) / tsx, a[1] - (c.y - tmy) / tsy), i, c.p]); });
+  });
+  pairs.sort((a, b) => a[0] - b[0]);
+  const res = new Map(), gotP = new Set();
+  pairs.forEach(([, i, p]) => { if (res.has(i) || gotP.has(p)) return; res.set(i, p); gotP.add(p); });
+  return res;
+}
+// shape numbers from a list of positions [{x, y, pos}] (analyst view, metres)
+function shapeStats(list) {
+  let of = list.filter((v) => v.pos !== "GK");
+  if (!list.some((v) => v.pos === "GK")) { // goalkeeper unknown: leave out the deepest player if he's inside his own box
+    const deep = of.slice().sort((a, b) => a.x - b.x)[0];
+    if (deep && deep.x < 16.5 && of.length > 3) of = of.filter((q) => q !== deep);
+  }
+  if (of.length < 5) return null;   // too few players for a shape
+  const mean = (a) => a.reduce((s, v) => s + v, 0) / a.length;
+  const xs = of.map((v) => v.x), ys = of.map((v) => v.y), cx = mean(xs), cy = mean(ys);
+  const defs = of.filter((v) => LINE_OF[v.pos] === "def");
+  const back = defs.length >= 2 ? defs : of.slice().sort((a, b) => a.x - b.x).slice(0, Math.min(4, of.length));
+  return { width: Math.max(...ys) - Math.min(...ys), depth: Math.max(...xs) - Math.min(...xs), line: mean(back.map((v) => v.x)), height: cx,
+    compact: mean(of.map((v) => Math.hypot(v.x - cx, v.y - cy))), n: of.length };
+}
+// numbers for a team: averaged over its freeze frames when it has 1+ usable frame, else from the average positions
+function teamNumbers(m, tm, sh, minN) {
+  const per = sh.frames.map(({ pts }) => shapeStats(pts.map((q) => ({ x: q.n[0], y: q.n[1], pos: q.p ? posOf(m, tm, q.p) : "" })))).filter(Boolean);
+  if (per.length) {
+    const out = { fromFrames: per.length };
+    ["width", "depth", "line", "height", "compact"].forEach((k) => { out[k] = per.reduce((a, q) => a + q[k], 0) / per.length; });
+    out.n = Math.round(per.reduce((a, q) => a + q.n, 0) / per.length);
+    return out;
+  }
+  return shapeStats(Object.values(sh.pl).filter((v) => (v.n >= minN || v.fr > 0)));
+}
+// draw one team: lines from line-up positions, then the players
+function drawShapeTeam(m, tm, list, { tx, ghost, joinLines }) {
+  const col = m.teams[tm].color;
+  if (joinLines && !ghost) {
+    ["def", "mid", "am", "att"].forEach((ln) => {
+      const g = list.filter((v) => LINE_OF[v.pos] === ln).map((v) => tx(v.x, v.y)).sort((a, b) => a[1] - b[1]);
+      if (g.length < 2) return;
+      CX.globalAlpha = .7; CX.strokeStyle = col; CX.lineWidth = 3; CX.setLineDash(ln === "def" ? [] : [8, 6]); CX.beginPath();
+      g.forEach(([x, y], k) => (k ? CX.lineTo(px(x), py(y)) : CX.moveTo(px(x), py(y)))); CX.stroke(); CX.setLineDash([]); CX.globalAlpha = 1;
+    });
+  }
+  const maxN = Math.max(1, ...list.map((v) => v.n || 1));
+  list.forEach((v) => {
+    const [x, y] = tx(v.x, v.y), r = ghost ? 11 : v.n ? 12 + 9 * v.n / maxN : 14;
+    if (ghost) { CX.setLineDash([4, 3]); dot(x, y, r, "rgba(255,255,255,.18)", "#ffffff", 2.5); CX.setLineDash([]); return; }
+    dot(x, y, r, col, v.p ? "#fff" : "rgba(255,255,255,.6)", 2.5);
+    if (!v.p) return;
+    CX.fillStyle = "#fff"; CX.font = `600 15px ${css("--font-body")}`; CX.textAlign = "center"; CX.textBaseline = "middle"; CX.fillText(shirt(v.p) || "", px(x), py(y));
+    CX.font = `600 13px ${css("--font-body")}`; CX.textBaseline = "top"; CX.lineWidth = 3; CX.strokeStyle = "rgba(0,0,0,.55)";
+    const lab = shortName(v.p) + (v.pos ? " · " + v.pos : ""); CX.strokeText(lab, px(x), py(y) + r + 2); CX.fillText(lab, px(x), py(y) + r + 2);
+    CX.textAlign = "left"; CX.textBaseline = "alphabetic";
+  });
+}
+function renderShape(m) {
+  const frames = shapeFrames(m), stName = { in: "in possession", out: "out of possession" };
+  // frame picker
+  const keepF = $("shFrame").value;
+  $("shFrame").innerHTML = `<option value="">Averages: events + ${frames.length} frame${frames.length === 1 ? "" : "s"}</option>` +
+    frames.map(({ f, poss, ph }) => `<option value="${esc(f.id)}" ${f.id === keepF ? "selected" : ""}>${mmss(f.t)} · ${poss != null ? esc(m.teams[poss].name) + " ball" + (ph[poss] ? " (" + esc(ph[poss]) + ")" : "") : "possession unknown"} · ${f.pts.length} players</option>`).join("");
+  const one = frames.find((q) => q.f.id === $("shFrame").value);
+  ["shMode", "shMin"].forEach((id) => { $(id).disabled = !!one; });
+  const f = (v) => v == null ? "–" : Math.round(v) + " m";
+  const metrics = [["Width", "width"], ["Depth", "depth"], ["Back line height", "line"], ["Team height", "height"], ["Compactness", "compact"]];
+  const two = (lbl, a, b, ca, cb, sep) => `<div class="kpi span2"><div class="lbl">${lbl}</div><div class="v"><span class="h" style="color:${esc(ca)}">${a}</span><span class="sep">${sep}</span><span class="a" style="color:${esc(cb)}">${b}</span></div></div>`;
+  const joinLines = $("shLines").checked;
+
+  // ---- one freeze frame, exactly as clicked ----
+  if (one) {
+    const { f: fr, poss, ph, ball } = one;
+    const toHome = (x, y) => norm(m, { x, y, tm: 0, t: fr.t });   // everything in the home team's attacking direction
+    drawPitchCanvas(`Freeze frame ${mmss(fr.t)} — ${poss != null ? m.teams[poss].name + " in possession" : "possession unknown"}`, poss != null ? `${m.teams[poss].name}: ${ph[poss] || "–"} · ${m.teams[1 - poss].name}: ${ph[1 - poss] || "–"}` : "");
+    const lists = [0, 1].map((tm) => fr.pts.filter((q) => q.tm === tm).map((q) => { const [x, y] = toHome(q.x, q.y); return { x, y, p: q.p, pos: q.p ? posOf(m, tm, q.p) : "" }; }));
+    lists.forEach((list, tm) => drawShapeTeam(m, tm, list, { tx: (x, y) => [x, y], joinLines }));
+    if (ball) { const [bx, by] = toHome(ball[0], ball[1]); dot(bx, by, 7, "#ffffff", "#000", 2); }
+    // numbers in each team's own attacking direction
+    const own = [0, 1].map((tm) => shapeStats(fr.pts.filter((q) => q.tm === tm).map((q) => { const n = norm(m, { x: q.x, y: q.y, tm, t: fr.t }); return { x: n[0], y: n[1], pos: q.p ? posOf(m, tm, q.p) : "" }; })));
+    $("kpis").innerHTML = metrics.map(([l, k]) => two(l, f(own[0]?.[k]), f(own[1]?.[k]), m.teams[0].color, m.teams[1].color, "v")).join("");
+    S.shapeExport = [["team", "player", "position", "x_m", "y_m"], ...fr.pts.map((q) => { const n = norm(m, { x: q.x, y: q.y, tm: q.tm, t: fr.t }); return [m.teams[q.tm].name, q.p, q.p ? posOf(m, q.tm, q.p) : "", r1(n[0]), r1(n[1])]; })];
+    $("viewNote").innerHTML = `This moment exactly as you clicked it, ${esc(m.teams[0].name)} attacking left → right; white dot = the ball. Edit or delete frames from the chips on the Tag tab.`;
+    return;
+  }
+
+  // ---- averages: events + frames ----
+  const mode = $("shMode").value, minN = +$("shMin").value, showPts = $("shPts").checked;
+  const team = $("fTeam").value, both = team === "";
+  const ev = filtered({ ignoreAction: true, allPlayers: true, bothTeams: true });
+  const layers = both ? [{ tm: 0, st: mode === "out" ? "out" : "in" }, { tm: 1, st: mode === "out" ? "in" : "out" }]
+    : mode === "both" ? [{ tm: +team, st: "out", ghost: true }, { tm: +team, st: "in" }] : [{ tm: +team, st: mode }];
+  const txFor = (tm) => (x, y) => both && tm === 1 ? [L - x, W - y] : [x, y];   // both teams: away drawn attacking right -> left
+  const ph = $("fPhase").value, wb = (st) => st === "in" ? "with the ball" : "without it";
+  const title = both ? `${m.teams[0].name} ${wb(layers[0].st)} v ${m.teams[1].name} ${wb(layers[1].st)}` : `Team shape — ${m.teams[+team].name}, ${mode === "both" ? "without the ball → with it" : stName[mode]}`;
+  const shapes = layers.map((l) => ({ ...l, sh: teamShape(m, ev, l.tm, l.st, frames) }));
+  const nFr = new Set(shapes.flatMap((q) => q.sh.frames.map((u) => u.fc.f.id))).size;
+  drawPitchCanvas(title, both ? (ph || "") : (ph ? ph + " · " : "") + `${ev.length} events${nFr ? ` + ${nFr} freeze frame${nFr === 1 ? "" : "s"}` : ""}`);
+  if (showPts) shapes.forEach(({ tm, sh, ghost }) => { if (ghost) return; const tx = txFor(tm); CX.globalAlpha = .45; sh.frames.forEach(({ pts }) => pts.forEach((q) => { const [x, y] = tx(q.n[0], q.n[1]); dot(x, y, 4, m.teams[tm].color, null); })); CX.globalAlpha = 1; });
+  if (!both && mode === "both") {
+    const [o, i] = shapes;
+    Object.entries(i.sh.pl).forEach(([p, v]) => { const u = o.sh.pl[p]; if (!u || !(u.n >= minN || u.fr > 0) || !(v.n >= minN || v.fr > 0)) return; arrow(u.x, u.y, v.x, v.y, "#ffffff", 2.5, .8); });
+  }
+  const res = shapes.map(({ tm, st, sh, ghost }) => {
+    const list = Object.entries(sh.pl).filter(([, v]) => (v.n >= minN || v.fr > 0)).map(([p, v]) => ({ ...v, p }));
+    drawShapeTeam(m, tm, list, { tx: txFor(tm), ghost, joinLines });
+    return { tm, st, sh, stats: teamNumbers(m, tm, sh, minN) };
+  });
+  if (both) {
+    const [A, B] = res;
+    $("kpis").innerHTML = metrics.map(([l, k]) => two(l, f(A.stats?.[k]), f(B.stats?.[k]), m.teams[0].color, m.teams[1].color, "v")).join("");
+  } else if (mode === "both") {
+    const O = res.find((q) => q.st === "out"), I = res.find((q) => q.st === "in");
+    $("kpis").innerHTML = metrics.map(([l, k]) => two(l + " · without → with ball", f(O.stats?.[k]), f(I.stats?.[k]), css("--ink-2"), m.teams[+team].color, "→")).join("");
+  } else {
+    const st = res[0].stats;
+    $("kpis").innerHTML = metrics.map(([l, k]) => kpi(l, f(st?.[k]))).join("") + kpi("Players shown", Object.values(res[0].sh.pl).filter((v) => (v.n >= minN || v.fr > 0)).length);
+  }
+  S.shapeExport = [["team", "state", "player", "position", "avg_x_m (0 = own goal)", "avg_y_m (0 = left touchline)", "positions used", "from freeze frames"]];
+  res.forEach(({ tm, st, sh }) => Object.entries(sh.pl).filter(([, v]) => (v.n >= minN || v.fr > 0)).forEach(([p, v]) => S.shapeExport.push([m.teams[tm].name, stName[st], p, v.pos, r1(v.x), r1(v.y), v.n, v.fr])));
+  S.shapeExport.push([], ["team", "state", ...metrics.map(([l]) => l + " (m)"), "numbers from"]);
+  res.forEach(({ tm, st, stats }) => S.shapeExport.push([m.teams[tm].name, stName[st], ...metrics.map(([, k]) => stats ? r1(stats[k]) : ""), stats?.fromFrames ? stats.fromFrames + " freeze frames" : "average positions"]));
+  const anyPos = res.some((q) => Object.values(q.sh.pl).some((v) => v.pos));
+  const fromFr = res.filter((q) => q.stats?.fromFrames).map((q) => `${m.teams[q.tm].name} ${stName[q.st]}: ${q.stats.fromFrames}`);
+  $("viewNote").innerHTML = `Each dot = a player's average position from his events and freeze frames (with the ball: passes, carries, shots, receptions; without it: tackles, pressures, interceptions). Bigger dot = more positions. ` +
+    (both ? `Both teams are shown at the same moments; switch who has the ball with <b>Show</b>. ` : mode === "both" ? `Rings = without the ball, solid = with it; arrows show how each player moves. ` : "") +
+    (anyPos ? "" : `Set formations in <b>Line-ups</b> to join the lines. `) +
+    `Numbers ${fromFr.length ? `come from freeze frames (${esc(fromFr.join("; "))})` : `come from the averages; add freeze frames (⇧F on the Tag tab) for exact ones`}, in metres; compactness = average distance from the team's centre.`;
+}
 function renderAnalysis() {
   const m = S.match; if (!m) return; fillFilters();
   $("fOrient").closest("label").hidden = ANALYST_ONLY.has(S.view);
   $("fPerWrap").hidden = S.view !== "players";
   $("profCtl").hidden = S.view !== "profile";
-  ["fPlayer", "fTeam", "fAction", "fOutcome"].forEach((id) => { $(id).closest("label").hidden = S.view === "profile"; });
+  $("shapeCtl").hidden = S.view !== "shape";
+  ["fPlayer", "fTeam", "fAction", "fOutcome"].forEach((id) => { $(id).closest("label").hidden = S.view === "profile" || (S.view === "shape" && id !== "fTeam"); });
   $("orientNote").innerHTML = ANALYST_ONLY.has(S.view) && S.view !== "players" && S.view !== "teams"
     ? "Heatmaps and zones always use the <b>analyst view</b>: each team attacking left → right, so you can compare players, halves and matches directly."
     : videoView()
@@ -2216,6 +2555,8 @@ function renderAnalysis() {
     } else {
       $("viewNote").textContent = `Click a player to highlight his passing links. Node size = involvement, line thickness = passes between the pair (pairs with fewer than ${minShow} hidden). Uses the team, phase and time filters.`;
     }
+  } else if (view === "shape") {
+    renderShape(m);
   } else if (view === "shots") {
     const ev = filtered({ ignoreAction: true }).filter((e) => e.a === "Shot");
     drawPitchCanvas("Shot map", subTitle(ev.length));
@@ -2390,6 +2731,7 @@ const kpi = (n, v) => `<div class="kpi"><div class="lbl">${n}</div><div class="v
 $("bCsvView").onclick = () => {
   const m = S.match, base = safeName(m.title) + "_" + S.view;
   if (S.view === "players" && S.tableExport) return offerFile(base + ".csv", csv(S.tableExport));
+  if (S.view === "shape" && S.shapeExport) return offerFile(base + ".csv", csv(S.shapeExport));
   if (S.view === "profile" && S.profExport) return offerFile(base + "_" + safeName(($("pPlayer").value || "").split("|")[1]) + ".csv", csv(S.profExport));
   if (S.view === "teams") {
     const rows = [["Stat", m.teams[0].name, m.teams[1].name], ...[...$("kpis").querySelectorAll(".kpi")].map((k) => [k.querySelector(".lbl")?.textContent.trim() || "", k.querySelector(".v .h")?.textContent.trim() || "", k.querySelector(".v .a")?.textContent.trim() || ""])];
@@ -2418,7 +2760,7 @@ window.addEventListener("beforeunload", () => { if (S.dirty) saveNow(); });
 
 /* ================= boot ================= */
 /* ---------- tap buttons (touch screens and mouse) ---------- */
-$("actBar").innerHTML = Object.entries(ACTIONS).map(([k, v]) => `<button data-act="${v[0]}" class="${v[1] === "def" ? "def" : ""}"><span>${v[0]}</span><kbd>${k}</kbd></button>`).join("");
+$("actBar").innerHTML = Object.entries(TAG_KEYS).map(([k, v]) => `<button data-act="${v[0]}" class="${v[1] === "def" ? "def" : ""}"><span>${v[0]}</span><kbd>${k}</kbd></button>`).join("");
 $("actBar").addEventListener("click", (e) => { const b = e.target.closest("[data-act]"); if (!b) return; b.blur(); S.comp = null; startAction(b.dataset.act); });
 $("tTeam").onclick = (e) => { e.currentTarget.blur(); S.active = 1 - S.active; renderSquads(); renderComposer(); toast("Now picking " + S.match.teams[S.active].name + " players"); };
 $("tUndo").onclick = (e) => { e.currentTarget.blur(); undoLast(); };
