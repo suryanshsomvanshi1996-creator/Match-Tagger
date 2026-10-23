@@ -2,7 +2,7 @@
 
 **A free football match-analysis tool that runs in your browser.** Play a match video, log every action with a key press or a tap on the pitch, and get professional-style analysis straight away: **team shape** with and without the ball, **player profiles and comparisons** with percentile radars, **quick tagging and freeze frames** that keep up with the video, and **clips** of any player's actions, plus heatmaps, pass networks, expected threat (xT) and team stats.
 
-Built by **Suryansh Somvanshi**, a data analyst and former video analyst at REBALL.
+Built by **Suryansh Somvanshi**, data analyst and a football analyst.
 
 > **Try it:** https://suryanshsomvanshi1996-creator.github.io/Match-Tagger/
 ---
